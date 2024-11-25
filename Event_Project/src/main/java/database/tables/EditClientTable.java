@@ -9,5 +9,5 @@ package database.tables;
  * @author nikos
  */
 public class EditClientTable {
-
+  /* Eimai mesa Mihalis! */
 }
