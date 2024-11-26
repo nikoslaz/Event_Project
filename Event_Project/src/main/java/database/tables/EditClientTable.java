@@ -4,12 +4,188 @@
  */
 package database.tables;
 
+import com.google.gson.Gson;
+import database.DB_Connection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mainClasses.Client;
+
 /**
  *
  * @author nikos
  */
 public class EditClientTable {
-  /* Eimai mesa Mihalis! */
-  /* Testing git push commit whatevs */
-  /* Mixaliw testarei github desktop */
+
+    public void addClientFromJSON(String json) throws ClassNotFoundException {
+        Client user = jsonToClient(json);
+        addNewClient(user);
+    }
+
+    public Client jsonToClient(String json) {
+        Gson gson = new Gson();
+
+        Client user = gson.fromJson(json, Client.class);
+        return user;
+    }
+
+    public String clientToJSON(Client user) {
+        Gson gson = new Gson();
+
+        String json = gson.toJson(user, Client.class);
+        return json;
+    }
+
+    public ArrayList<Client> getClients() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Client> clients = new ArrayList<Client>();
+        ResultSet rs = null;
+        try {
+            // Build the query to fetch all pet owners
+            String query = "SELECT * FROM petowners";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Client client = gson.fromJson(json, Client.class);
+                clients.add(client);
+            }
+            return clients;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        } finally {
+            // Close the ResultSet, Statement, and Connection
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public void updateClient(String username, int balance) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String update = "UPDATE petowners SET balance='" + balance + "' WHERE username = '" + username + "'";
+        stmt.executeUpdate(update);
+    }
+
+    public Client databaseToClients(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM clients WHERE username = '" + username + "' AND password='" + password + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Client user = gson.fromJson(json, Client.class);
+            return user;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public String databaseClientToJSON(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM clients WHERE username = '" + username + "' AND password='" + password + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            return json;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void createClientsTable() throws SQLException, ClassNotFoundException {
+
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        String createTypeQuery = "CREATE TYPE card_details AS ("
+                + "card_number INTEGER, "
+                + "card_expdate DATE, "
+                + "card_csv INTEGER)";
+
+        String createTableQuery = "CREATE TABLE clients ("
+                + "client_username VARCHAR(50) NOT NULL UNIQUE, "
+                + "client_password VARCHAR(50) NOT NULL, "
+                + "client_firstname VARCHAR(50) NOT NULL, "
+                + "client_lastname VARCHAR(50) NOT NULL, "
+                + "client_email VARCHAR(50) NOT NULL UNIQUE, "
+                + "client_balance INTEGER, "
+                + "client_card card_details NOT NULL, "
+                + "PRIMARY KEY (client_username))";
+
+        try {
+            stmt.execute(createTypeQuery);
+            stmt.execute(createTableQuery);
+            System.out.println("Type 'card_details' and table 'clients' created successfully!");
+        } catch (SQLException e) {
+            System.err.println("Error while creating type or table: " + e.getMessage());
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
+
+    /**
+     * Establish a database connection and add in the database.
+     *
+     * @param user
+     * @throws ClassNotFoundException
+     */
+    public void addNewClient(Client user) throws ClassNotFoundException {
+        try {
+            Connection con = DB_Connection.getConnection();
+
+            Statement stmt = con.createStatement();
+
+            String insertQuery = "INSERT INTO clients (client_username, client_password, client_firstname, client_lastname, client_email, client_balance, client_card) "
+                    + "VALUES ("
+                    + "'" + user.getClientUsername() + "', "
+                    + "'" + user.getClientPassword() + "', "
+                    + "'" + user.getClientName() + "', "
+                    + "'" + user.getClientLastname() + "', "
+                    + "'" + user.getClientEmail() + "', "
+                    + user.getClientBalance() + ", "
+                    + "ROW("
+                    + user.getClientCard().getCardNumber() + ", "
+                    + "'" + user.getClientCard().getCardExpDate() + "', "
+                    + user.getClientCard().getCardCvv() + ")::card_details"
+                    + ")";
+            //stmt.execute(table);
+            System.out.println(insertQuery);
+            stmt.executeUpdate(insertQuery);
+            System.out.println("# The client was successfully added in the database.");
+
+            /* Get the member id from the database and set it to the member */
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EditClientTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
