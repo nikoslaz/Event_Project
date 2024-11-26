@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class EditEventTable {
 
-    public void addReservationFromJSON(String json) throws ClassNotFoundException {
+    public void addEventFromJSON(String json) throws ClassNotFoundException {
         Event r = jsonToEvent(json);
         createNewEvent(r);
     }
