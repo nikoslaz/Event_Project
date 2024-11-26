@@ -60,7 +60,7 @@ public class EditEventTable {
     public void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String updateQuery = "UPDATE events SET status='" + status + "' WHERE booking_id= '" + eventID + "'";
+        String updateQuery = "UPDATE events SET status='" + status + "' WHERE event_id= '" + eventID + "'";
         stmt.executeUpdate(updateQuery);
         stmt.close();
         con.close();
