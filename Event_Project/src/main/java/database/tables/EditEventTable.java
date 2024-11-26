@@ -4,10 +4,119 @@
  */
 package database.tables;
 
+import com.google.gson.Gson;
+import mainClasses.Event;
+import database.DB_Connection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author nikos
  */
 public class EditEventTable {
+
+    public void addReservationFromJSON(String json) throws ClassNotFoundException {
+        Event r = jsonToEvent(json);
+        createNewEvent(r);
+    }
+
+    public Event databaseToEvent(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM events WHERE event_id= '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Event bt = gson.fromJson(json, Event.class);
+            return bt;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Event jsonToEvent(String json) {
+        Gson gson = new Gson();
+        Event r = gson.fromJson(json, Event.class);
+        return r;
+    }
+
+    public String eventToJSON(Event e) {
+        Gson gson = new Gson();
+
+        String json = gson.toJson(e, Event.class);
+        return json;
+    }
+
+    public void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String updateQuery = "UPDATE events SET status='" + status + "' WHERE booking_id= '" + eventID + "'";
+        stmt.executeUpdate(updateQuery);
+        stmt.close();
+        con.close();
+    }
+
+    public void createEventTable() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = "CREATE TABLE events ("
+                + "event_id INTEGER NOT NULL AUTO_INCREMENT, "
+                + "event_name VARCHAR(50) NOT NULL, "
+                + "event_date DATE NOT NULL, "
+                + "event_time TIME NOT NULL, "
+                + "event_type ENUM('CONCERT', 'PERFORMANCE', 'COMEDYNIGHT') NOT NULL, "
+                + "event_capacity INTEGER NOT NULL, "
+                + "event_status ENUM('SCHEDULED', 'CANCELED', 'COMPLETED') NOT NULL, "
+                + "PRIMARY KEY (event_id))";
+        stmt.execute(sql);
+        stmt.close();
+        con.close();
+
+    }
+
+    /**
+     * Establish a database connection and add in the database.
+     *
+     * @throws ClassNotFoundException
+     */
+    public void createNewEvent(Event ev) throws ClassNotFoundException {
+        try {
+            Connection con = DB_Connection.getConnection();
+
+            Statement stmt = con.createStatement();
+
+            String insertQuery = "INSERT INTO "
+                    + " bookings (event_id,event_name,event_date,event_time,event_type,event_capacity,event_status)"
+                    + " VALUES ("
+                    + "'" + ev.getEventId() + "',"
+                    + "'" + ev.getEventName() + "',"
+                    + "'" + ev.getEventDate() + "',"
+                    + "'" + ev.getEventTime() + "',"
+                    + "'" + ev.getEventType() + "',"
+                    + "'" + ev.getEventCapacity() + "',"
+                    + "'" + ev.getEventStatus() + "'"
+                    + ")";
+            //stmt.execute(table);
+
+            stmt.executeUpdate(insertQuery);
+            System.out.println("# The event was successfully added in the database.");
+
+            /* Get the member id from the database and set it to the member */
+            stmt.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
