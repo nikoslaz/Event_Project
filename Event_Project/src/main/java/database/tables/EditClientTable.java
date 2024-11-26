@@ -11,4 +11,5 @@ package database.tables;
 public class EditClientTable {
   /* Eimai mesa Mihalis! */
   /* Testing git push commit whatevs */
+  /* Mixaliw testarei github desktop */
 }
