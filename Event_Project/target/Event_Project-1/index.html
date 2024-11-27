@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration Form</title>
     <link rel="stylesheet" href="style.css">
+    <script src="js/ajax.js" ></script>
 </head>
 <body>
     <h1>User Registration</h1>
-    <form action="/submit-user" method="POST">
+    <form id="form" name='form'  action="/submit-user" method="POST" onsubmit='RegisterPOST();return false;'>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
