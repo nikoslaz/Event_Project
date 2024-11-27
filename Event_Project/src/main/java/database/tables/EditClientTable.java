@@ -46,8 +46,8 @@ public class EditClientTable {
         ArrayList<Client> clients = new ArrayList<Client>();
         ResultSet rs = null;
         try {
-            // Build the query to fetch all pet owners
-            String query = "SELECT * FROM petowners";
+            // Build the query to fetch all clients
+            String query = "SELECT * FROM clients";
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {

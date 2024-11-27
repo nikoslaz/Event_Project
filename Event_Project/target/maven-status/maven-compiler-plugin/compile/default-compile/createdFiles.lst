@@ -1,11 +1,14 @@
 mainClasses\Reservation.class
-mainClasses\Ticket.class
 mainClasses\Event.class
 database\tables\EditTicketTable.class
 database\DB_Connection.class
 database\tables\EditEventTable.class
 mainClasses\JSON_Converter.class
 database\tables\EditClientTable.class
+database\tables\EditReservationTable.class
+mainClasses\Client$CardDetails.class
+mainClasses\Ticket.class
+mainClasses\Status.class
+mainClasses\Type.class
 database\init\InitDatabase.class
 mainClasses\Client.class
-database\tables\EditReservationTable.class
