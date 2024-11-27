@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration Form</title>
     <link rel="stylesheet" href="style.css">
-    <script src="js/ajax.js" ></script>
 </head>
 <body>
     <h1>User Registration</h1>
-    <form id="form" name='form'  action="/submit-user" method="POST" onsubmit='RegisterPOST();return false;'>
+    <form action="/submit-user" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
@@ -28,8 +27,13 @@
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" required>
 
-        <label for="card">Card Info:</label>
-        <input type="text" id="card" name="card" required>
+        <!-- Card Information Section -->
+        <label>Card Info:</label>
+        <div class="card-details">
+            <input type="text" id="card" name="card_number" placeholder="Card Number" required>
+            <input type="text" id="exp_date" name="exp_date" placeholder="MM/YY" required>
+            <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+        </div>
 
         <button type="submit">Create User</button>
     </form>
