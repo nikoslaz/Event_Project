@@ -99,7 +99,7 @@ public class EditReservationTable {
 
             Statement stmt = con.createStatement();
 
-            String insertQuery = "INSERT INTO bookings "
+            String insertQuery = "INSERT INTO reservations "
                     + "(reservation_id, reservation_tickets, reservation_date, reservation_payment_amount, reservation_status) "
                     + "VALUES ("
                     + "'" + res.getReservationID() + "', "
