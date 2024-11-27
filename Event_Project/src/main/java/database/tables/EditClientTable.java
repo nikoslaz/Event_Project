@@ -134,7 +134,7 @@ public class EditClientTable {
                 + "client_firstname VARCHAR(50) NOT NULL, "
                 + "client_lastname VARCHAR(50) NOT NULL, "
                 + "client_email VARCHAR(50) NOT NULL UNIQUE, "
-                + "client_balance INTEGER, "
+                + "client_balance INTEGER DEFAULT 0, "
                 + "client_card card_details NOT NULL, "
                 + "PRIMARY KEY (client_username))";
 
