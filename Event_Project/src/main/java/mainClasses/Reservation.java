@@ -4,7 +4,7 @@
  */
 package mainClasses;
 
-enum Status {
+enum ResStatus {
     ACTIVE, CANCELED, COMPLETE
 };
 
@@ -18,7 +18,7 @@ public class Reservation {
     private int reservationTickets;
     private int reservationPaymentAmount;
     private String reservationDate;
-    private Status reservationStatus;
+    private ResStatus reservationStatus;
 
     public int getReservationID() {
         return reservationID;
@@ -52,11 +52,11 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public Status getReservationStatus() {
+    public ResStatus getReservationStatus() {
         return reservationStatus;
     }
 
-    public void setReservationStatus(Status reservationStatus) {
+    public void setReservationStatus(ResStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
 }

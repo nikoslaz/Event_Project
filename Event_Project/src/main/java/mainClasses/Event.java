@@ -4,11 +4,11 @@
  */
 package mainClasses;
 
-enum Status {
+enum EventStatus {
     SCHEDULED, CANCELED, COMPLETED
 }
 
-enum Type {
+enum EventType {
     CONCERT, PERFOMANCE, COMEDYNIGHT
 }
 
@@ -19,8 +19,8 @@ enum Type {
 public class Event {
     private int event_id, event_capacity;
     private String event_name, event_date, event_time;
-    private Type event_type;
-    private Status event_status;
+    private EventType event_type;
+    private EventStatus event_status;
 
     public int getEventId() {
         return event_id;
@@ -62,19 +62,19 @@ public class Event {
         this.event_time = event_time;
     }
 
-    public Type getEventType() {
+    public EventType getEventType() {
         return event_type;
     }
 
-    public void setEventType(Type event_type) {
+    public void setEventType(EventType event_type) {
         this.event_type = event_type;
     }
 
-    public Status getEventStatus() {
+    public EventStatus getEventStatus() {
         return event_status;
     }
 
-    public void setEventStatus(Status event_status) {
+    public void setEventStatus(EventStatus event_status) {
         this.event_status = event_status;
     }
 }
