@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>User Registration</h1>
-    <form action="/submit-user" method="POST">
+    <form id="form" name='form' onsubmit='RegisterPOST();return false;'>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
