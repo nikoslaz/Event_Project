@@ -123,11 +123,6 @@ public class EditClientTable {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
-        String createTypeQuery = "CREATE TYPE card_details AS ("
-                + "card_number INTEGER, "
-                + "card_expdate DATE, "
-                + "card_csv INTEGER)";
-
         String createTableQuery = "CREATE TABLE clients ("
                 + "client_username VARCHAR(50) NOT NULL UNIQUE, "
                 + "client_password VARCHAR(50) NOT NULL, "
@@ -135,13 +130,14 @@ public class EditClientTable {
                 + "client_lastname VARCHAR(50) NOT NULL, "
                 + "client_email VARCHAR(50) NOT NULL UNIQUE, "
                 + "client_balance INTEGER DEFAULT 0, "
-                + "client_card card_details NOT NULL, "
+                + "card_number INTEGER, "
+                + "card_expdate DATE, "
+                + "card_csv INTEGER,"
                 + "PRIMARY KEY (client_username))";
 
         try {
-            stmt.execute(createTypeQuery);
             stmt.execute(createTableQuery);
-            System.out.println("Type 'card_details' and table 'clients' created successfully!");
+            System.out.println("~Table 'clients' created successfully!");
         } catch (SQLException e) {
             System.err.println("Error while creating type or table: " + e.getMessage());
         } finally {
@@ -171,9 +167,9 @@ public class EditClientTable {
                     + "'" + user.getClientEmail() + "', "
                     + user.getClientBalance() + ", "
                     + "ROW("
-                    + user.getClientCard().getCardNumber() + ", "
-                    + "'" + user.getClientCard().getCardExpDate() + "', "
-                    + user.getClientCard().getCardCvv() + ")::card_details"
+                    + user.getCardNumber() + ", "
+                    + "'" + user.getCardExpDate() + "', "
+                    + user.getCardCvv() + ")::card_details"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
