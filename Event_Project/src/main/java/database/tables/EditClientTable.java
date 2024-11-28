@@ -88,7 +88,7 @@ public class EditClientTable {
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM clients WHERE username = '" + username + "' AND password='" + password + "'");
+            rs = stmt.executeQuery("SELECT * FROM clients WHERE client_username = '" + username + "' AND client_password='" + password + "'");
             rs.next();
             String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();
@@ -129,6 +129,7 @@ public class EditClientTable {
                 + "client_firstname VARCHAR(50) NOT NULL, "
                 + "client_lastname VARCHAR(50) NOT NULL, "
                 + "client_email VARCHAR(50) NOT NULL UNIQUE, "
+                + "client_phone INTEGER NOT NULL UNIQUE, "
                 + "client_balance INTEGER DEFAULT 0, "
                 + "card_number INTEGER, "
                 + "card_expdate DATE, "
@@ -158,19 +159,19 @@ public class EditClientTable {
 
             Statement stmt = con.createStatement();
 
-            String insertQuery = "INSERT INTO clients (client_username, client_password, client_firstname, client_lastname, client_email, client_balance, client_card) "
+            String insertQuery = "INSERT INTO clients (client_username, client_password, client_firstname, client_lastname, client_email, client_phone, client_balance, card_number, card_expdate, card_cvv) "
                     + "VALUES ("
                     + "'" + user.getClientUsername() + "', "
                     + "'" + user.getClientPassword() + "', "
                     + "'" + user.getClientName() + "', "
                     + "'" + user.getClientLastname() + "', "
                     + "'" + user.getClientEmail() + "', "
-                    + user.getClientBalance() + ", "
-                    + "ROW("
-                    + user.getCardNumber() + ", "
+                    + "'" + user.getClientPhone() + "', "
+                    + "'" + user.getClientBalance() + "', "
+                    + "'" + user.getCardNumber() + "', "
                     + "'" + user.getCardExpDate() + "', "
-                    + user.getCardCvv() + ")::card_details"
-                    + ")";
+                    + "'" + user.getCardCvv() + "')";
+
             //stmt.execute(table);
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
@@ -184,5 +185,22 @@ public class EditClientTable {
         }
     }
 
+    public static void main(String[] args) {
+        EditClientTable edit = new EditClientTable();
+        try {
+            System.out.println("Attempting to create the Clients table...");
+            edit.createClientsTable();
+            System.out.println("Clients table created successfully.");
+        } catch (SQLException e) {
+            System.err.println("SQL Error while creating the Clients table: " + e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver not found. Ensure the database driver is included in your classpath.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error while creating the table: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 }

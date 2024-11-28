@@ -1,10 +1,12 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package servlets;
 
+import database.tables.EditClientTable;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -14,8 +16,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Client;
-import database.tables.EditClientTable;
-import jakarta.servlet.http.HttpServlet;
 import org.json.JSONObject;
 
 /**
@@ -43,14 +43,15 @@ public class RegistrationClient extends HttpServlet {
         System.out.println(jsonObject);
 
         Client client = new Client();
-        client.setClientUsername(jsonObject.getString("client_username"));
-        client.setClientName(jsonObject.getString("client_firstname"));
-        client.setClientLastname(jsonObject.getString("client_lastname"));
-        client.setClientEmail(jsonObject.getString("client_email"));
-        client.setClientBalance(jsonObject.getInt("client_balance"));
+        client.setClientUsername(jsonObject.getString("username"));
+        client.setClientPassword(jsonObject.getString("password"));
+        client.setClientName(jsonObject.getString("name"));
+        client.setClientLastname(jsonObject.getString("lastname"));
+        client.setClientEmail(jsonObject.getString("email"));
+        client.setClientPhone(jsonObject.getInt("phone"));
         client.setCardNumber(jsonObject.getString("card_number"));
-        client.setCardExpDate(jsonObject.getString("card_expdate"));
-        client.setCardCvv(jsonObject.getString("card_cvv"));
+        client.setCardExpDate(jsonObject.getString("exp_date"));
+        client.setCardCvv(jsonObject.getString("cvv"));
 
         EditClientTable editClientTable = new EditClientTable();
         JSONObject jsonResponse = new JSONObject();
@@ -64,6 +65,7 @@ public class RegistrationClient extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
             } else {
                 editClientTable.addNewClient(client);
+                System.out.println("Client added");
                 response.setStatus(HttpServletResponse.SC_OK);
                 jsonResponse.put("status", "success");
                 jsonResponse.put("message", "Registration successful.");
@@ -87,4 +89,5 @@ public class RegistrationClient extends HttpServlet {
         out.print(jsonResponse);
         out.flush();
     }
+
 }
