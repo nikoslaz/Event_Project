@@ -13,42 +13,9 @@ public class Client {
     private String client_email;
     private int client_phone;
     private int client_cancel_balance;
-
-    // Field for nested CardDetails
-    private CardDetails client_card;
-
-    // Nested CardDetails class
-    public static class CardDetails {
-
-        private String cardNumber;
-        private String cardExpDate;
-        private String cardCvv;
-
-        // Getters and Setters for CardDetails
-        public String getCardNumber() {
-            return cardNumber;
-        }
-
-        public void setCardNumber(String cardNumber) {
-            this.cardNumber = cardNumber;
-        }
-
-        public String getCardExpDate() {
-            return cardExpDate;
-        }
-
-        public void setCardExpDate(String cardExpDate) {
-            this.cardExpDate = cardExpDate;
-        }
-
-        public String getCardCvv() {
-            return cardCvv;
-        }
-
-        public void setCardCvv(String cardCvv) {
-            this.cardCvv = cardCvv;
-        }
-    }
+    private String cardNumber;
+    private String cardExpDate;
+    private String cardCvv;
 
     // Getters and Setters for Client fields
     public String getClientUsername() {
@@ -107,13 +74,28 @@ public class Client {
         this.client_cancel_balance = client_cancel_balance;
     }
 
-    // Getter and Setter for CardDetails
-    public CardDetails getClientCard() {
-        return client_card;
+    // Getters and Setters for CardDetails
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setClientCard(CardDetails client_card) {
-        this.client_card = client_card;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
+    public String getCardExpDate() {
+        return cardExpDate;
+    }
+
+    public void setCardExpDate(String cardExpDate) {
+        this.cardExpDate = cardExpDate;
+    }
+
+    public String getCardCvv() {
+        return cardCvv;
+    }
+
+    public void setCardCvv(String cardCvv) {
+        this.cardCvv = cardCvv;
+    }
 }

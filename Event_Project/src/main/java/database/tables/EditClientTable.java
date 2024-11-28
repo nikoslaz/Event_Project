@@ -21,26 +21,26 @@ import mainClasses.Client;
  */
 public class EditClientTable {
 
-    public static void addClientFromJSON(String json) throws ClassNotFoundException {
+    public void addClientFromJSON(String json) throws ClassNotFoundException {
         Client user = jsonToClient(json);
         addNewClient(user);
     }
 
-    public static Client jsonToClient(String json) {
+    public Client jsonToClient(String json) {
         Gson gson = new Gson();
 
         Client user = gson.fromJson(json, Client.class);
         return user;
     }
 
-    public static String clientToJSON(Client user) {
+    public String clientToJSON(Client user) {
         Gson gson = new Gson();
 
         String json = gson.toJson(user, Client.class);
         return json;
     }
 
-    public static ArrayList<Client> getClients() throws SQLException, ClassNotFoundException {
+    public ArrayList<Client> getClients() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ArrayList<Client> clients = new ArrayList<Client>();
@@ -75,14 +75,14 @@ public class EditClientTable {
         return null;
     }
 
-    public static void updateClient(String username, int balance) throws SQLException, ClassNotFoundException {
+    public void updateClient(String username, int balance) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String update = "UPDATE petowners SET balance='" + balance + "' WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
 
-    public static Client databaseToClients(String username, String password) throws SQLException, ClassNotFoundException {
+    public Client databaseToClients(String username, String password) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
@@ -101,7 +101,7 @@ public class EditClientTable {
         return null;
     }
 
-    public static String databaseClientToJSON(String username, String password) throws SQLException, ClassNotFoundException {
+    public String databaseClientToJSON(String username, String password) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
@@ -118,15 +118,10 @@ public class EditClientTable {
         return null;
     }
 
-    public static void createClientsTable() throws SQLException, ClassNotFoundException {
+    public void createClientsTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-
-        String createTypeQuery = "CREATE TYPE card_details AS ("
-                + "card_number INTEGER, "
-                + "card_expdate DATE, "
-                + "card_csv INTEGER)";
 
         String createTableQuery = "CREATE TABLE clients ("
                 + "client_username VARCHAR(50) NOT NULL UNIQUE, "
@@ -135,13 +130,14 @@ public class EditClientTable {
                 + "client_lastname VARCHAR(50) NOT NULL, "
                 + "client_email VARCHAR(50) NOT NULL UNIQUE, "
                 + "client_balance INTEGER DEFAULT 0, "
-                + "client_card card_details NOT NULL, "
+                + "card_number INTEGER, "
+                + "card_expdate DATE, "
+                + "card_cvv INTEGER,"
                 + "PRIMARY KEY (client_username))";
 
         try {
-            stmt.execute(createTypeQuery);
             stmt.execute(createTableQuery);
-            System.out.println("Type 'card_details' and table 'clients' created successfully!");
+            System.out.println("~Table 'clients' created successfully!");
         } catch (SQLException e) {
             System.err.println("Error while creating type or table: " + e.getMessage());
         } finally {
@@ -156,7 +152,7 @@ public class EditClientTable {
      * @param user
      * @throws ClassNotFoundException
      */
-    public static void addNewClient(Client user) throws ClassNotFoundException {
+    public void addNewClient(Client user) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
 
@@ -171,9 +167,9 @@ public class EditClientTable {
                     + "'" + user.getClientEmail() + "', "
                     + user.getClientBalance() + ", "
                     + "ROW("
-                    + user.getClientCard().getCardNumber() + ", "
-                    + "'" + user.getClientCard().getCardExpDate() + "', "
-                    + user.getClientCard().getCardCvv() + ")::card_details"
+                    + user.getCardNumber() + ", "
+                    + "'" + user.getCardExpDate() + "', "
+                    + user.getCardCvv() + ")::card_details"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
@@ -188,14 +184,5 @@ public class EditClientTable {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Started main. Creating client table!");
-        try {
-            createClientsTable();
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-        }
-    }
 
 }

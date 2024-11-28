@@ -9,7 +9,7 @@ mainClasses\JSON_Converter.class
 database\tables\EditClientTable.class
 database\tables\EditReservationTable.class
 mainClasses\EventStatus.class
-mainClasses\Client$CardDetails.class
+servlets\RegistrationClient.class
 mainClasses\Ticket.class
 mainClasses\Type.class
 database\init\InitDatabase.class
