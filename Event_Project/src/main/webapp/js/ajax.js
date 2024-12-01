@@ -104,4 +104,46 @@ function createTableFromJSON(data) {
     return tableContent;
 }
 
+function loginPOST() {
+    var username = document.getElementById('username_log').value;
+    var password = document.getElementById('password_log').value;
+
+    console.log("Username:", username, "Password:", password);  
+    
+    //TELIKA THA KANOUME ADMIN?? CHECK IT OUT
+    // Check for administrator credentials
+    //if (username === 'admin' && password === 'admin12*') {
+      //  window.location.href = 'admin.html'; // Redirect the administrator
+        //return; // Terminate the function
+    //}
+
+    // AJAX request for regular users
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Assuming 'userId' and 'userType' are keys in your response object
+                    sessionStorage.setItem('userId', response.userId);
+                    sessionStorage.setItem('userType', response.userType);
+
+                    $("#ajaxContent").html("Successful Login");
+                    redirect();
+                } else {
+                    $("#error").html("Wrong Credentials");
+                }
+            } else {
+                $("#error").html("Login Failed");
+            }
+        }
+    };
+
+    var data = $('#loginForm').serialize();
+    xhr.open('POST', 'Login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
+}
+
+
 
