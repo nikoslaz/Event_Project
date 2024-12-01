@@ -3,6 +3,7 @@ mainClasses\Reservation.class
 mainClasses\Event.class
 database\tables\EditTicketTable.class
 mainClasses\ResStatus.class
+servlets\Login.class
 database\DB_Connection.class
 database\tables\EditEventTable.class
 mainClasses\JSON_Converter.class

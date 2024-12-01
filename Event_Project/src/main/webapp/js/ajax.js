@@ -110,12 +110,12 @@ function loginPOST() {
 
     console.log("Username:", username, "Password:", password);  
     
-    //TELIKA THA KANOUME ADMIN?? CHECK IT OUT
+    
     // Check for administrator credentials
-    //if (username === 'admin' && password === 'admin12*') {
-      //  window.location.href = 'admin.html'; // Redirect the administrator
-        //return; // Terminate the function
-    //}
+    if (username === 'admin' && password === 'admin123') {
+        window.location.href = 'admin.html'; // Redirect the administrator
+        return; // Terminate the function
+    }
 
     // AJAX request for regular users
     var xhr = new XMLHttpRequest();
