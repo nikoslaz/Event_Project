@@ -63,6 +63,41 @@ button:active {
     transform: scale(0.98); /* Slightly shrink when clicked */
 }
 
+/* General Styling for Content Container */
+.content-container {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    gap: 20px; /* Space between child elements */
+    padding: 20px; /* Add padding around the container */
+    margin: 20px auto; /* Center horizontally with margin at the top */
+    max-width: 1200px; /* Set a maximum width for the container */
+    background-color: #f9f9f9; /* Light background for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Styling for Each Content Div */
+.content-container > div {
+    background-color: #fff; /* White background for each content block */
+    padding: 15px; /* Add padding inside each block */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for each block */
+    border: 1px solid #ddd; /* Light border around each block */
+    min-height: 150px; /* Ensure minimum height for empty blocks */
+    display: flex;
+    flex-direction: column; /* Allow content to stack inside each block */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center-align text inside blocks */
+}
+
+/* Adjust Text Inside Content Blocks */
+.content-container > div p {
+    margin: 0; /* Remove default margins */
+    font-size: 1em; /* Set a standard font size */
+    color: #555; /* Subtle text color */
+}
+
 /* Responsive Design for Smaller Screens */
 @media (max-width: 480px) {
     .dashboard-container {
@@ -72,5 +107,14 @@ button:active {
     button {
         font-size: 0.9em;
         padding: 8px 15px;
+    }
+    
+    .content-container {
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    .content-container > div {
+        padding: 10px; /* Reduce padding inside blocks */
+        min-height: 100px; /* Lower minimum height for smaller screens */
     }
 }

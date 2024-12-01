@@ -147,3 +147,134 @@ function loginPOST() {
 
 
 
+function loadClients() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = xhr.responseText;
+                console.log("Response data:", responseData); // Log the response data
+
+                try {
+                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
+                    let tableContent = createTableFromJSON(parsedResponse, 'client'); // Include 'petkeeper' type
+                    document.getElementById('clientsContent').innerHTML = tableContent; // Update 'keepersContent' div
+                } catch (error) {
+                    console.error("JSON parsing error:", error); // Log JSON parsing error
+                    document.getElementById('clientsContent').innerHTML = 'Invalid JSON response.';
+                }
+            } else {
+                // Error handling for non-200 responses
+                document.getElementById('clientsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+            }
+        }
+    };
+    xhr.onerror = function() {
+        // Handle network errors
+        alert("Network Error. Please try again.");
+    };
+
+    // Setting the query parameter for pet keepers
+    var typeParam = "type=all";
+    xhr.open('GET', 'AdminClients?' + typeParam);
+    xhr.send();
+}
+
+function loadEvents() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = xhr.responseText;
+                console.log("Response data:", responseData); // Log the response data
+
+                try {
+                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
+                    let tableContent = createTableFromJSON(parsedResponse, 'event'); // Include 'petkeeper' type
+                    document.getElementById('eventsContent').innerHTML = tableContent; // Update 'keepersContent' div
+                } catch (error) {
+                    console.error("JSON parsing error:", error); // Log JSON parsing error
+                    document.getElementById('eventsContent').innerHTML = 'Invalid JSON response.';
+                }
+            } else {
+                // Error handling for non-200 responses
+                document.getElementById('eventsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+            }
+        }
+    };
+    xhr.onerror = function() {
+        // Handle network errors
+        alert("Network Error. Please try again.");
+    };
+
+    // Setting the query parameter for pet keepers
+    var typeParam = "type=all";
+    xhr.open('GET', 'AdminEvents?' + typeParam);
+    xhr.send();
+}
+
+function loadTickets() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = xhr.responseText;
+                console.log("Response data:", responseData); // Log the response data
+
+                try {
+                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
+                    let tableContent = createTableFromJSON(parsedResponse, 'ticket'); // Include 'petkeeper' type
+                    document.getElementById('ticketsContent').innerHTML = tableContent; // Update 'keepersContent' div
+                } catch (error) {
+                    console.error("JSON parsing error:", error); // Log JSON parsing error
+                    document.getElementById('ticketsContent').innerHTML = 'Invalid JSON response.';
+                }
+            } else {
+                // Error handling for non-200 responses
+                document.getElementById('ticketsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+            }
+        }
+    };
+    xhr.onerror = function() {
+        // Handle network errors
+        alert("Network Error. Please try again.");
+    };
+
+    // Setting the query parameter for pet keepers
+    var typeParam = "type=all";
+    xhr.open('GET', 'AdminTickets?' + typeParam);
+    xhr.send();
+}
+
+function loadReservations() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = xhr.responseText;
+                console.log("Response data:", responseData); // Log the response data
+
+                try {
+                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
+                    let tableContent = createTableFromJSON(parsedResponse, 'reservation'); // Include 'petkeeper' type
+                    document.getElementById('reservationsContent').innerHTML = tableContent; // Update 'keepersContent' div
+                } catch (error) {
+                    console.error("JSON parsing error:", error); // Log JSON parsing error
+                    document.getElementById('reservationsContent').innerHTML = 'Invalid JSON response.';
+                }
+            } else {
+                // Error handling for non-200 responses
+                document.getElementById('reservationsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+            }
+        }
+    };
+    xhr.onerror = function() {
+        // Handle network errors
+        alert("Network Error. Please try again.");
+    };
+
+    // Setting the query parameter for pet keepers
+    var typeParam = "type=all";
+    xhr.open('GET', 'AdminReservations?' + typeParam);
+    xhr.send();
+}
