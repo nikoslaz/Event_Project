@@ -115,17 +115,27 @@ footer {
     color: #007bff; /* Highlight color when hovered */
 }
 
+.button-container {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 480px) { 
     form {
         padding: 15px;
     }
 
-    h1 {
+    h1, h2 {
         font-size: 1.5em;
     }
 
     input, button {
         font-size: 0.9em;
+    }
+        
+    footer {
+        font-size: 0.75em; /* Smaller footer text */
     }
 }
