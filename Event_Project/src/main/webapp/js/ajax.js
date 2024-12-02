@@ -14,7 +14,7 @@ function RegisterPOST() {
             if (xhr.status === 200) {
                 const responseData = JSON.parse(xhr.responseText);
                 //$('#ajaxContent').html("Successful Registration. Now please log in!<br> Your Data");
-                $('#ajaxContent').append(createTableFromJSON(responseData));
+                $('#ajaxContent').append(createClientTableJSON(responseData));
             } else {
                 $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
                 if (xhr.responseText) {
@@ -43,7 +43,7 @@ function RegisterPOST() {
     xhr.send(jsonData);
 }
 
-function createTableFromJSON(data) {
+function createClientTableJSON(data) {
     console.log("Creating table for clients data"); // Debugging
 
     if (!Array.isArray(data) || data.length === 0) {
@@ -152,7 +152,7 @@ function loadClients() {
 
                 try {
                     const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createTableFromJSON(parsedResponse, 'clients'); // Include 'petkeeper' type
+                    let tableContent = createClientTableJSON(parsedResponse, 'clients'); // Include 'petkeeper' type
                     document.getElementById('clientsContent').innerHTML = tableContent; // Update 'keepersContent' div
                 } catch (error) {
                     console.error("JSON parsing error:", error); // Log JSON parsing error
@@ -185,7 +185,7 @@ function loadEvents() {
 
                 try {
                     const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createTableFromJSON(parsedResponse, 'event'); // Include 'petkeeper' type
+                    let tableContent = createClientTableJSON(parsedResponse, 'event'); // Include 'petkeeper' type
                     document.getElementById('eventsContent').innerHTML = tableContent; // Update 'keepersContent' div
                 } catch (error) {
                     console.error("JSON parsing error:", error); // Log JSON parsing error
@@ -218,7 +218,7 @@ function loadTickets() {
 
                 try {
                     const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createTableFromJSON(parsedResponse, 'ticket'); // Include 'petkeeper' type
+                    let tableContent = createClientTableJSON(parsedResponse, 'ticket'); // Include 'petkeeper' type
                     document.getElementById('ticketsContent').innerHTML = tableContent; // Update 'keepersContent' div
                 } catch (error) {
                     console.error("JSON parsing error:", error); // Log JSON parsing error
@@ -251,7 +251,7 @@ function loadReservations() {
 
                 try {
                     const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createTableFromJSON(parsedResponse, 'reservation'); // Include 'petkeeper' type
+                    let tableContent = createClientTableJSON(parsedResponse, 'reservation'); // Include 'petkeeper' type
                     document.getElementById('reservationsContent').innerHTML = tableContent; // Update 'keepersContent' div
                 } catch (error) {
                     console.error("JSON parsing error:", error); // Log JSON parsing error
