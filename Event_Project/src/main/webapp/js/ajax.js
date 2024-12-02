@@ -157,7 +157,7 @@ function loadClients() {
 
                 try {
                     const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createTableFromJSON(parsedResponse, 'client'); // Include 'petkeeper' type
+                    let tableContent = createTableFromJSON(parsedResponse, 'clients'); // Include 'petkeeper' type
                     document.getElementById('clientsContent').innerHTML = tableContent; // Update 'keepersContent' div
                 } catch (error) {
                     console.error("JSON parsing error:", error); // Log JSON parsing error
@@ -176,7 +176,7 @@ function loadClients() {
 
     // Setting the query parameter for pet keepers
     var typeParam = "type=all";
-    xhr.open('GET', 'AdminClients?' + typeParam);
+    xhr.open('GET', 'LoadClients?' + typeParam);
     xhr.send();
 }
 
