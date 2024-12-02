@@ -21,12 +21,12 @@ import java.util.logging.Logger;
  */
 public class EditEventTable {
 
-    public static void addEventFromJSON(String json) throws ClassNotFoundException {
+    public void addEventFromJSON(String json) throws ClassNotFoundException {
         Event r = jsonToEvent(json);
         createNewEvent(r);
     }
 
-    public static Event databaseToEvent(int id) throws SQLException, ClassNotFoundException {
+    public Event databaseToEvent(int id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
@@ -45,13 +45,13 @@ public class EditEventTable {
         return null;
     }
 
-    public static Event jsonToEvent(String json) {
+    public Event jsonToEvent(String json) {
         Gson gson = new Gson();
         Event r = gson.fromJson(json, Event.class);
         return r;
     }
 
-    public static String eventToJSON(Event e) {
+    public String eventToJSON(Event e) {
         Gson gson = new Gson();
 
         String json = gson.toJson(e, Event.class);
@@ -93,7 +93,7 @@ public class EditEventTable {
         return null;
     }
 
-    public static void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {
+    public void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String updateQuery = "UPDATE events SET status='" + status + "' WHERE event_id= '" + eventID + "'";
@@ -102,7 +102,7 @@ public class EditEventTable {
         con.close();
     }
 
-    public static void createEventTable() throws SQLException, ClassNotFoundException {
+    public  void createEventTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String sql = "CREATE TABLE events ("
@@ -125,7 +125,7 @@ public class EditEventTable {
      *
      * @throws ClassNotFoundException
      */
-    public static void createNewEvent(Event ev) throws ClassNotFoundException {
+    public void createNewEvent(Event ev) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
 
