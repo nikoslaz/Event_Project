@@ -44,7 +44,7 @@ function RegisterPOST() {
 }
 
 function createClientTableJSON(data) {
-        let tableContent = `
+    let tableContent = `
         <table border="1">
             <thead>
                 <tr>
@@ -92,7 +92,7 @@ function createClientTableJSON(data) {
 }
 
 function createEventTableJSON(data) {
-    let tableContent = `
+        let tableContent = `
         <table border="1">
             <thead>
                 <tr>
@@ -116,7 +116,7 @@ function createEventTableJSON(data) {
                 <td>${event.event_date || 'N/A'}</td>
                 <td>${event.event_time || 'N/A'}</td>
                 <td>${event.event_type || 'N/A'}</td>
-                <td>${event.event_capacity != null ? event.event_capacity : 'N/A'}</td>
+                <td>${event.event_capacity !== null ? event.event_capacity : 'N/A'}</td>
                 <td>${event.event_status || 'N/A'}</td>
             </tr>
         `;
