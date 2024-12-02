@@ -19,7 +19,7 @@ public class Reservation {
     private String reservation_date;
     private int reservation_payment_amount;
     private ResStatus reservation_status;
-    private int client_username;
+    private String client_username;
     private int event_id;
 
     public int getReservationID() {
@@ -62,11 +62,11 @@ public class Reservation {
         this.reservation_status = reservation_status;
     }
 
-    public int getClientUsername() {
+    public String getClientUsername() {
         return this.client_username;
     }
 
-    public void setClientUsername(int client_username) {
+    public void setClientUsername(String client_username) {
         this.client_username = client_username;
     }
 

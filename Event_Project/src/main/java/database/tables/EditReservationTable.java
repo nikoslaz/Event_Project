@@ -98,14 +98,13 @@ public class EditReservationTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO reservations "
-                    + "(reservation_id, reservation_tickets, reservation_date, reservation_payment_amount, reservation_status, client_username, event_ID) "
+                    + "(reservation_tickets, reservation_date, reservation_payment_amount, reservation_status, client_username, event_ID) "
                     + "VALUES ("
-                    + "'" + res.getReservationID() + "', "
                     + "'" + res.getReservationTickets() + "', "
                     + "'" + res.getReservationDate() + "', "
                     + "'" + res.getReservationPaymentAmount() + "', "
-                    + "'" + res.getReservationStatus() + "'"
-                    + "'" + res.getClientUsername() + "'"
+                    + "'ACTIVE',"
+                    + "'" + res.getClientUsername() + "',"
                     + "'" + res.getEventID() + "')";
             //stmt.execute(table);
 
@@ -128,6 +127,21 @@ public class EditReservationTable {
         } catch (Exception e) {
             // Handle any exception that occurs
             System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+        }
+        Reservation rev = new Reservation();
+        rev.setReservationTickets(8);
+        rev.setReservationDate("2024-12-12");
+        rev.setReservationPaymentAmount(12);
+        rev.setClientUsername("nikole45");
+        rev.setEventID(1);
+        try {
+            edit.createNewReservation(rev);
+            System.out.println("Reservation 1 created successfully.");
+
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating reservation 1: " + e.getMessage());
             e.printStackTrace(); // Optional: Print the full stack trace for debugging
         }
     }

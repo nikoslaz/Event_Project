@@ -132,16 +132,14 @@ public class EditEventTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO "
-                    + " events (event_id,event_name,event_date,event_time,event_type,event_capacity,event_status)"
+                    + " events (event_name, event_date, event_time, event_type, event_capacity, event_status)"
                     + " VALUES ("
-                    + "'" + ev.getEventId() + "',"
                     + "'" + ev.getEventName() + "',"
                     + "'" + ev.getEventDate() + "',"
                     + "'" + ev.getEventTime() + "',"
                     + "'" + ev.getEventType() + "',"
                     + "'" + ev.getEventCapacity() + "',"
-                    + "'" + ev.getEventStatus() + "'"
-                    + ")";
+                    + "'SCHEDULED')";
             //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery);
@@ -159,10 +157,24 @@ public class EditEventTable {
         EditEventTable edit = new EditEventTable();
         try {
             edit.createEventTable();
-            System.out.println("Reservation table created successfully.");
+            System.out.println("Event table created successfully.");
         } catch (Exception e) {
             // Handle any exception that occurs
-            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
+            System.err.println("An error occurred while creating the event table: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+        }
+        Event ev = new Event();
+        ev.setEventCapacity(80);
+        ev.setEventName("Cats");
+        ev.setEventDate("2024-01-01");
+        ev.setEventTime("12:12:12");
+        ev.setEventType(Event.EventType.CONCERT);
+        try {
+            edit.createNewEvent(ev);
+            System.out.println("Event Cats created successfully.");
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating event cats: " + e.getMessage());
             e.printStackTrace(); // Optional: Print the full stack trace for debugging
         }
     }

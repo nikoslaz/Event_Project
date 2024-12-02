@@ -8,6 +8,7 @@ database\tables\EditEventTable.class
 mainClasses\JSON_Converter.class
 database\tables\EditClientTable.class
 database\tables\EditReservationTable.class
+servlets\AddEvent.class
 servlets\RegistrationClient.class
 mainClasses\Event$EventStatus.class
 mainClasses\Event$EventType.class

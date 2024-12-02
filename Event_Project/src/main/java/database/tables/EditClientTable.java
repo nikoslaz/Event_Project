@@ -78,7 +78,7 @@ public class EditClientTable {
     public void updateClient(String username, int balance) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String update = "UPDATE petowners SET balance='" + balance + "' WHERE username = '" + username + "'";
+        String update = "UPDATE clients SET client_balance='" + balance + "' WHERE client_username = '" + username + "'";
         stmt.executeUpdate(update);
     }
 
@@ -182,6 +182,36 @@ public class EditClientTable {
 
         } catch (SQLException ex) {
             Logger.getLogger(EditClientTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        EditClientTable edit = new EditClientTable();
+        try {
+            edit.createClientsTable();
+            System.out.println("Customer table created successfully.");
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating the customer table: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+        }
+        Client nikole = new Client();
+        nikole.setClientUsername("nikole45");
+        nikole.setClientPassword("dogname");
+        nikole.setClientName("Hello");
+        nikole.setClientLastname("World");
+        nikole.setClientEmail("example@domain");
+        nikole.setClientPhone(1234567890);
+        nikole.setCardNumber("1234567890");
+        nikole.setCardExpDate("2024-12-12");
+        nikole.setCardCvv("123");
+        try {
+            edit.addNewClient(nikole);
+            System.out.println("Customer Nikole created successfully.");
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating the rcustomer Nikole: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
         }
     }
 
