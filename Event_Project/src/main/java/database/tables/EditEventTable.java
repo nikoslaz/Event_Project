@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,6 +56,41 @@ public class EditEventTable {
 
         String json = gson.toJson(e, Event.class);
         return json;
+    }
+
+    public ArrayList<Event> getEvents(String type) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Event> events = new ArrayList<Event>();
+        ResultSet rs = null;
+        try {
+            // Build the query to fetch all clients
+            String query = "SELECT * FROM events";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Event ev = gson.fromJson(json, Event.class);
+                events.add(ev);
+            }
+            return events;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        } finally {
+            // Close the ResultSet, Statement, and Connection
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
     public static void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {

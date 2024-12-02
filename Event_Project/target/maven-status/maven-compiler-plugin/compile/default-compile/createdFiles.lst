@@ -11,7 +11,9 @@ database\tables\EditClientTable.class
 database\tables\EditReservationTable.class
 mainClasses\EventStatus.class
 servlets\RegistrationClient.class
+servlets\LoadEvents.class
 mainClasses\Ticket.class
 mainClasses\Type.class
+servlets\LoadClients.class
 database\init\InitDatabase.class
 mainClasses\Client.class
