@@ -56,10 +56,9 @@ function createTableFromJSON(data) {
         <table border="1">
             <thead>
                 <tr>
-                    <th>Select</th>
                     <th>Username</th>
                     <th>Password</th>
-                    <th>First Name</th>
+                    <th>Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -79,7 +78,6 @@ function createTableFromJSON(data) {
         // Add a table row with data and handle any missing fields gracefully
         tableContent += `
             <tr>
-                <td><input type="checkbox" name="clientSelect" value="${client.client_username || ''}"></td>
                 <td>${client.client_username || 'N/A'}</td>
                 <td>${client.client_password || 'N/A'}</td>
                 <td>${client.client_name || 'N/A'}</td>
