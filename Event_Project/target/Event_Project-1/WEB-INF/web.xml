@@ -16,6 +16,10 @@
         <servlet-name>LoadClients</servlet-name>
         <servlet-class>servlets.LoadClients</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEvent</servlet-name>
+        <servlet-class>servlets.AddEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>LoadClients</servlet-name>
         <url-pattern>/LoadClients</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEvent</servlet-name>
+        <url-pattern>/AddEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

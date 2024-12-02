@@ -1,4 +1,3 @@
-mainClasses\EventType.class
 mainClasses\Reservation.class
 mainClasses\Event.class
 database\tables\EditTicketTable.class
@@ -9,8 +8,9 @@ database\tables\EditEventTable.class
 mainClasses\JSON_Converter.class
 database\tables\EditClientTable.class
 database\tables\EditReservationTable.class
-mainClasses\EventStatus.class
 servlets\RegistrationClient.class
+mainClasses\Event$EventStatus.class
+mainClasses\Event$EventType.class
 servlets\LoadEvents.class
 mainClasses\Ticket.class
 mainClasses\Type.class

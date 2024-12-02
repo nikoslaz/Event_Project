@@ -4,23 +4,25 @@
  */
 package mainClasses;
 
-enum EventStatus {
-    SCHEDULED, CANCELED, COMPLETED
-}
-
-enum EventType {
-    CONCERT, PERFOMANCE, COMEDYNIGHT
-}
-
 /**
  *
  * @author nikos
  */
 public class Event {
+
+    public enum EventStatus {
+        SCHEDULED, CANCELED, COMPLETED
+    }
+
+    public enum EventType {
+        CONCERT, PERFOMANCE, COMEDYNIGHT
+    }
+
     private int event_id, event_capacity;
     private String event_name, event_date, event_time;
     private EventType event_type;
     private EventStatus event_status;
+
 
     public int getEventId() {
         return event_id;
