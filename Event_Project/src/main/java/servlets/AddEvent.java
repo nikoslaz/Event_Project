@@ -4,7 +4,6 @@
  */
 package servlets;
 
-import database.tables.EditClientTable;
 import database.tables.EditEventTable;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -46,7 +45,6 @@ public class AddEvent extends HttpServlet {
         System.out.println(jsonObject);
 
         Event event = new Event();
-        event.setEventId(jsonObject.getInt("event_id"));
         event.setEventName(jsonObject.getString("event_name"));
         event.setEventDate(jsonObject.getString("event_date"));
         event.setEventTime(jsonObject.getString("event_time"));

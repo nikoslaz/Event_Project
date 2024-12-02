@@ -44,12 +44,7 @@ function RegisterPOST() {
 }
 
 function createClientTableJSON(data) {
-    if (!Array.isArray(data) || data.length === 0) {
-        console.error("Invalid or empty data:", data);
-        return "<p>No data available to display.</p>";
-    }
-
-    let tableContent = `
+        let tableContent = `
         <table border="1">
             <thead>
                 <tr>
@@ -97,12 +92,6 @@ function createClientTableJSON(data) {
 }
 
 function createEventTableJSON(data) {
-    if (!Array.isArray(data) || data.length === 0) {
-    console.error("Invalid or empty data:", data);
-    return "<p>No data available to display.</p>";
-    }
-
-    
     let tableContent = `
         <table border="1">
             <thead>
@@ -345,59 +334,41 @@ function clearEventForm() {
     document.getElementById('event_capacity').value = '';
 }
 
-// Submit the Event Form
 function submitEventForm() {
-    const event_id = document.getElementById('event_id').value;
-    const event_name = document.getElementById('event_name').value;
-    const event_date = document.getElementById('event_date').value;
-    const event_time = document.getElementById('event_time').value;
-    const event_type = document.getElementById('event_type').value;
-    const event_status = document.getElementById('event_status').value;
-    const event_capacity = document.getElementById('event_capacity').value;
-
-    // Validate Input Fields
-    if (
-        !event_id ||
-        !event_name ||
-        !event_date ||
-        !event_time ||
-        !event_type ||
-        !event_status ||
-        !event_capacity
-    ) {
-        alert('Please fill in all fields.');
-        return;
-    }
-
-    // Create the Event Data Object
-    const eventData = {
-        event_id: parseInt(event_id, 10),
-        event_name: event_name,
-        event_date: event_date,
-        event_time: event_time,
-        event_type: event_type,
-        event_status: event_status,
-        event_capacity: parseInt(event_capacity, 10),
-    };
-
-    // Send Data to the Server
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'AddEvent', true); // Replace with your actual server endpoint
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
+    let myForm = document.getElementById('eventForm');
+    let formData = new FormData(myForm);
+    console.log("AJAX");
+    
+    var xhr = new XMLHttpRequest();
     xhr.onload = function () {
-        if (xhr.status === 200) {
-            alert('Event successfully added!');
-            hideEventForm();
-            loadEvents(); // Optional: Reload the events table after adding
-        } else {
-            alert('Failed to add event. Error: ' + xhr.status);
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = JSON.parse(xhr.responseText);
+                $('#ajaxContent').append(createEventTableJSON(responseData));
+            } else {
+                $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+                if (xhr.responseText) {
+                    const responseData = JSON.parse(xhr.responseText);
+                    for (const x in responseData) {
+                        $('#ajaxContent').append("<p style='color:red'>" + x + "=" + responseData[x] + "</p>");
+                    }
+                } else {
+                    $('#ajaxContent').append("<p>There was an error processing your request.</p>");
+                }
+            }
         }
     };
-
+    
     xhr.onerror = function () {
-        alert('Network error. Please try again.');
+        // Handle network errors
+        alert("Network Error. Please try again.");
     };
-
-    xhr.send(JSON.stringify(eventData));
+    
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    xhr.open('POST', 'AddEvent');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
 }
