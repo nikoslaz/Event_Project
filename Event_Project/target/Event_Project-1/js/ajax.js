@@ -44,14 +44,11 @@ function RegisterPOST() {
 }
 
 function createClientTableJSON(data) {
-    console.log("Creating table for clients data"); // Debugging
-
     if (!Array.isArray(data) || data.length === 0) {
         console.error("Invalid or empty data:", data);
         return "<p>No data available to display.</p>";
     }
 
-    // Start table with headers matching the `clients` table
     let tableContent = `
         <table border="1">
             <thead>
@@ -92,6 +89,51 @@ function createClientTableJSON(data) {
     });
     
      tableContent += `
+            </tbody>
+        </table>
+    `;
+
+    return tableContent;
+}
+
+function createEventTableJSON(data) {
+    if (!Array.isArray(data) || data.length === 0) {
+    console.error("Invalid or empty data:", data);
+    return "<p>No data available to display.</p>";
+    }
+
+    
+    let tableContent = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Event Date</th>
+                    <th>Event Time</th>
+                    <th>Event Type</th>
+                    <th>Event Capacity</th>
+                    <th>Event Status</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(event => {
+        tableContent += `
+            <tr>
+                <td>${event.event_id || 'N/A'}</td>
+                <td>${event.event_name || 'N/A'}</td>
+                <td>${event.event_date || 'N/A'}</td>
+                <td>${event.event_time || 'N/A'}</td>
+                <td>${event.event_type || 'N/A'}</td>
+                <td>${event.event_capacity != null ? event.event_capacity : 'N/A'}</td>
+                <td>${event.event_status || 'N/A'}</td>
+            </tr>
+        `;
+    });
+
+    tableContent += `
             </tbody>
         </table>
     `;
@@ -177,35 +219,42 @@ function loadClients() {
 
 function loadEvents() {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const responseData = xhr.responseText;
-                console.log("Response data:", responseData); // Log the response data
 
-                try {
-                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createClientTableJSON(parsedResponse, 'event'); // Include 'petkeeper' type
-                    document.getElementById('eventsContent').innerHTML = tableContent; // Update 'keepersContent' div
-                } catch (error) {
-                    console.error("JSON parsing error:", error); // Log JSON parsing error
-                    document.getElementById('eventsContent').innerHTML = 'Invalid JSON response.';
-                }
-            } else {
-                // Error handling for non-200 responses
-                document.getElementById('eventsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Response data:", xhr.responseText)
+
+            try {
+                // Parse the JSON response
+                const parsedResponse = JSON.parse(xhr.responseText);
+                console.log("Parsed response:", parsedResponse);
+
+                // Generate the table from event data
+                let tableContent = createEventTableJSON(parsedResponse);
+
+                // Update the DOM with the generated table
+                document.getElementById('eventsContent').innerHTML = tableContent;
+
+            } catch (error) {
+                console.error("Error parsing JSON:", error); // Log JSON parsing error
+                document.getElementById('eventsContent').innerHTML = '<p>Invalid JSON response from the server.</p>';
             }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+            document.getElementById('eventsContent').innerHTML = `<p>Failed to load events. Server responded with status ${xhr.status}.</p>`;
         }
     };
-    xhr.onerror = function() {
-        // Handle network errors
-        alert("Network Error. Please try again.");
+
+    // Define what happens in case of error
+    xhr.onerror = function () {
+        console.error("Network error occurred");
+        document.getElementById('eventsContent').innerHTML = '<p>Network error occurred. Please try again later.</p>';
     };
 
-    // Setting the query parameter for pet keepers
-    var typeParam = "type=all";
-    xhr.open('GET', 'AdminEvents?' + typeParam);
-    xhr.send();
+    // Open a GET request to the server endpoint
+    xhr.open('GET', 'LoadEvents'); 
+    xhr.send(); // Send the request
 }
 
 function loadTickets() {
