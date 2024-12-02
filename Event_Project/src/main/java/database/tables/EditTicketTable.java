@@ -104,4 +104,17 @@ public class EditTicketTable {
         }
     }
 
+//    public static void main(String[] args) {
+//        EditTicketTable edit = new EditTicketTable();
+//        try {
+//            edit.createTicketTable();
+//            System.out.println("Reservation table created successfully.");
+//        } catch (Exception e) {
+//            // Handle any exception that occurs
+//            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
+//            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+//        }
+//    }
+
+
 }
