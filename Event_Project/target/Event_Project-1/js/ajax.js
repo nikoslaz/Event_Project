@@ -58,7 +58,7 @@ function createTableFromJSON(data) {
                 <tr>
                     <th>Username</th>
                     <th>Password</th>
-                    <th>Name</th>
+                    <th>FirstName</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -75,22 +75,26 @@ function createTableFromJSON(data) {
     data.forEach(function(client, index) {
         console.log(`Processing client ${index}:`, client); // Debugging
 
-        // Add a table row with data and handle any missing fields gracefully
         tableContent += `
             <tr>
                 <td>${client.client_username || 'N/A'}</td>
                 <td>${client.client_password || 'N/A'}</td>
-                <td>${client.client_name || 'N/A'}</td>
+                <td>${client.client_firstname || 'N/A'}</td>
                 <td>${client.client_lastname || 'N/A'}</td>
                 <td>${client.client_email || 'N/A'}</td>
                 <td>${client.client_phone || 'N/A'}</td>
                 <td>${client.client_balance || 0}</td>
-                <td>${client.cardNumber || 'N/A'}</td>
-                <td>${client.cardExpDate || 'N/A'}</td>
-                <td>${client.cardCvv || 'N/A'}</td>
+                <td>${client.card_number || 'N/A'}</td>
+                <td>${client.card_expdate || 'N/A'}</td>
+                <td>${client.card_cvv || 'N/A'}</td>
             </tr>
         `;
     });
+    
+     tableContent += `
+            </tbody>
+        </table>
+    `;
 
     return tableContent;
 }

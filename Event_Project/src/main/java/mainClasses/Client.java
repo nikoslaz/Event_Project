@@ -8,14 +8,14 @@ public class Client {
 
     private String client_username;
     private String client_password;
-    private String client_name;
+    private String client_firstname;
     private String client_lastname;
     private String client_email;
     private int client_phone;
     private int client_cancel_balance;
-    private String cardNumber;
-    private String cardExpDate;
-    private String cardCvv;
+    private String card_number;
+    private String card_expdate;
+    private String card_cvv;
 
     // Getters and Setters for Client fields
     public String getClientUsername() {
@@ -35,11 +35,11 @@ public class Client {
     }
 
     public String getClientName() {
-        return client_name;
+        return client_firstname;
     }
 
-    public void setClientName(String client_name) {
-        this.client_name = client_name;
+    public void setClientName(String client_firstname) {
+        this.client_firstname = client_firstname;
     }
 
     public String getClientLastname() {
@@ -76,26 +76,26 @@ public class Client {
 
     // Getters and Setters for CardDetails
     public String getCardNumber() {
-        return cardNumber;
+        return card_number;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setCardNumber(String card_number) {
+        this.card_number = card_number;
     }
 
     public String getCardExpDate() {
-        return cardExpDate;
+        return card_expdate;
     }
 
-    public void setCardExpDate(String cardExpDate) {
-        this.cardExpDate = cardExpDate;
+    public void setCardExpDate(String card_expdate) {
+        this.card_expdate = card_expdate;
     }
 
     public String getCardCvv() {
-        return cardCvv;
+        return card_cvv;
     }
 
-    public void setCardCvv(String cardCvv) {
-        this.cardCvv = cardCvv;
+    public void setCardCvv(String card_cvv) {
+        this.card_cvv = card_cvv;
     }
 }
