@@ -4,82 +4,94 @@
  */
 package servlets;
 
+import database.tables.EditEventTable;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mainClasses.Event;
+import mainClasses.Event.EventStatus;
+import mainClasses.Event.EventType;
+import org.json.JSONObject;
 
 /**
  *
- * @author narba
+ * @author nikos
  */
 public class AddEvent extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddEvent</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddEvent at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("doPost registration");
+        // Parse JSON data from event
+        StringBuilder sb = new StringBuilder();
+        String line;
+        try (BufferedReader reader = request.getReader()) {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid request data");
+            return;
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        System.out.println(jsonObject);
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        Event event = new Event();
+        event.setEventName(jsonObject.getString("event_name"));
+        event.setEventDate(jsonObject.getString("event_date"));
+        event.setEventTime(jsonObject.getString("event_time"));
+        String eventTypeString = jsonObject.getString("event_type");
+        EventType eventType = EventType.valueOf(eventTypeString.toUpperCase()); // Convert String to Enum
+        event.setEventType(eventType);
+        event.setEventCapacity(jsonObject.getInt("event_capacity"));
+        String eventStatusString = jsonObject.getString("event_status");
+        EventStatus eventStatus = EventStatus.valueOf(eventStatusString.toUpperCase()); // Convert String to Enum
+        event.setEventStatus(eventStatus);
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        EditEventTable editEventTable = new EditEventTable();
+        JSONObject jsonResponse = new JSONObject();
+
+        try {
+            // Check if user already exists in the database
+            if (editEventTable.databaseToEvent(event.getEventId() )!= null) {
+                // User already exists, send error response
+                jsonResponse.put("status", "error");
+                jsonResponse.put("message", "User with provided username or password already exists.");
+                response.setStatus(HttpServletResponse.SC_CONFLICT);
+            } else {
+                editEventTable.createNewEvent(event);
+                System.out.println("Event added");
+                response.setStatus(HttpServletResponse.SC_OK);
+                jsonResponse.put("status", "success");
+                jsonResponse.put("message", "Registration successful.");
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
+        } catch (SQLException ex) {
+            jsonResponse.put("status", "error");
+            jsonResponse.put("message", "Database error: " + ex.getMessage());
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(AddEvent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            jsonResponse.put("status", "error");
+            jsonResponse.put("message", "Class not found error: " + ex.getMessage());
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(AddEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Send JSON response
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse);
+        out.flush();
+    }
 
 }
+

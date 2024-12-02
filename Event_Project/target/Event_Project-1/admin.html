@@ -47,8 +47,6 @@
     <div id="addEventForm" class="hidden">
     <h2>Add New Event</h2>
     <form id="eventForm">
-        <label for="event_id">Event ID:</label>
-        <input type="number" id="event_id" name="event_id" required>
 
         <label for="event_name">Event Name:</label>
         <input type="text" id="event_name" name="event_name" required>
@@ -66,14 +64,6 @@
             <option value="CONFERENCE">Conference</option>
             <option value="WORKSHOP">Workshop</option>
             <option value="SPORTS">Sports</option>
-        </select>
-
-        <label for="event_status">Event Status:</label>
-        <select id="event_status" name="event_status" required>
-            <option value="" disabled selected>Select an event status</option>
-            <option value="SCHEDULED">Scheduled</option>
-            <option value="CANCELLED">Cancelled</option>
-            <option value="COMPLETED">Completed</option>
         </select>
 
         <label for="event_capacity">Event Capacity:</label>

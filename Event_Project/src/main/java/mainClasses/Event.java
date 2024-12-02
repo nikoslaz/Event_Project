@@ -15,7 +15,7 @@ public class Event {
     }
 
     public enum EventType {
-        CONCERT, PERFOMANCE, COMEDYNIGHT
+        CONCERT, PERFOMANCE, COMEDYNIGHT, SPORTS, CONFERENCE, WORKSHOP
     }
 
     private int event_id, event_capacity;
