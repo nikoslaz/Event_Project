@@ -17,12 +17,23 @@
     <div class="dashboard-container">
         <h1>Admin Dashboard</h1>
         <div class="button-container">
+            <!-- Creation of tables -->
+            <button onclick="createClientsTable()">Create Clients Table</button>
+            <button onclick="createEventsTable()">Create Events Table</button>
+            <button onclick="createTicketsTable()">Create Tickets Table</button>
+            <button onclick="createReservationsTable()">Create Reservations Table</button>
+            
             <!-- Basic Tables -->
             <button onclick="loadClients()">Load Clients</button>
             <button onclick="loadEvents()">Load Events</button>
             <button onclick="loadTickets()">Load Tickets</button>
             <button onclick="loadReservations()">Load Reservations</button>
-
+            
+            <!--sto cancel tha prepei kapws na dinoume to id pou theloume na akurwthei sthn sunarthsh -->
+            <button onclick="cancelEvent()">Cancel Event</button>
+            <!-- thelw na vgazei forma pou tha sumplhrwnw ta stoixeia tou neou event-->
+            <button onclick="addEvent()">Add Event</button>
+            
             <!-- SQL Questions -->
             <button onclick="showAvailable_ReservedSeats()">Show Available and Reserved seats for every event</button>
             <button onclick="showProfits()">Show profits for each event</button>
@@ -32,7 +43,48 @@
             <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
         </div>
     </div>
+    <!-- Add Event Form (Initially Hidden) -->
+    <div id="addEventForm" class="hidden">
+    <h2>Add New Event</h2>
+    <form id="eventForm">
+        <label for="event_id">Event ID:</label>
+        <input type="number" id="event_id" name="event_id" required>
 
+        <label for="event_name">Event Name:</label>
+        <input type="text" id="event_name" name="event_name" required>
+
+        <label for="event_date">Event Date:</label>
+        <input type="date" id="event_date" name="event_date" required>
+
+        <label for="event_time">Event Time:</label>
+        <input type="time" id="event_time" name="event_time" required>
+
+        <label for="event_type">Event Type:</label>
+        <select id="event_type" name="event_type" required>
+            <option value="" disabled selected>Select an event type</option>
+            <option value="CONCERT">Concert</option>
+            <option value="CONFERENCE">Conference</option>
+            <option value="WORKSHOP">Workshop</option>
+            <option value="SPORTS">Sports</option>
+        </select>
+
+        <label for="event_status">Event Status:</label>
+        <select id="event_status" name="event_status" required>
+            <option value="" disabled selected>Select an event status</option>
+            <option value="SCHEDULED">Scheduled</option>
+            <option value="CANCELLED">Cancelled</option>
+            <option value="COMPLETED">Completed</option>
+        </select>
+
+        <label for="event_capacity">Event Capacity:</label>
+        <input type="number" id="event_capacity" name="event_capacity" required>
+
+        <button type="button" onclick="submitEventForm()">Submit Event</button>
+        <button type="button" onclick="hideEventForm()">Cancel</button>
+    </form>
+    </div>
+
+    
     <div class="content-container">
         <div id="clientsContent"></div>
         <div id="eventsContent"></div>

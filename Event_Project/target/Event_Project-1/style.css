@@ -1,0 +1,136 @@
+/* General Reset */
+body, h1, form, label, input, button, footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Heading Styling */
+h1, h2 {
+    font-size: 2em;
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Centered Form Container */
+form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;                                                                      
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Card Details Section */
+.card-details {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card-details input {
+    flex: 1;
+    min-width: 100px;
+}
+
+/* Button */
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 20px; /* Add spacing at the top */
+    font-size: 0.85em; /* Slightly smaller footer text */
+    color: #666;
+}
+
+.social-media {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between links */
+}
+
+.social-media a {
+    text-decoration: none;
+    color: #555; /* Default color */
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #007bff; /* Highlight color when hovered */
+}
+
+
+/* Responsive Design */
+@media (max-width: 480px) { 
+    form {
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    input, button {
+        font-size: 0.9em;
+    }
+        
+    footer {
+        font-size: 0.75em; /* Smaller footer text */
+    }
+}

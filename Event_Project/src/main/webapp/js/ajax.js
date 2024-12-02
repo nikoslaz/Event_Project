@@ -278,3 +278,82 @@ function loadReservations() {
     xhr.open('GET', 'AdminReservations?' + typeParam);
     xhr.send();
 }
+
+// Show the Add Event Form
+function addEvent() {
+    document.getElementById('addEventForm').classList.remove('hidden');
+}
+
+// Hide the Add Event Form
+function hideEventForm() {
+    document.getElementById('addEventForm').classList.add('hidden');
+    clearEventForm(); // Optional: Clear form fields when hiding the form
+}
+
+// Clear the Event Form Fields
+function clearEventForm() {
+    document.getElementById('event_id').value = '';
+    document.getElementById('event_name').value = '';
+    document.getElementById('event_date').value = '';
+    document.getElementById('event_time').value = '';
+    document.getElementById('event_type').value = '';
+    document.getElementById('event_status').value = '';
+    document.getElementById('event_capacity').value = '';
+}
+
+// Submit the Event Form
+function submitEventForm() {
+    const event_id = document.getElementById('event_id').value;
+    const event_name = document.getElementById('event_name').value;
+    const event_date = document.getElementById('event_date').value;
+    const event_time = document.getElementById('event_time').value;
+    const event_type = document.getElementById('event_type').value;
+    const event_status = document.getElementById('event_status').value;
+    const event_capacity = document.getElementById('event_capacity').value;
+
+    // Validate Input Fields
+    if (
+        !event_id ||
+        !event_name ||
+        !event_date ||
+        !event_time ||
+        !event_type ||
+        !event_status ||
+        !event_capacity
+    ) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Create the Event Data Object
+    const eventData = {
+        event_id: parseInt(event_id, 10),
+        event_name: event_name,
+        event_date: event_date,
+        event_time: event_time,
+        event_type: event_type,
+        event_status: event_status,
+        event_capacity: parseInt(event_capacity, 10),
+    };
+
+    // Send Data to the Server
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'AddEvent', true); // Replace with your actual server endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            alert('Event successfully added!');
+            hideEventForm();
+            loadEvents(); // Optional: Reload the events table after adding
+        } else {
+            alert('Failed to add event. Error: ' + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        alert('Network error. Please try again.');
+    };
+
+    xhr.send(JSON.stringify(eventData));
+}

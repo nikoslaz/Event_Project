@@ -98,6 +98,106 @@ button:active {
     color: #555; /* Subtle text color */
 }
 
+/* General Hidden Class */
+.hidden {
+    display: none;
+}
+
+/* Add Event Form Container */
+#addEventForm {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Form Heading */
+#addEventForm h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+/* Form Styling */
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Labels */
+#eventForm label {
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+}
+
+/* Input Fields */
+#eventForm input,
+#eventForm select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Input Focus Effect */
+#eventForm input:focus,
+#eventForm select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Select Dropdown Styling */
+#eventForm select {
+    appearance: none; /* For consistent styling across browsers */
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Buttons */
+#eventForm button {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#eventForm button:first-of-type {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#eventForm button:first-of-type:hover {
+    background-color: #0056b3;
+}
+
+#eventForm button:first-of-type:active {
+    transform: scale(0.98);
+}
+
+#eventForm button:last-of-type {
+    background-color: #ccc;
+    color: #333;
+}
+
+#eventForm button:last-of-type:hover {
+    background-color: #aaa;
+}
+
+#eventForm button:last-of-type:active {
+    transform: scale(0.98);
+}
+
 /* Responsive Design for Smaller Screens */
 @media (max-width: 480px) {
     .dashboard-container {
@@ -116,5 +216,20 @@ button:active {
     .content-container > div {
         padding: 10px; /* Reduce padding inside blocks */
         min-height: 100px; /* Lower minimum height for smaller screens */
+    }
+    
+    #addEventForm {
+        padding: 15px 20px;
+    }
+
+    #eventForm input,
+    #eventForm select {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    #eventForm button {
+        font-size: 0.9em;
+        padding: 8px;
     }
 }
