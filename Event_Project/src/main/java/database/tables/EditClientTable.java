@@ -185,22 +185,4 @@ public class EditClientTable {
         }
     }
 
-    public static void main(String[] args) {
-        EditClientTable edit = new EditClientTable();
-        try {
-            System.out.println("Attempting to create the Clients table...");
-            edit.createClientsTable();
-            System.out.println("Clients table created successfully.");
-        } catch (SQLException e) {
-            System.err.println("SQL Error while creating the Clients table: " + e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.err.println("Driver not found. Ensure the database driver is included in your classpath.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Unexpected error while creating the table: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
 }

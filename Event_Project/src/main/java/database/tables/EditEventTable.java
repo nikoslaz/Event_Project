@@ -132,7 +132,7 @@ public class EditEventTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO "
-                    + " bookings (event_id,event_name,event_date,event_time,event_type,event_capacity,event_status)"
+                    + " events (event_id,event_name,event_date,event_time,event_type,event_capacity,event_status)"
                     + " VALUES ("
                     + "'" + ev.getEventId() + "',"
                     + "'" + ev.getEventName() + "',"
