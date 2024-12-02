@@ -52,8 +52,7 @@ public class AddEvent extends HttpServlet {
         EventType eventType = EventType.valueOf(eventTypeString.toUpperCase()); // Convert String to Enum
         event.setEventType(eventType);
         event.setEventCapacity(jsonObject.getInt("event_capacity"));
-        String eventStatusString = jsonObject.getString("event_status");
-        EventStatus eventStatus = EventStatus.valueOf(eventStatusString.toUpperCase()); // Convert String to Enum
+        EventStatus eventStatus = EventStatus.SCHEDULED; // Convert String to Enum
         event.setEventStatus(eventStatus);
 
         EditEventTable editEventTable = new EditEventTable();

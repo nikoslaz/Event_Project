@@ -330,7 +330,6 @@ function clearEventForm() {
     document.getElementById('event_date').value = '';
     document.getElementById('event_time').value = '';
     document.getElementById('event_type').value = '';
-    document.getElementById('event_status').value = '';
     document.getElementById('event_capacity').value = '';
 }
 

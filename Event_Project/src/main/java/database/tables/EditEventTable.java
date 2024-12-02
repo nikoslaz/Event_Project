@@ -102,7 +102,7 @@ public class EditEventTable {
         con.close();
     }
 
-    public  void createEventTable() throws SQLException, ClassNotFoundException {
+    public void createEventTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String sql = "CREATE TABLE events ("
@@ -139,7 +139,7 @@ public class EditEventTable {
                     + "'" + ev.getEventTime() + "',"
                     + "'" + ev.getEventType() + "',"
                     + "'" + ev.getEventCapacity() + "',"
-                    + "'SCHEDULED')";
+                    + "'" + ev.getEventStatus() + "')";
             //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery);
@@ -169,6 +169,7 @@ public class EditEventTable {
         ev.setEventDate("2024-01-01");
         ev.setEventTime("12:12:12");
         ev.setEventType(Event.EventType.CONCERT);
+        ev.setEventStatus(Event.EventStatus.SCHEDULED);
         try {
             edit.createNewEvent(ev);
             System.out.println("Event Cats created successfully.");
