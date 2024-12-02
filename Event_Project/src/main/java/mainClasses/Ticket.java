@@ -14,40 +14,58 @@ enum Type {
  */
 public class Ticket {
 
-    private int ticketID;
-    private int ticketPrice;
-    private Type ticketType;
-    private boolean ticketAvailability;
+    private int ticket_id;
+    private Type ticket_type;
+    private int ticket_price;
+    private boolean ticket_availability;
+    private int event_id;
+    private int reservation_id;
 
     public int getTicketID() {
-        return ticketID;
+        return this.ticket_id;
     }
 
-    public void setTicketID(int ticketID) {
-        this.ticketID = ticketID;
-    }
-
-    public int getTicketPrice() {
-        return ticketPrice;
-    }
-
-    public void setTicketPrice(int ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setTicketID(int ticket_id) {
+        this.ticket_id = ticket_id;
     }
 
     public Type getTicketType() {
-        return ticketType;
+        return this.ticket_type;
     }
 
-    public void setTicketType(Type ticketType) {
-        this.ticketType = ticketType;
+    public void setTicketType(Type ticket_type) {
+        this.ticket_type = ticket_type;
+    }
+
+    public int getTicketPrice() {
+        return this.ticket_price;
+    }
+
+    public void setTicketPrice(int ticket_price) {
+        this.ticket_price = ticket_price;
     }
 
     public boolean isTicketAvailability() {
-        return ticketAvailability;
+        return this.ticket_availability;
     }
 
-    public void setTicketAvailability(boolean ticketAvailability) {
-        this.ticketAvailability = ticketAvailability;
+    public void setTicketAvailability(boolean ticket_availability) {
+        this.ticket_availability = ticket_availability;
+    }
+
+    public int getEventID() {
+        return this.event_id;
+    }
+
+    public void setEventID(int event_id) {
+        this.event_id = event_id;
+    }
+
+    public int getReservationID() {
+        return this.reservation_id;
+    }
+
+    public void setReservationID() {
+        this.reservation_id = reservation_id;
     }
 }

@@ -63,7 +63,7 @@ public class EditTicketTable {
                 + "ticket_price DECIMAL(10, 2) NOT NULL, "
                 + "ticket_availability BOOLEAN NOT NULL, "
                 + "event_id INTEGER NOT NULL, "
-                + "reservation_id INTEGER NOT NULL, "
+                + "reservation_id INTEGER NULL, "
                 + "FOREIGN KEY (event_id) REFERENCES events(event_id), "
                 + "FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id), "
                 + "PRIMARY KEY (ticket_id))";
@@ -84,12 +84,13 @@ public class EditTicketTable {
 
             Statement stmt = con.createStatement();
 
-            String insertQuery = "INSERT INTO tickets (ticket_id, ticket_type, ticket_price, ticket_availability) "
+            String insertQuery = "INSERT INTO tickets (ticket_id, ticket_type, ticket_price, ticket_availability, event_id) "
                     + "VALUES ("
-                    + tick.getTicketID() + ", "
+                    + "'" + tick.getTicketID() + "', "
                     + "'" + tick.getTicketType() + "', "
-                    + tick.getTicketPrice() + ", "
-                    + (tick.isTicketAvailability() ? "Available" : "Not Available")
+                    + "'" + tick.getTicketPrice() + "', "
+                    + "'Available', "
+                    + "'" + tick.getEventID() + "'"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
@@ -104,17 +105,17 @@ public class EditTicketTable {
         }
     }
 
-//    public static void main(String[] args) {
-//        EditTicketTable edit = new EditTicketTable();
-//        try {
-//            edit.createTicketTable();
-//            System.out.println("Reservation table created successfully.");
-//        } catch (Exception e) {
-//            // Handle any exception that occurs
-//            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
-//            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-//        }
-//    }
+    public static void main(String[] args) {
+        EditTicketTable edit = new EditTicketTable();
+        try {
+            edit.createTicketTable();
+            System.out.println("Reservation table created successfully.");
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+        }
+    }
 
 
 }

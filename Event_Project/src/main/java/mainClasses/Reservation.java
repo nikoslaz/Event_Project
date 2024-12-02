@@ -16,12 +16,14 @@ public class Reservation {
 
     private int reservation_id;
     private int reservation_tickets;
-    private int reservation_payment_amount;
     private String reservation_date;
+    private int reservation_payment_amount;
     private ResStatus reservation_status;
+    private int client_username;
+    private int event_id;
 
     public int getReservationID() {
-        return reservation_id;
+        return this.reservation_id;
     }
 
     public void setReservationID(int reservation_id) {
@@ -29,34 +31,50 @@ public class Reservation {
     }
 
     public int getReservationTickets() {
-        return reservation_tickets;
+        return this.reservation_tickets;
     }
 
     public void setReservationTickets(int reservation_tickets) {
         this.reservation_tickets = reservation_tickets;
     }
 
-    public int getReservationPaymentAmount() {
-        return reservation_payment_amount;
-    }
-
-    public void setReservationPaymentAmount(int reservation_payment_amount) {
-        this.reservation_payment_amount = reservation_payment_amount;
-    }
-
     public String getReservationDate() {
-        return reservation_date;
+        return this.reservation_date;
     }
 
     public void setReservationDate(String reservation_date) {
         this.reservation_date = reservation_date;
     }
 
+    public int getReservationPaymentAmount() {
+        return this.reservation_payment_amount;
+    }
+
+    public void setReservationPaymentAmount(int reservation_payment_amount) {
+        this.reservation_payment_amount = reservation_payment_amount;
+    }
+
     public ResStatus getReservationStatus() {
-        return reservation_status;
+        return this.reservation_status;
     }
 
     public void setReservationStatus(ResStatus reservation_status) {
         this.reservation_status = reservation_status;
+    }
+
+    public int getClientUsername() {
+        return this.client_username;
+    }
+
+    public void setClientUsername(int client_username) {
+        this.client_username = client_username;
+    }
+
+    public int getEventID() {
+        return this.event_id;
+    }
+
+    public void setEventID(int event_id) {
+        this.event_id = event_id;
     }
 }

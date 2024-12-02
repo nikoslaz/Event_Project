@@ -69,7 +69,7 @@ public class EditReservationTable {
     public void createReservationTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String sql = "CREATE TABLE reservation ("
+        String sql = "CREATE TABLE reservations ("
                 + "reservation_id INTEGER NOT NULL AUTO_INCREMENT, "
                 + "reservation_tickets INTEGER NOT NULL, "
                 + "reservation_date DATE NOT NULL, "
@@ -77,10 +77,8 @@ public class EditReservationTable {
                 + "reservation_status ENUM('ACTIVE', 'CANCELED', 'COMPLETE') NOT NULL, "
                 + "client_username VARCHAR(50) NOT NULL, "
                 + "event_id INTEGER NOT NULL, "
-                + "ticket_id INTEGER NOT NULL, "
                 + "FOREIGN KEY (client_username) REFERENCES clients(client_username), "
                 + "FOREIGN KEY (event_id) REFERENCES events(event_id), "
-                + "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id), "
                 + "PRIMARY KEY (reservation_id)"
                 + ")";
         stmt.execute(sql);
@@ -100,13 +98,15 @@ public class EditReservationTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO reservations "
-                    + "(reservation_id, reservation_tickets, reservation_date, reservation_payment_amount, reservation_status) "
+                    + "(reservation_id, reservation_tickets, reservation_date, reservation_payment_amount, reservation_status, client_username, event_ID) "
                     + "VALUES ("
                     + "'" + res.getReservationID() + "', "
                     + "'" + res.getReservationTickets() + "', "
                     + "'" + res.getReservationDate() + "', "
                     + "'" + res.getReservationPaymentAmount() + "', "
-                    + "'" + res.getReservationStatus() + "')";
+                    + "'" + res.getReservationStatus() + "'"
+                    + "'" + res.getClientUsername() + "'"
+                    + "'" + res.getEventID() + "')";
             //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery);
@@ -120,17 +120,17 @@ public class EditReservationTable {
         }
     }
 
-//    public static void main(String[] args) {
-//        EditReservationTable edit = new EditReservationTable();
-//        try {
-//            edit.createReservationTable();
-//            System.out.println("Reservation table created successfully.");
-//        } catch (Exception e) {
-//            // Handle any exception that occurs
-//            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
-//            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-//        }
-//    }
+    public static void main(String[] args) {
+        EditReservationTable edit = new EditReservationTable();
+        try {
+            edit.createReservationTable();
+            System.out.println("Reservation table created successfully.");
+        } catch (Exception e) {
+            // Handle any exception that occurs
+            System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
+            e.printStackTrace(); // Optional: Print the full stack trace for debugging
+        }
+    }
 
 
 }
