@@ -26,11 +26,11 @@ public class LoadEvents extends HttpServlet {
                 JSONObject event = new JSONObject();
                 event.put("event_id", rs.getInt("event_id"));
                 event.put("event_name", rs.getString("event_name"));
-                event.put("event_date", rs.getDate("event_date").toString()); // Ensure proper date format
+                event.put("event_date", rs.getDate("event_date").toString());
                 event.put("event_time", rs.getTime("event_time").toString());
-                event.put("event_type", rs.getString("event_type")); // Fixed ENUM handling
+                event.put("event_type", rs.getString("event_type"));
                 event.put("event_capacity", rs.getInt("event_capacity"));
-                event.put("event_status", rs.getString("event_status")); // Fixed ENUM handling
+                event.put("event_status", rs.getString("event_status"));
 
                 eventsArray.put(event);
             }
@@ -38,7 +38,6 @@ public class LoadEvents extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write(eventsArray.toString());
         } catch (SQLException | ClassNotFoundException ex) {
-            // Log the exception (use proper logging frameworks like SLF4J/Logback in real applications)
             System.err.println("Database error: " + ex.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred");
         }
