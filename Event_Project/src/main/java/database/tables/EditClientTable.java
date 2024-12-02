@@ -40,7 +40,7 @@ public class EditClientTable {
         return json;
     }
 
-    public ArrayList<Client> getClients() throws SQLException, ClassNotFoundException {
+    public ArrayList<Client> getClients(String type) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ArrayList<Client> clients = new ArrayList<Client>();
