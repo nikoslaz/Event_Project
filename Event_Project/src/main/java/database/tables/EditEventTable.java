@@ -187,31 +187,5 @@ public class EditEventTable {
         }
     }
 
-    public static void main(String[] args) {
-        EditEventTable edit = new EditEventTable();
-        try {
-            //edit.createEventTable();
-            System.out.println("Event table created successfully.");
-        } catch (Exception e) {
-            // Handle any exception that occurs
-            System.err.println("An error occurred while creating the event table: " + e.getMessage());
-            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-        }
-        Event ev = new Event();
-        ev.setEventCapacity(20);
-        ev.setEventName("Cats");
-        ev.setEventDate("2024-01-01");
-        ev.setEventTime("12:12:12");
-        ev.setEventType(Event.EventType.CONCERT);
-        ev.setEventStatus(Event.EventStatus.SCHEDULED);
-        try {
-            edit.createNewEvent(ev);
-            System.out.println("Event Cats created successfully.");
-        } catch (Exception e) {
-            // Handle any exception that occurs
-            System.err.println("An error occurred while creating event cats: " + e.getMessage());
-            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-        }
-    }
 
 }
