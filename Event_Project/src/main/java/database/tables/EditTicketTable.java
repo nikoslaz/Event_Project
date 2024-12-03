@@ -84,12 +84,11 @@ public class EditTicketTable {
 
             Statement stmt = con.createStatement();
 
-            String insertQuery = "INSERT INTO tickets (ticket_id, ticket_type, ticket_price, ticket_availability, event_id) "
+            String insertQuery = "INSERT INTO tickets (ticket_type, ticket_price, ticket_availability, event_id) "
                     + "VALUES ("
-                    + "'" + tick.getTicketID() + "', "
                     + "'" + tick.getTicketType() + "', "
                     + "'" + tick.getTicketPrice() + "', "
-                    + "'Available', "
+                    + "TRUE, "
                     + "'" + tick.getEventID() + "'"
                     + ")";
             //stmt.execute(table);
