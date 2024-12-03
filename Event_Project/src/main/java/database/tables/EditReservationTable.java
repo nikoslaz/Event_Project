@@ -142,5 +142,19 @@ public class EditReservationTable {
         }
     }
 
+    public static void main(String[] args) {
+        EditReservationTable tab = new EditReservationTable();
+        Reservation res = new Reservation();
+        res.setReservationTickets(2);
+        res.setReservationDate("11-11-11");
+        res.setReservationPaymentAmount(12);
+        res.setClientUsername("123456");
+        res.setEventID(1);
+        try {
+            tab.createNewReservation(res);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }

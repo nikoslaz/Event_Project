@@ -347,7 +347,7 @@ function loadTickets() {
             }
         } else {
             console.error("Request failed with status:", xhr.status);
-            document.getElementById('ticketsContent').innerHTML = `<p>Failed to load events. Server responded with status ${xhr.status}.</p>`;
+            document.getElementById('ticketsContent').innerHTML = `<p>Failed to load tickets. Server responded with status ${xhr.status}.</p>`;
         }
     };
 
@@ -357,8 +357,7 @@ function loadTickets() {
         document.getElementById('ticketsContent').innerHTML = '<p>Network error occurred. Please try again later.</p>';
     };
 
-    var typeParam = "type=all";
-    xhr.open('GET', 'LoadTickets?' + typeParam);
+    xhr.open('GET', 'LoadTickets?');
     xhr.send();
 }
 

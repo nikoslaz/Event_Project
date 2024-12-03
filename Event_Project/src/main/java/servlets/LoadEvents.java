@@ -18,7 +18,7 @@ public class LoadEvents extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONArray eventsArray = new JSONArray();
-        String query = "SELECT * FROM events WHERE event_status = 'SCHEDULED'";
+        String query = "SELECT * FROM events";
 
         try (Connection conn = DB_Connection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 

@@ -49,9 +49,9 @@ public class RegistrationClient extends HttpServlet {
         client.setClientLastname(jsonObject.getString("lastname"));
         client.setClientEmail(jsonObject.getString("email"));
         client.setClientPhone(jsonObject.getInt("phone"));
-        client.setCardNumber(jsonObject.getString("card_number"));
+        client.setCardNumber(jsonObject.getInt("card_number"));
         client.setCardExpDate(jsonObject.getString("exp_date"));
-        client.setCardCvv(jsonObject.getString("cvv"));
+        client.setCardCvv(jsonObject.getInt("cvv"));
 
         EditClientTable editClientTable = new EditClientTable();
         JSONObject jsonResponse = new JSONObject();

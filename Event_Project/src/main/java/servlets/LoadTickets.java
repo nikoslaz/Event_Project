@@ -3,57 +3,40 @@ package servlets;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import com.google.gson.Gson;
-import database.tables.EditTicketTable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mainClasses.Ticket;
+import database.DB_Connection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class LoadTickets extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        JSONArray ticketArray = new JSONArray();
+        String query = "SELECT * FROM tickets";
 
-        // Get the type parameter from the request
-        String type = request.getParameter("type");
-        if (type == null || type.isEmpty()) {
-            // Send an error if the type parameter is missing
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Type parameter is missing");
-            return;
-        }
+        try (Connection conn = DB_Connection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
-        try {
-            // Create an instance of EditPetKeepersTable to fetch data
-            EditTicketTable editTickets = new EditTicketTable();
-            ArrayList<Ticket> tick = editTickets.getTickets(type);
+            while (rs.next()) {
+                JSONObject ticket = new JSONObject();
+                ticket.put("ticket_id", rs.getInt("ticket_id"));
+                ticket.put("ticket_type", rs.getString("ticket_type"));
+                ticket.put("ticket_price", rs.getInt("ticket_price"));
+                ticket.put("ticket_availability", rs.getInt("ticket_availability"));
+                ticket.put("event_id", rs.getInt("event_id"));
+                ticket.put("reservation_id", rs.getInt("reservation_id"));
 
-            // Check if the keepers list is empty
-            if (tick.isEmpty()) {
-                // Respond with 404 Not Found if no keepers are found
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return;
+                ticketArray.put(ticket);
             }
 
-            // Convert the list of keepers to JSON
-            Gson gson = new Gson();
-            String json = gson.toJson(tick);
-
-            // Send the JSON response back to the client
-            try (PrintWriter out = response.getWriter()) {
-                out.print(json);
-            }
-
-            // Set the response status to OK
-            response.setStatus(HttpServletResponse.SC_OK);
-        } catch (ClassNotFoundException | SQLException e) {
-            // Log the exception and send a 500 Internal Server Error response
-            Logger.getLogger(LoadTickets.class.getName()).log(Level.SEVERE, null, e);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching data");
+            response.setContentType("application/json");
+            response.getWriter().write(ticketArray.toString());
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Database error: " + ex.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred");
         }
     }
 }
