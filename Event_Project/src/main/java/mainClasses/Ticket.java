@@ -4,15 +4,15 @@
  */
 package mainClasses;
 
-enum Type {
-    REGULAR, VIP, BALCONY
-};
-
 /**
  *
  * @author nikos
  */
 public class Ticket {
+
+    public enum Type {
+        REGULAR, VIP, BALCONY
+    };
 
     private int ticket_id;
     private Type ticket_type;

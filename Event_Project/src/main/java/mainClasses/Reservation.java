@@ -4,15 +4,15 @@
  */
 package mainClasses;
 
-enum ResStatus {
-    ACTIVE, CANCELED, COMPLETE
-};
-
 /**
  *
  * @author nikos
  */
 public class Reservation {
+
+    public enum ResStatus {
+        ACTIVE, CANCELED, COMPLETE
+    };
 
     private int reservation_id;
     private int reservation_tickets;

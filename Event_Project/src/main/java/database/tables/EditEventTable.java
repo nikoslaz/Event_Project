@@ -6,6 +6,8 @@ package database.tables;
 
 import com.google.gson.Gson;
 import mainClasses.Event;
+import mainClasses.Ticket;
+import database.tables.EditTicketTable;
 import database.DB_Connection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -140,13 +142,22 @@ public class EditEventTable {
                     + "'" + ev.getEventType() + "',"
                     + "'" + ev.getEventCapacity() + "',"
                     + "'" + ev.getEventStatus() + "')";
-            //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery);
             System.out.println("# The event was successfully added in the database.");
 
             /* Get the member id from the database and set it to the member */
             stmt.close();
+
+            System.out.println("# Creating event tickets.");
+            EditTicketTable ticktab = new EditTicketTable();
+            Ticket tick = new Ticket();
+            tick.setTicketType(Ticket.Type.REGULAR);
+            tick.setTicketPrice(10);
+            tick.setEventID(ev.getEventId());
+            for (int i = 0; i < ev.getEventCapacity(); i++) {
+                ticktab.createNewTicket(tick);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,7 +175,7 @@ public class EditEventTable {
             e.printStackTrace(); // Optional: Print the full stack trace for debugging
         }
         Event ev = new Event();
-        ev.setEventCapacity(80);
+        ev.setEventCapacity(20);
         ev.setEventName("Cats");
         ev.setEventDate("2024-01-01");
         ev.setEventTime("12:12:12");

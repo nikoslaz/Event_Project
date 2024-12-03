@@ -136,7 +136,7 @@ public class EditReservationTable {
         rev.setClientUsername("nikole45");
         rev.setEventID(1);
         try {
-            edit.createNewReservation(rev);
+            //edit.createNewReservation(rev);
             System.out.println("Reservation 1 created successfully.");
 
         } catch (Exception e) {
