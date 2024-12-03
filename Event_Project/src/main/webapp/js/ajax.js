@@ -152,7 +152,7 @@ function createTicketJSON(data) {
                 <td>${ticket.ticket_id || 'N/A'}</td>
                 <td>${ticket.ticket_type || 'N/A'}</td>
                 <td>${ticket.ticket_price || 'N/A'}</td>
-                <td>${ticket.ticket_availability === true ? 'Available' : ticket.ticket_availability === false ? 'Not Available' : 'N/A'}</td>
+                <td>${ticket.ticket_availability === 1 ? 'Available' : ticket.ticket_availability === 0 ? 'Not Available' : 'N/A'}</td>
                 <td>${ticket.event_id || 'N/A'}</td>
                 <td>${ticket.reservation_id || 'N/A'}</td>
             </tr>
