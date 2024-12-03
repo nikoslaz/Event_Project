@@ -130,6 +130,43 @@ function createEventTableJSON(data) {
     return tableContent;
 }
 
+function createTicketJSON(data) {
+        let tableContent = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Ticket Type</th>
+                    <th>Ticket Price</th>
+                    <th>Ticket Availabilty</th>
+                    <th>Event ID</th>
+                    <th>Reservation ID</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(ticket => {
+        tableContent += `
+            <tr>
+                <td>${ticket.ticket_id || 'N/A'}</td>
+                <td>${ticket.ticket_type || 'N/A'}</td>
+                <td>${ticket.ticket_price || 'N/A'}</td>
+                <td>${ticket.availability || 'N/A'}</td>
+                <td>${ticket.event_id || 'N/A'}</td>
+                <td>${ticket.reservation_id || 'N/A'}</td>
+            </tr>
+        `;
+    });
+
+    tableContent += `
+            </tbody>
+        </table>
+    `;
+
+    return tableContent;
+}
+
 function loginPOST() {
     var username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
@@ -248,34 +285,41 @@ function loadEvents() {
 
 function loadTickets() {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const responseData = xhr.responseText;
-                console.log("Response data:", responseData); // Log the response data
 
-                try {
-                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createClientTableJSON(parsedResponse, 'ticket'); // Include 'petkeeper' type
-                    document.getElementById('ticketsContent').innerHTML = tableContent; // Update 'keepersContent' div
-                } catch (error) {
-                    console.error("JSON parsing error:", error); // Log JSON parsing error
-                    document.getElementById('ticketsContent').innerHTML = 'Invalid JSON response.';
-                }
-            } else {
-                // Error handling for non-200 responses
-                document.getElementById('ticketsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Response data:", xhr.responseText)
+
+            try {
+                // Parse the JSON response
+                const parsedResponse = JSON.parse(xhr.responseText);
+                console.log("Parsed response:", parsedResponse);
+
+                // Generate the table from event data
+                let tableContent = createTicketJSON(parsedResponse);
+
+                // Update the DOM with the generated table
+                document.getElementById('ticketsContent').innerHTML = tableContent;
+
+            } catch (error) {
+                console.error("Error parsing JSON:", error); // Log JSON parsing error
+                document.getElementById('ticketsContent').innerHTML = '<p>Invalid JSON response from the server.</p>';
             }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+            document.getElementById('ticketsContent').innerHTML = `<p>Failed to load events. Server responded with status ${xhr.status}.</p>`;
         }
     };
-    xhr.onerror = function() {
-        // Handle network errors
-        alert("Network Error. Please try again.");
+
+    // Define what happens in case of error
+    xhr.onerror = function () {
+        console.error("Network error occurred");
+        document.getElementById('ticketsContent').innerHTML = '<p>Network error occurred. Please try again later.</p>';
     };
 
-    // Setting the query parameter for pet keepers
     var typeParam = "type=all";
-    xhr.open('GET', 'AdminTickets?' + typeParam);
+    xhr.open('GET', 'LoadTickets?' + typeParam);
     xhr.send();
 }
 

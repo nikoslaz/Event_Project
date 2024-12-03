@@ -28,6 +28,14 @@
         <servlet-name>CreateTables</servlet-name>
         <servlet-class>servlets.CreateTables</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadTickets</servlet-name>
+        <servlet-class>servlets.LoadTickets</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadReservations</servlet-name>
+        <servlet-class>servlets.LoadReservations</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>CreateTables</servlet-name>
         <url-pattern>/CreateTables</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadTickets</servlet-name>
+        <url-pattern>/LoadTickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadReservations</servlet-name>
+        <url-pattern>/LoadReservations</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

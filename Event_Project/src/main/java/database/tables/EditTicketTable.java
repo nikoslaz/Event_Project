@@ -32,13 +32,13 @@ public class EditTicketTable {
         return ticket;
     }
 
-    public ArrayList<Ticket> databaseToTicket(int ticket_ID) throws SQLException, ClassNotFoundException {
+    public ArrayList<Ticket> getTickets(String type) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM tickets WHERE ticket_id= '" + ticket_ID + "'");
+            rs = stmt.executeQuery("SELECT * FROM tickets'");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();

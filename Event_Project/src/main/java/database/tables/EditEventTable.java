@@ -155,9 +155,9 @@ public class EditEventTable {
             tick.setTicketType(Ticket.Type.REGULAR);
             tick.setTicketPrice(10);
             tick.setEventID(ev.getEventId());
-            for (int i = 0; i < ev.getEventCapacity(); i++) {
-                ticktab.createNewTicket(tick);
-            }
+//            for (int i = 0; i < ev.getEventCapacity(); i++) {
+//                ticktab.createNewTicket(tick);
+//            }
 
         } catch (SQLException ex) {
             Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
