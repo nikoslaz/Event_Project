@@ -152,9 +152,48 @@ function createTicketJSON(data) {
                 <td>${ticket.ticket_id || 'N/A'}</td>
                 <td>${ticket.ticket_type || 'N/A'}</td>
                 <td>${ticket.ticket_price || 'N/A'}</td>
-                <td>${ticket.availability || 'N/A'}</td>
+                <td>${ticket.ticket_availability === true ? 'Available' : ticket.ticket_availability === false ? 'Not Available' : 'N/A'}</td>
                 <td>${ticket.event_id || 'N/A'}</td>
                 <td>${ticket.reservation_id || 'N/A'}</td>
+            </tr>
+        `;
+    });
+
+    tableContent += `
+            </tbody>
+        </table>
+    `;
+
+    return tableContent;
+}
+
+function createReservationsTableJSON(data) {
+        let tableContent = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Reservation Tickets</th>
+                    <th>Reservation Date</th>
+                    <th>Reservation Payment Amount</th>
+                    <th>Reservation Status</th>
+                    <th>Client Username</th>
+                    <th>Event ID</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(reservations => {
+        tableContent += `
+            <tr>
+                <td>${reservations.reservation_id || 'N/A'}</td>
+                <td>${reservations.reservation_tickets || 'N/A'}</td>
+                <td>${reservations.reservation_date || 'N/A'}</td>
+                <td>${reservations.reservation_payment_amount || 'N/A'}</td>
+                <td>${reservations.status || 'N/A'}</td>
+                <td>${reservations.client_username || 'N/A'}</td>
+                <td>${reservations.event_id || 'N/A'}</td>
             </tr>
         `;
     });
@@ -325,34 +364,41 @@ function loadTickets() {
 
 function loadReservations() {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const responseData = xhr.responseText;
-                console.log("Response data:", responseData); // Log the response data
 
-                try {
-                    const parsedResponse = JSON.parse(responseData); // Attempt to parse as JSON
-                    let tableContent = createClientTableJSON(parsedResponse, 'reservation'); // Include 'petkeeper' type
-                    document.getElementById('reservationsContent').innerHTML = tableContent; // Update 'keepersContent' div
-                } catch (error) {
-                    console.error("JSON parsing error:", error); // Log JSON parsing error
-                    document.getElementById('reservationsContent').innerHTML = 'Invalid JSON response.';
-                }
-            } else {
-                // Error handling for non-200 responses
-                document.getElementById('reservationsContent').innerHTML = 'Request failed. Returned status of ' + xhr.status;
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Response data:", xhr.responseText)
+
+            try {
+                // Parse the JSON response
+                const parsedResponse = JSON.parse(xhr.responseText);
+                console.log("Parsed response:", parsedResponse);
+
+                // Generate the table from event data
+                let tableContent = createReservationsTableJSON(parsedResponse);
+
+                // Update the DOM with the generated table
+                document.getElementById('reservationsContent').innerHTML = tableContent;
+
+            } catch (error) {
+                console.error("Error parsing JSON:", error); // Log JSON parsing error
+                document.getElementById('reservationsContent').innerHTML = '<p>Invalid JSON response from the server.</p>';
             }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+            document.getElementById('reservationsContent').innerHTML = `<p>Failed to load events. Server responded with status ${xhr.status}.</p>`;
         }
     };
-    xhr.onerror = function() {
-        // Handle network errors
-        alert("Network Error. Please try again.");
+
+    // Define what happens in case of error
+    xhr.onerror = function () {
+        console.error("Network error occurred");
+        document.getElementById('reservationsContent').innerHTML = '<p>Network error occurred. Please try again later.</p>';
     };
 
-    // Setting the query parameter for pet keepers
     var typeParam = "type=all";
-    xhr.open('GET', 'AdminReservations?' + typeParam);
+    xhr.open('GET', 'LoadReservations?' + typeParam);
     xhr.send();
 }
 

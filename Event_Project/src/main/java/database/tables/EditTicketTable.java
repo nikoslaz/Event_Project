@@ -38,7 +38,7 @@ public class EditTicketTable {
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM tickets'");
+            rs = stmt.executeQuery("SELECT * FROM tickets");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
@@ -88,7 +88,7 @@ public class EditTicketTable {
                     + "VALUES ("
                     + "'" + tick.getTicketType() + "', "
                     + "'" + tick.getTicketPrice() + "', "
-                    + "TRUE, "
+                    + "'" + tick.getTicketAvailability() + "', "
                     + "'" + tick.getEventID() + "'"
                     + ")";
             //stmt.execute(table);

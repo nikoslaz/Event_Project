@@ -2,6 +2,7 @@ servlets\CreateTables.class
 mainClasses\Reservation.class
 mainClasses\Event.class
 mainClasses\Reservation$ResStatus.class
+servlets\LoadReservations.class
 database\tables\EditTicketTable.class
 servlets\LoadTickets.class
 servlets\Login.class
@@ -17,6 +18,5 @@ mainClasses\Event$EventType.class
 servlets\LoadEvents.class
 mainClasses\Ticket.class
 servlets\LoadClients.class
-database\init\InitDatabase.class
 mainClasses\Client.class
 mainClasses\Ticket$Type.class

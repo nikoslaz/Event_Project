@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Reservation;
@@ -55,6 +56,28 @@ public class EditReservationTable {
 
         String json = gson.toJson(r, Reservation.class);
         return json;
+    }
+
+    public ArrayList<Reservation> getReservations(String type) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM reservations");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Reservation rev = gson.fromJson(json, Reservation.class);
+                reservations.add(rev);
+            }
+            return reservations;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+
+        }
+        return null;
     }
 
     public void updateReservation(int reservationID, String status) throws SQLException, ClassNotFoundException {

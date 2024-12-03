@@ -45,7 +45,7 @@ public class Ticket {
         this.ticket_price = ticket_price;
     }
 
-    public boolean isTicketAvailability() {
+    public boolean getTicketAvailability() {
         return this.ticket_availability;
     }
 
