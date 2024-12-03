@@ -20,6 +20,14 @@
         <servlet-name>AddEvent</servlet-name>
         <servlet-class>servlets.AddEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateClientTable</servlet-name>
+        <servlet-class>servlets.CreateClientTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateTables</servlet-name>
+        <servlet-class>servlets.CreateTables</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>AddEvent</servlet-name>
         <url-pattern>/AddEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateClientTable</servlet-name>
+        <url-pattern>/CreateClientTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateTables</servlet-name>
+        <url-pattern>/CreateTables</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

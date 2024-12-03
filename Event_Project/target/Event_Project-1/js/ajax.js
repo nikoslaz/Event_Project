@@ -371,3 +371,11 @@ function submitEventForm() {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(jsonData);
 }
+
+function createTables() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "CreateTables", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    console.log("Tables created!");
+    xhr.send();
+}
