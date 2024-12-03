@@ -61,7 +61,7 @@ public class EditTicketTable {
                 + "(ticket_id INTEGER NOT NULL AUTO_INCREMENT, "
                 + "ticket_type ENUM('REGULAR', 'VIP', 'BALCONY') NOT NULL, "
                 + "ticket_price DECIMAL(10, 2) NOT NULL, "
-                + "ticket_availability BOOLEAN NOT NULL, "
+                + "ticket_availability INTEGER NOT NULL, "
                 + "event_id INTEGER NOT NULL, "
                 + "reservation_id INTEGER NULL, "
                 + "FOREIGN KEY (event_id) REFERENCES events(event_id), "

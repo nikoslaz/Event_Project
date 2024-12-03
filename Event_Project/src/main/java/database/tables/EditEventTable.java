@@ -177,7 +177,7 @@ public class EditEventTable {
             Ticket tick = new Ticket();
             tick.setTicketType(Ticket.Type.REGULAR);
             tick.setTicketPrice(10);
-            tick.setTicketAvailability(true);
+            tick.setTicketAvailability(1);
             tick.setEventID(eventab.getMaxEventID().getEventId());
             for (int i = 0; i < ev.getEventCapacity(); i++) {
                 ticktab.createNewTicket(tick);
