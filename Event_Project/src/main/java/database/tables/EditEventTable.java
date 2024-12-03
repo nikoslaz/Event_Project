@@ -6,8 +6,6 @@ package database.tables;
 
 import com.google.gson.Gson;
 import mainClasses.Event;
-import mainClasses.Ticket;
-import database.tables.EditTicketTable;
 import database.DB_Connection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mainClasses.Ticket;
 
 /**
  *
@@ -35,6 +34,25 @@ public class EditEventTable {
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM events WHERE event_id= '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Event bt = gson.fromJson(json, Event.class);
+            return bt;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Event getMaxEventID() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM events WHERE event_id= (SELECT MAX(event_id) FROM events)");
             rs.next();
             String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();
@@ -148,47 +166,26 @@ public class EditEventTable {
 
             /* Get the member id from the database and set it to the member */
             stmt.close();
-
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                System.out.println("Lol");
+            }
             System.out.println("# Creating event tickets.");
             EditTicketTable ticktab = new EditTicketTable();
+            EditEventTable eventab = new EditEventTable();
             Ticket tick = new Ticket();
             tick.setTicketType(Ticket.Type.REGULAR);
             tick.setTicketPrice(10);
-            tick.setEventID(ev.getEventId());
-//            for (int i = 0; i < ev.getEventCapacity(); i++) {
-//                ticktab.createNewTicket(tick);
-//            }
+            tick.setEventID(eventab.getMaxEventID().getEventId());
+            for (int i = 0; i < ev.getEventCapacity(); i++) {
+                ticktab.createNewTicket(tick);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void main(String[] args) {
-        EditEventTable edit = new EditEventTable();
-        try {
-            edit.createEventTable();
-            System.out.println("Event table created successfully.");
-        } catch (Exception e) {
-            // Handle any exception that occurs
-            System.err.println("An error occurred while creating the event table: " + e.getMessage());
-            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-        }
-        Event ev = new Event();
-        ev.setEventCapacity(20);
-        ev.setEventName("Cats");
-        ev.setEventDate("2024-01-01");
-        ev.setEventTime("12:12:12");
-        ev.setEventType(Event.EventType.CONCERT);
-        ev.setEventStatus(Event.EventStatus.SCHEDULED);
-        try {
-            edit.createNewEvent(ev);
-            System.out.println("Event Cats created successfully.");
-        } catch (Exception e) {
-            // Handle any exception that occurs
-            System.err.println("An error occurred while creating event cats: " + e.getMessage());
-            e.printStackTrace(); // Optional: Print the full stack trace for debugging
-        }
-    }
 
 }
