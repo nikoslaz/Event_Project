@@ -107,8 +107,9 @@ public class EditTicketTable {
     public static void main(String[] args) {
         EditTicketTable edit = new EditTicketTable();
         try {
-            edit.createTicketTable();
+            //edit.createTicketTable();
             System.out.println("Reservation table created successfully.");
+            System.out.println("# Creating event ticket.");
         } catch (Exception e) {
             // Handle any exception that occurs
             System.err.println("An error occurred while creating the reservation table: " + e.getMessage());
