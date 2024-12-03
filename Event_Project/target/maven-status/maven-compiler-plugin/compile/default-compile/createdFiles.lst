@@ -17,6 +17,5 @@ mainClasses\Event$EventType.class
 servlets\LoadEvents.class
 mainClasses\Ticket.class
 servlets\LoadClients.class
-database\init\InitDatabase.class
 mainClasses\Client.class
 mainClasses\Ticket$Type.class

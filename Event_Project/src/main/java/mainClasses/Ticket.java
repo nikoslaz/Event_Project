@@ -17,7 +17,7 @@ public class Ticket {
     private int ticket_id;
     private Type ticket_type;
     private int ticket_price;
-    private boolean ticket_availability;
+    private int ticket_availability;
     private int event_id;
     private int reservation_id;
 
@@ -45,11 +45,11 @@ public class Ticket {
         this.ticket_price = ticket_price;
     }
 
-    public boolean isTicketAvailability() {
+    public int isTicketAvailability() {
         return this.ticket_availability;
     }
 
-    public void setTicketAvailability(boolean ticket_availability) {
+    public void setTicketAvailability(int ticket_availability) {
         this.ticket_availability = ticket_availability;
     }
 
