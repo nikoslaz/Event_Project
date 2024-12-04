@@ -9,6 +9,7 @@ servlets\Login.class
 database\DB_Connection.class
 database\tables\EditEventTable.class
 mainClasses\JSON_Converter.class
+servlets\LoadClientEvents.class
 database\tables\EditClientTable.class
 database\tables\EditReservationTable.class
 servlets\AddEvent.class

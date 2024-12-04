@@ -135,9 +135,11 @@ function loadEventTableJSON(data) {
             <thead>
                 <tr>
                     <th>Select</th>
+                    <th>Event ID</th>
                     <th>Event Name</th>
                     <th>Event Date</th>
                     <th>Event Time</th>
+                    <th>Event Type</th>
                 </tr>
             </thead>
             <tbody>
@@ -147,9 +149,11 @@ function loadEventTableJSON(data) {
         tableContent += `
             <tr>
                 <td><button onclick="selectEvent('${event.event_name}', '${event.event_date}', '${event.event_time}')">Select</button></td>
+                <td>${event.event_id || 'N/A'}</td>
                 <td>${event.event_name || 'N/A'}</td>
                 <td>${event.event_date || 'N/A'}</td>
                 <td>${event.event_time || 'N/A'}</td>
+                <td>${event.event_type || 'N/A'}</td>
             </tr>
         `;
     });
@@ -242,7 +246,7 @@ function createReservationsTableJSON(data) {
 
 function addReservation() {
     document.getElementById('eventTable').classList.remove('hidden');
-    loadEvents();
+    loadEventsOnClient();
 }
 
 function cancelReservation() {
@@ -285,7 +289,7 @@ function loadEventsOnClient() {
     };
 
     // Open a GET request to the server endpoint
-    xhr.open('GET', 'LoadEvents'); 
+    xhr.open('GET', 'LoadClientEvents'); 
     xhr.send(); // Send the request
 }
 
