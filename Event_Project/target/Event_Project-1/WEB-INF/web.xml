@@ -36,6 +36,10 @@
         <servlet-name>LoadReservations</servlet-name>
         <servlet-class>servlets.LoadReservations</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadClientEvents</servlet-name>
+        <servlet-class>servlets.LoadClientEvents</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>LoadReservations</servlet-name>
         <url-pattern>/LoadReservations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadClientEvents</servlet-name>
+        <url-pattern>/LoadClientEvents</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
