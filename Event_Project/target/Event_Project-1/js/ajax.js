@@ -206,12 +206,9 @@ function createReservationsTableJSON(data) {
 }
 
 function redirect() {
-    window.location.href = "client.html";
+    window.location.href = 'client.html';
 }
 
-function redirect_back() {
-    window.location.href = "index.html";
-}
 function loginPOST() {
     var username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
@@ -224,11 +221,6 @@ function loginPOST() {
         window.location.href = 'admin.html';
         return;
     }
-    
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'Login', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
 
     // AJAX request for regular users
     var xhr = new XMLHttpRequest();
