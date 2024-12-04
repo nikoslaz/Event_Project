@@ -254,7 +254,8 @@ function cancelReservation() {
 }
 
 function selectEvent(id) {
-
+    document.getElementById('ticketsContent').classList.remove('hidden');
+    loadTickets();
 }
 
 function loadEventsOnClient() {
