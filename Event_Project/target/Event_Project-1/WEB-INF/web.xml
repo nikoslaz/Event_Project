@@ -40,6 +40,10 @@
         <servlet-name>LoadClientEvents</servlet-name>
         <servlet-class>servlets.LoadClientEvents</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateTickets</servlet-name>
+        <servlet-class>servlets.UpdateTickets</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>LoadClientEvents</servlet-name>
         <url-pattern>/LoadClientEvents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTickets</servlet-name>
+        <url-pattern>/UpdateTickets</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -28,22 +28,33 @@
     </div>
     
     <div id="ticketsContent" class="hidden">
-        <div class="ticket-box">
+        
+        <div id="showRegularTickets">
+            <h2>Regular Tickets 100</h2>
+        </div>
+        
+        <div id="showRegularTickets">
+            <h2>VIP Tickets 100</h2>
+        </div>
+        
+        <div id="showRegularTickets">
+            <h2>Balcony Tickets 100</h2>
+        </div>
+        
+        <form id="ticketForm">
             <label for="regularTickets">Regular:</label>
             <input type="number" id="regularTickets" name="regularTickets" min="0" placeholder="0">
-        </div>
-        <div class="ticket-box">
+            
             <label for="vipTickets">VIP:</label>
             <input type="number" id="vipTickets" name="vipTickets" min="0" placeholder="0">
-        </div>
-        <div class="ticket-box">
+            
             <label for="balconyTickets">Balcony:</label>
             <input type="number" id="balconyTickets" name="balconyTickets" min="0" placeholder="0">
-        </div>
-        <!-- Submit button -->
-        <div class="submit-box">
-            <button type="button" onclick="submitTickets()">Submit</button>
-        </div>
+            
+            <div class="submit-box">
+                <button type="button" onclick="submitTickets()">Submit</button>
+            </div>
+        </form>
     </div>
 
     
