@@ -245,6 +245,10 @@ function addReservation() {
     loadEvents();
 }
 
+function cancelReservation() {
+    document.getElementById('canelReservationTable').classList.remove('hidden');
+}
+
 function loadEventsOnClient() {
     var xhr = new XMLHttpRequest();
 
@@ -259,7 +263,7 @@ function loadEventsOnClient() {
                 console.log("Parsed response:", parsedResponse);
 
                 // Generate the table from event data
-                let tableContent = createEventTableJSON(parsedResponse);
+                let tableContent = loadEventTableJSON(parsedResponse);
 
                 // Update the DOM with the generated table
                 document.getElementById('eventsContent').innerHTML = tableContent;
