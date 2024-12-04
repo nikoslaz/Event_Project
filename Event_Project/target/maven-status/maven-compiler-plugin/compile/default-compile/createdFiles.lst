@@ -9,8 +9,8 @@ servlets\AddEvent.class
 servlets\RegistrationClient.class
 mainClasses\Event$EventType.class
 mainClasses\Ticket.class
+database\tables\EditTicketTable$Regulars.class
 servlets\LoadClients.class
-servlets\UpdateTickets.class
 mainClasses\Ticket$Type.class
 servlets\CreateTables.class
 mainClasses\Reservation$ResStatus.class

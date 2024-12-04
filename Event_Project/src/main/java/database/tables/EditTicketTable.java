@@ -19,7 +19,14 @@ import mainClasses.Ticket;
  *
  * @author nikos
  */
+
 public class EditTicketTable {
+
+    public static class Regulars {
+
+        public String title;
+        public int REGULARCOUNT;
+    };
 
     public void addTicketFromJSON(String json) throws ClassNotFoundException {
         Ticket ticket = jsonToTicket(json);
@@ -52,6 +59,64 @@ public class EditTicketTable {
 
         }
         return null;
+    }
+
+
+    public int getRegularCount(int event_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT COUNT(ticket_id) AS REGULARCOUNT FROM tickets WHERE event_id=" + event_id + " AND ticket_availability=1 AND ticket_type='REGULAR'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            EditTicketTable.Regulars bt = gson.fromJson(json, EditTicketTable.Regulars.class);
+            return bt.REGULARCOUNT;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return -1;
+    }
+
+    public int getVIPCount(int event_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT COUNT(ticket_id) AS REGULARCOUNT FROM tickets WHERE event_id=" + event_id + " AND ticket_availability=1 AND ticket_type='VIP'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            EditTicketTable.Regulars bt = gson.fromJson(json, EditTicketTable.Regulars.class);
+            return bt.REGULARCOUNT;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return -1;
+    }
+
+    public int getBalconyCount(int event_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT COUNT(ticket_id) AS REGULARCOUNT FROM tickets WHERE event_id=" + event_id + " AND ticket_availability=1 AND ticket_type='BALCONY'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            EditTicketTable.Regulars bt = gson.fromJson(json, EditTicketTable.Regulars.class);
+            return bt.REGULARCOUNT;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return -1;
     }
 
     public void createTicketTable() throws SQLException, ClassNotFoundException {
@@ -101,6 +166,17 @@ public class EditTicketTable {
 
         } catch (SQLException ex) {
             Logger.getLogger(EditTicketTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        EditTicketTable ela = new EditTicketTable();
+        try {
+            System.out.println("Regular count: " + ela.getRegularCount(1));
+            System.out.println("Vip count: " + ela.getVIPCount(1));
+            System.out.println("Balcony: " + ela.getBalconyCount(1));
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
