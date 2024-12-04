@@ -253,10 +253,6 @@ function cancelReservation() {
     document.getElementById('canelReservationTable').classList.remove('hidden');
 }
 
-function selectEvent(event_id) {
-    document.getElementById('ticketsContent').classList.remove('hidden');
-}
-
 function loadEventsOnClient() {
     var xhr = new XMLHttpRequest();
 
@@ -561,4 +557,38 @@ function createTables() {
     xhr.setRequestHeader("Content-Type", "application/json");
     console.log("Tables created!");
     xhr.send();
+}
+
+function submitTickets(){
+    const regular = parseInt(document.getElementById('regularTickets').value) || 0;
+    const vip = parseInt(document.getElementById('vipTickets').value) || 0;
+    const balcony = parseInt(document.getElementById('balconyTickets').value) || 0;
+    
+    console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}`);
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'LoadReservations', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    const ticketData = JSON.stringify({
+        regularTickets: regular,
+        vipTickets: vip,
+        balconyTickets: balcony
+    });
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('Response from servlet:', xhr.responseText);
+        }
+    };
+    
+    xhr.send(ticketData);
+}
+
+function selectEvent(event_id) {
+    document.getElementById('ticketsContent').classList.remove('hidden');
+    
+    //showRegularTicks(event_id);
+    //showVIPTicks();
+    //showBalconyTicks();
 }
