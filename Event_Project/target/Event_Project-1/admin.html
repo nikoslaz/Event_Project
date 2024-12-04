@@ -13,23 +13,14 @@
     </script>
 </head>
 <body>
-    <!-- edw isws tha eprepe na exoume tis erwthseis SQL -->
     <div class="dashboard-container">
         <h1>Admin Dashboard</h1>
         <div class="button-container">
-            <!-- Creation of tables -->
             <button onclick="createTables()">Create Tables</button>
-            
-            <!-- Basic Tables -->
-            <button onclick="loadClients()">Load Clients</button>
-            <button onclick="loadEvents()">Load Events</button>
-            <button onclick="loadTickets()">Load Tickets</button>
-            <button onclick="loadReservations()">Load Reservations</button>
+            <button onclick="refreshTables()">Refresh Tables</button>
             
             <!--sto cancel tha prepei kapws na dinoume to id pou theloume na akurwthei sthn sunarthsh -->
             <button onclick="cancelEvent()">Cancel Event</button>
-            <!-- thelw na vgazei forma pou tha sumplhrwnw ta stoixeia tou neou event-->
-            <button onclick="addEvent()">Add Event</button>
             
             <!-- SQL Questions -->
             <button onclick="showAvailable_ReservedSeats()">Show Available and Reserved seats for every event</button>
@@ -40,8 +31,15 @@
             <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
         </div>
     </div>
-    <!-- Add Event Form (Initially Hidden) -->
-    <div id="addEventForm" class="hidden">
+    
+    <div class="content-container">
+        <div id="clientsContent"></div>
+        <div id="eventsContent"></div>
+        <div id="ticketsContent"></div>
+        <div id="reservationsContent"></div>
+    </div> 
+    
+    <div id="addEventForm">
     <h2>Add New Event</h2>
     <form id="eventForm">
 
@@ -58,10 +56,6 @@
         <select id="event_type" name="event_type" required>
             <option value="" disabled selected>Select an event type</option>
             <option value="CONCERT">Concert</option>
-            <option value="CONFERENCE">Conference</option>
-            <option value="WORKSHOP">Workshop</option>
-            <option value="SPORTS">Sports</option>
-            <option value="PERFORMANCE">Performance</option>
             <option value="COMEDYNIGHT">Comedy Night</option>
         </select>
 
@@ -73,12 +67,5 @@
     </form>
     </div>
 
-    
-    <div class="content-container">
-        <div id="clientsContent"></div>
-        <div id="eventsContent"></div>
-        <div id="ticketsContent"></div>
-        <div id="reservationsContent"></div>
-    </div> 
 </body>
 </html>

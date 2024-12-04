@@ -168,17 +168,4 @@ public class EditTicketTable {
             Logger.getLogger(EditTicketTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void main(String[] args) {
-        EditTicketTable ela = new EditTicketTable();
-        try {
-            System.out.println("Regular count: " + ela.getRegularCount(1));
-            System.out.println("Vip count: " + ela.getVIPCount(1));
-            System.out.println("Balcony: " + ela.getBalconyCount(1));
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-
 }

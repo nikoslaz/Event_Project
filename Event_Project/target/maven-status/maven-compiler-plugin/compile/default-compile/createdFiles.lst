@@ -11,6 +11,7 @@ mainClasses\Event$EventType.class
 mainClasses\Ticket.class
 database\tables\EditTicketTable$Regulars.class
 servlets\LoadClients.class
+servlets\UpdateTickets.class
 mainClasses\Ticket$Type.class
 servlets\CreateTables.class
 mainClasses\Reservation$ResStatus.class
@@ -21,4 +22,5 @@ database\tables\EditEventTable.class
 database\tables\EditReservationTable.class
 mainClasses\Event$EventStatus.class
 servlets\LoadEvents.class
+servlets\SelectRegularEventTickets.class
 mainClasses\Client.class

@@ -16,29 +16,18 @@
     <div class="dashboard-container">
         <h1>Client Dashboard</h1>
         <div class="button-container">
-            <!-- Creation of tables -->
-            <button onclick="addReservation()">Select Event</button>
-            <button onclick="cancelReservation()">Cancel Reservation</button>
+            <button onclick="refreshClientEvents()">Refresh Events</button>
         </div>
     </div>
-    <!-- Add Reservation Form (Initially Hidden) -->
-    <div id="eventTable" class="hidden">
-        <h2>Select Event</h2>
+    
+    <div id="eventTable">
+        <h2>Available Events</h2>
         <div id="eventsContent"></div>
     </div>
     
-    <div id="ticketsContent" class="hidden">
-        
+    <div id="ticketsContent">
         <div id="showRegularTickets">
-            <h2>Regular Tickets 100</h2>
-        </div>
-        
-        <div id="showRegularTickets">
-            <h2>VIP Tickets 100</h2>
-        </div>
-        
-        <div id="showRegularTickets">
-            <h2>Balcony Tickets 100</h2>
+            <h2>Regular Tickets: X</h2>
         </div>
         
         <form id="ticketForm">
@@ -55,17 +44,6 @@
                 <button type="button" onclick="submitTickets()">Submit</button>
             </div>
         </form>
-    </div>
-
-    
-    <!-- Cancel Reservation Form (Initially Hidden) -->
-    <div id="canelReservationTable" class="hidden">
-        <h2>Select Event</h2>
-        <div id="reservationsContent"></div>
-        <form id="cancelForm">
-            
-        </form>
-        
     </div>
 </body>
 </html>

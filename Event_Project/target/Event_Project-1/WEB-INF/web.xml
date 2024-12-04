@@ -44,6 +44,10 @@
         <servlet-name>UpdateTickets</servlet-name>
         <servlet-class>servlets.UpdateTickets</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SelectRegularEventTickets</servlet-name>
+        <servlet-class>servlets.SelectRegularEventTickets</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>UpdateTickets</servlet-name>
         <url-pattern>/UpdateTickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectRegularEventTickets</servlet-name>
+        <url-pattern>/SelectRegularEventTickets</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
