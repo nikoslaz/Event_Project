@@ -234,14 +234,12 @@ function loginPOST() {
                 if (response.success) {
                     // Assuming 'userId' and 'userType' are keys in your response object
                     sessionStorage.setItem('userType', 'client');
-
-                    $("#ajaxContent").html("Successful Login");
                     redirect();
                 } else {
-                    $("#error").html("Wrong Credentials");
+                    console.log("Wrong Credentials");
                 }
             } else {
-                $("#error").html("Login Failed");
+                console.log("Login Failed");
             }
         }
     };
