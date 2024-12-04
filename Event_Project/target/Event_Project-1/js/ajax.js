@@ -148,7 +148,7 @@ function loadEventTableJSON(data) {
     data.forEach(event => {
         tableContent += `
             <tr>
-                <td><button onclick="selectEvent('${event.event_name}', '${event.event_date}', '${event.event_time}')">Select</button></td>
+                <td><button onclick="selectEvent('${event.event_id}')">Select</button></td>
                 <td>${event.event_id || 'N/A'}</td>
                 <td>${event.event_name || 'N/A'}</td>
                 <td>${event.event_date || 'N/A'}</td>
@@ -251,6 +251,10 @@ function addReservation() {
 
 function cancelReservation() {
     document.getElementById('canelReservationTable').classList.remove('hidden');
+}
+
+function selectEvent(id) {
+
 }
 
 function loadEventsOnClient() {
