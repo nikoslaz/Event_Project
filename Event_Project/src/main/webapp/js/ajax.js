@@ -13,7 +13,6 @@ function RegisterPOST() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const responseData = JSON.parse(xhr.responseText);
-                //$('#ajaxContent').html("Successful Registration. Now please log in!<br> Your Data");
                 $('#ajaxContent').append(createClientTableJSON(responseData));
             } else {
                 $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
@@ -206,6 +205,13 @@ function createReservationsTableJSON(data) {
     return tableContent;
 }
 
+function redirect() {
+    window.location.href = "client.html";
+}
+
+function redirect_back() {
+    window.location.href = "index.html";
+}
 function loginPOST() {
     var username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
@@ -215,9 +221,14 @@ function loginPOST() {
     
     // Check for administrator credentials
     if (username === 'admin' && password === 'admin123') {
-        window.location.href = 'admin.html'; // Redirect the administrator
-        return; // Terminate the function
+        window.location.href = 'admin.html';
+        return;
     }
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'Login', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
 
     // AJAX request for regular users
     var xhr = new XMLHttpRequest();
@@ -227,7 +238,6 @@ function loginPOST() {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     // Assuming 'userId' and 'userType' are keys in your response object
-                    sessionStorage.setItem('userId', response.userId);
                     sessionStorage.setItem('userType', response.userType);
 
                     $("#ajaxContent").html("Successful Login");
