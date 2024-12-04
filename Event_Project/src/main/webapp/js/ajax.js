@@ -567,7 +567,7 @@ function submitTickets(){
     console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}`);
     
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'LoadReservations', true);
+    xhr.open('POST', 'UpdateTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     
     const ticketData = JSON.stringify({
