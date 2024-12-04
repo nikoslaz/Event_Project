@@ -240,6 +240,51 @@ function createReservationsTableJSON(data) {
     return tableContent;
 }
 
+function addReservation() {
+    document.getElementById('eventTable').classList.remove('hidden');
+    loadEvents();
+}
+
+function loadEventsOnClient() {
+    var xhr = new XMLHttpRequest();
+
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Response data:", xhr.responseText)
+
+            try {
+                // Parse the JSON response
+                const parsedResponse = JSON.parse(xhr.responseText);
+                console.log("Parsed response:", parsedResponse);
+
+                // Generate the table from event data
+                let tableContent = createEventTableJSON(parsedResponse);
+
+                // Update the DOM with the generated table
+                document.getElementById('eventsContent').innerHTML = tableContent;
+
+            } catch (error) {
+                console.error("Error parsing JSON:", error); // Log JSON parsing error
+                document.getElementById('eventsContent').innerHTML = '<p>Invalid JSON response from the server.</p>';
+            }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+            document.getElementById('eventsContent').innerHTML = `<p>Failed to load events. Server responded with status ${xhr.status}.</p>`;
+        }
+    };
+
+    // Define what happens in case of error
+    xhr.onerror = function () {
+        console.error("Network error occurred");
+        document.getElementById('eventsContent').innerHTML = '<p>Network error occurred. Please try again later.</p>';
+    };
+
+    // Open a GET request to the server endpoint
+    xhr.open('GET', 'LoadEvents'); 
+    xhr.send(); // Send the request
+}
+
 function redirect() {
     window.location.href = 'client.html';
 }
@@ -441,11 +486,6 @@ function loadReservations() {
 // Show the Add Event Form
 function addEvent() {
     document.getElementById('addEventForm').classList.remove('hidden');
-}
-
-// Show the Add Reservation Form
-function addReservation() {
-    document.getElementById('eventTable').classList.remove('hidden');
 }
 
 // Hide the Add Event Form
