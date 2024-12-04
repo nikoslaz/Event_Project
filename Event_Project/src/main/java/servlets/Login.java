@@ -34,6 +34,7 @@ public class Login extends HttpServlet {
             Client client = clientTable.databaseToClients(username, password);
 
             if (client != null) {
+                System.out.println("Client exists!");
                 // Store client details in session
                 session.setAttribute("client_username", client.getClientUsername());
                 session.setMaxInactiveInterval(120); // Set session timeout to 2 minutes

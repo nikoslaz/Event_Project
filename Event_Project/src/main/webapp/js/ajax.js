@@ -223,14 +223,17 @@ function loginPOST() {
     }
 
     // AJAX request for regular users
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'Login', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     // Assuming 'userId' and 'userType' are keys in your response object
-                    sessionStorage.setItem('userType', response.userType);
+                    sessionStorage.setItem('userType', 'client');
 
                     $("#ajaxContent").html("Successful Login");
                     redirect();
@@ -242,10 +245,9 @@ function loginPOST() {
             }
         }
     };
-
-    var data = $('#loginForm').serialize();
-    xhr.open('POST', 'Login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    
+    const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    console.log("Sending request with data:", data);
     xhr.send(data);
 }
 
