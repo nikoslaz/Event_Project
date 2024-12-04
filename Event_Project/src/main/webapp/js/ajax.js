@@ -129,6 +129,41 @@ function createEventTableJSON(data) {
     return tableContent;
 }
 
+function loadEventTableJSON(data) {
+    let tableContent = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Event Name</th>
+                    <th>Event Date</th>
+                    <th>Event Time</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(event => {
+        tableContent += `
+            <tr>
+                <td><button onclick="selectEvent('${event.event_name}', '${event.event_date}', '${event.event_time}')">Select</button></td>
+                <td>${event.event_name || 'N/A'}</td>
+                <td>${event.event_date || 'N/A'}</td>
+                <td>${event.event_time || 'N/A'}</td>
+            </tr>
+        `;
+    });
+
+    tableContent +=     `
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById('eventTable').innerHTML = tableContent;
+    document.getElementById('eventTable').classList.remove('hidden');
+}
+
+
 function createTicketJSON(data) {
         let tableContent = `
         <table border="1">
@@ -406,6 +441,11 @@ function loadReservations() {
 // Show the Add Event Form
 function addEvent() {
     document.getElementById('addEventForm').classList.remove('hidden');
+}
+
+// Show the Add Reservation Form
+function addReservation() {
+    document.getElementById('eventTable').classList.remove('hidden');
 }
 
 // Hide the Add Event Form

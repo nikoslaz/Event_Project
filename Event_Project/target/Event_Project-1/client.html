@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="client.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/ajax.js"></script>
@@ -17,49 +17,18 @@
         <h1>Client Dashboard</h1>
         <div class="button-container">
             <!-- Creation of tables -->
-            <button onclick="createReservation()">Create Reservation</button>
+            <button onclick="addReservation()">Select Event</button>
             <button onclick="cancelReservation()">Cancel Reservation</button>
         </div>
     </div>
     <!-- Add Event Form (Initially Hidden) -->
-    <div id="addEventForm" class="hidden">
-    <h2>Add New Event</h2>
-    <form id="eventForm">
-
-        <label for="event_name">Event Name:</label>
-        <input type="text" id="event_name" name="event_name" required>
-
-        <label for="event_date">Event Date:</label>
-        <input type="date" id="event_date" name="event_date" required>
-
-        <label for="event_time">Event Time:</label>
-        <input type="time" id="event_time" name="event_time" required>
-
-        <label for="event_type">Event Type:</label>
-        <select id="event_type" name="event_type" required>
-            <option value="" disabled selected>Select an event type</option>
-            <option value="CONCERT">Concert</option>
-            <option value="CONFERENCE">Conference</option>
-            <option value="WORKSHOP">Workshop</option>
-            <option value="SPORTS">Sports</option>
-            <option value="PERFORMANCE">Performance</option>
-            <option value="COMEDYNIGHT">Comedy Night</option>
-        </select>
-
-        <label for="event_capacity">Event Capacity:</label>
-        <input type="number" id="event_capacity" name="event_capacity" required>
-
-        <button type="button" onclick="submitEventForm()">Submit Event</button>
-        <button type="button" onclick="hideEventForm()">Cancel</button>
-    </form>
+    <div id="eventTable" class="hidden">
+        <h2>Select Event</h2>
+        
+        <form id="eventForm">
+            
+        </form>
+        
     </div>
-
-    
-    <div class="content-container">
-        <div id="clientsContent"></div>
-        <div id="eventsContent"></div>
-        <div id="ticketsContent"></div>
-        <div id="reservationsContent"></div>
-    </div> 
 </body>
 </html>
