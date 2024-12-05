@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import database.tables.EditTicketTable;
 
 public class UpdateTickets extends HttpServlet {
     @Override
@@ -34,9 +35,20 @@ public class UpdateTickets extends HttpServlet {
         int vipTickets = jsonObject.get("vipTickets").getAsInt();
         int balconyTickets = jsonObject.get("balconyTickets").getAsInt();
 
-        System.out.println("Regular Tickets: " + regularTickets);
-        System.out.println("VIP Tickets: " + vipTickets);
-        System.out.println("Balcony Tickets: " + balconyTickets);
+        EditTicketTable edit = new EditTicketTable();
+        try {
+            for (int i = 0; i < regularTickets; i++) {
+                edit.updateTicketStatus(0);
+            }
+            for (int i = 0; i < vipTickets; i++) {
+                edit.updateTicketStatus(1);
+            }
+            for (int i = 0; i < balconyTickets; i++) {
+                edit.updateTicketStatus(2);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         response.setContentType("application/json");
         response.getWriter().write("{\"status\": \"success\", \"message\": \"Tickets processed successfully!\"}");

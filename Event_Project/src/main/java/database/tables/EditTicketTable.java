@@ -119,6 +119,113 @@ public class EditTicketTable {
         return -1;
     }
 
+    public void updateTicketStatus(int type) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Establish the connection
+            con = DB_Connection.getConnection();
+            stmt = con.createStatement();
+
+            // Query to select the first ticket with ticket_availability = 1
+            if (type == 0) {
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' LIMIT 1";
+                rs = stmt.executeQuery(selectQuery);
+            } else if (type == 1) {
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'VIP' LIMIT 1";
+                rs = stmt.executeQuery(selectQuery);
+            } else if (type == 2) {
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'BALCONY' LIMIT 1";
+                rs = stmt.executeQuery(selectQuery);
+            }
+
+            if (rs.next()) {
+                // Get the ticket_id of the first available ticket
+                int ticketId = rs.getInt("ticket_id");
+
+                // Update ticket_availability to 0 for the selected ticket
+                String updateQuery = "UPDATE Tickets SET ticket_availability = 0 WHERE ticket_id = " + ticketId;
+                int rowsAffected = stmt.executeUpdate(updateQuery);
+
+                if (rowsAffected > 0) {
+                    System.out.println("Successfully updated ticket with ID: " + ticketId);
+                } else {
+                    System.out.println("No rows were updated.");
+                }
+            } else {
+                System.out.println("No available tickets found.");
+            }
+        } finally {
+            // Close resources
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void cancelTicketStatus(int type) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+            try {
+                // Establish the connection
+                con = DB_Connection.getConnection();
+                stmt = con.createStatement();
+
+                // Query to select the first ticket with ticket_availability = 0
+                if (type == 0) {
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'REGULAR' LIMIT 1";
+                    rs = stmt.executeQuery(selectQuery);
+                } else if (type == 1) {
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'VIP' LIMIT 1";
+                    rs = stmt.executeQuery(selectQuery);
+                } else if (type == 2) {
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'BALCONY' LIMIT 1";
+                    rs = stmt.executeQuery(selectQuery);
+                }
+
+                if (rs.next()) {
+                    // Get the ticket_id of the first available ticket
+                    int ticketId = rs.getInt("ticket_id");
+
+                    // Update ticket_availability to 1 for the selected ticket
+                    String updateQuery = "UPDATE Tickets SET ticket_availability = 1 WHERE ticket_id = " + ticketId;
+                    int rowsAffected = stmt.executeUpdate(updateQuery);
+
+                if (rowsAffected > 0) {
+                    System.out.println("Successfully cancelled ticket with ID: " + ticketId);
+                } else {
+                    System.out.println("No rows were updated.");
+                }
+            } else {
+                System.out.println("No available tickets found.");
+            }
+        } finally {
+            // Close resources
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+
+
+
     public void createTicketTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
