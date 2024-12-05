@@ -122,12 +122,14 @@ public class EditReservationTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO reservations "
-                    + "(reservation_tickets, reservation_date, reservation_payment_amount, reservation_status) "
+                    + "(reservation_tickets, reservation_date, reservation_payment_amount, reservation_status, client_username, event_id) "
                     + "VALUES ("
                     + "'" + res.getReservationTickets() + "', "
                     + "'" + res.getReservationDate() + "', "
                     + "'" + res.getReservationPaymentAmount() + "', "
-                    + "'ACTIVE'"
+                    + "'ACTIVE',"
+                    + "'" + res.getClientUsername() + "',"
+                    + "'" + res.getEventID() + "'"
                     + ")";
             //stmt.execute(table);
 

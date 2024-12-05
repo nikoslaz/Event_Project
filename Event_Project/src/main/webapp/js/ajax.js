@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+let globalUsername;
+let globalID;
+
 function RegisterPOST() {
     let myForm = document.getElementById('form');
     let formData = new FormData(myForm);
@@ -37,7 +40,7 @@ function RegisterPOST() {
 }
 
 function loginPOST() {
-    var username = document.getElementById('username_log').value;
+    let username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
     console.log("Username:", username, "Password:", password);  
     if (username === 'admin' && password === 'admin123') {
@@ -53,6 +56,7 @@ function loginPOST() {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     sessionStorage.setItem('userType', 'client');
+                    sessionStorage.setItem('globalUsername', username);
                     window.location.href = 'client.html';
                 } else {
                     console.log("Wrong Credentials");
@@ -430,14 +434,18 @@ function submitTickets(){
     const regular = parseInt(document.getElementById('regularTickets').value) || 0;
     const vip = parseInt(document.getElementById('vipTickets').value) || 0;
     const balcony = parseInt(document.getElementById('balconyTickets').value) || 0;
-    console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}`);
+    const globalUsername = sessionStorage.getItem('globalUsername'); 
+    const globalEventID = sessionStorage.getItem('globalID');
+    console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}, Username: ${globalUsername}, Event ID: ${globalEventID} `);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'UpdateTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     const ticketData = JSON.stringify({
         regularTickets: regular,
         vipTickets: vip,
-        balconyTickets: balcony
+        balconyTickets: balcony,
+        clientUsername: globalUsername,
+        eventID:globalEventID
     });
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -451,6 +459,7 @@ function submitTickets(){
 
 function selectRegularEventTickets(id) {
     console.log(`Event ID: ${id}`);
+    sessionStorage.setItem('globalID', id);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'CountEventTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');

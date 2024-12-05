@@ -37,39 +37,50 @@ public class UpdateTickets extends HttpServlet {
         int regularTickets = jsonObject.get("regularTickets").getAsInt();
         int vipTickets = jsonObject.get("vipTickets").getAsInt();
         int balconyTickets = jsonObject.get("balconyTickets").getAsInt();
+        String clientUsername = jsonObject.get("clientUsername").getAsString();
+        int eventID = jsonObject.get("eventID").getAsInt();
         allTickets = regularTickets + vipTickets + balconyTickets;
 
         EditTicketTable edit_tick = new EditTicketTable();
-        try {
-            for (int i = 0; i < regularTickets; i++) {
-                edit_tick.updateTicketStatus(0);
+        if (allTickets != 0) {
+            try {
+                for (int i = 0; i < regularTickets; i++) {
+                    edit_tick.updateTicketStatus(0);
+                }
+                for (int i = 0; i < vipTickets; i++) {
+                    edit_tick.updateTicketStatus(1);
+                }
+                for (int i = 0; i < balconyTickets; i++) {
+                    edit_tick.updateTicketStatus(2);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            for (int i = 0; i < vipTickets; i++) {
-                edit_tick.updateTicketStatus(1);
-            }
-            for (int i = 0; i < balconyTickets; i++) {
-                edit_tick.updateTicketStatus(2);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
 
-        Reservation res = new Reservation();
-        EditReservationTable edit_res = new EditReservationTable();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateString = currentDate.format(formatter);
+            Reservation res = new Reservation();
+            EditReservationTable edit_res = new EditReservationTable();
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String dateString = currentDate.format(formatter);
 
-        res.setReservationTickets(allTickets);
-        res.setReservationDate(dateString);
-        // Maybe do a function to return each price base on Event_ID from a QUERY !!!
-        // This is an example
-        res.setReservationPaymentAmount(regularTickets * 10 + vipTickets * 50 + balconyTickets * 20);
+            res.setReservationTickets(allTickets);
+            res.setReservationDate(dateString);
+            // Maybe do a function to return each price base on Event_ID from a QUERY !!!
+            // This is an example
+            res.setReservationPaymentAmount(regularTickets * 10 + vipTickets * 50 + balconyTickets * 20);
+            res.setClientUsername(clientUsername);
+            res.setEventID(eventID);
+
+            System.out.println(clientUsername);
 
         try {
             edit_res.createNewReservation(res);
         } catch (Exception e) {
             System.out.println(e);
+            }
+        } else {
+            System.out.println("NO TICKETS AVAILABLE");
+            // We can put other things here to show the user <3
         }
 
         // Respond with JSON
