@@ -98,8 +98,8 @@ public class EditReservationTable {
                 + "reservation_date DATE NOT NULL, "
                 + "reservation_payment_amount INTEGER NOT NULL, "
                 + "reservation_status ENUM('ACTIVE', 'CANCELED', 'COMPLETE') NOT NULL, "
-                + "client_username VARCHAR(50) NOT NULL, "
-                + "event_id INTEGER NOT NULL, "
+                + "client_username VARCHAR(50) , "
+                + "event_id INTEGER , "
                 + "FOREIGN KEY (client_username) REFERENCES clients(client_username), "
                 + "FOREIGN KEY (event_id) REFERENCES events(event_id), "
                 + "PRIMARY KEY (reservation_id)"
@@ -114,6 +114,7 @@ public class EditReservationTable {
      *
      * @throws ClassNotFoundException
      */
+    // PREPEI NA ALLAXTEI DEN KSEROYUME POS NA KNAOYE TA FORGEINS <3
     public void createNewReservation(Reservation res) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
@@ -121,14 +122,13 @@ public class EditReservationTable {
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO reservations "
-                    + "(reservation_tickets, reservation_date, reservation_payment_amount, reservation_status, client_username, event_ID) "
+                    + "(reservation_tickets, reservation_date, reservation_payment_amount, reservation_status) "
                     + "VALUES ("
                     + "'" + res.getReservationTickets() + "', "
                     + "'" + res.getReservationDate() + "', "
                     + "'" + res.getReservationPaymentAmount() + "', "
-                    + "'ACTIVE',"
-                    + "'" + res.getClientUsername() + "',"
-                    + "'" + res.getEventID() + "')";
+                    + "'ACTIVE'"
+                    + ")";
             //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery);
@@ -140,6 +140,10 @@ public class EditReservationTable {
         } catch (SQLException ex) {
             Logger.getLogger(EditReservationTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void getUsername() {
+
     }
 
     public static void main(String[] args) {
