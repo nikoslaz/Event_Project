@@ -21,10 +21,6 @@
         <servlet-class>servlets.AddEvent</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateClientTable</servlet-name>
-        <servlet-class>servlets.CreateClientTable</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreateTables</servlet-name>
         <servlet-class>servlets.CreateTables</servlet-class>
     </servlet>
@@ -45,8 +41,8 @@
         <servlet-class>servlets.UpdateTickets</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SelectRegularEventTickets</servlet-name>
-        <servlet-class>servlets.SelectRegularEventTickets</servlet-class>
+        <servlet-name>CountEventTickets</servlet-name>
+        <servlet-class>servlets.CountEventTickets</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
@@ -69,10 +65,6 @@
         <url-pattern>/AddEvent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateClientTable</servlet-name>
-        <url-pattern>/CreateClientTable</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreateTables</servlet-name>
         <url-pattern>/CreateTables</url-pattern>
     </servlet-mapping>
@@ -93,8 +85,8 @@
         <url-pattern>/UpdateTickets</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SelectRegularEventTickets</servlet-name>
-        <url-pattern>/SelectRegularEventTickets</url-pattern>
+        <servlet-name>CountEventTickets</servlet-name>
+        <url-pattern>/CountEventTickets</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

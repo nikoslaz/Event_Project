@@ -163,26 +163,28 @@ public class EditEventTable {
 
             stmt.executeUpdate(insertQuery);
             System.out.println("# The event was successfully added in the database.");
-
-            /* Get the member id from the database and set it to the member */
             stmt.close();
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                System.out.println("Lol");
-            }
-            System.out.println("# Creating event tickets.");
-            EditTicketTable ticktab = new EditTicketTable();
+
             EditEventTable eventab = new EditEventTable();
+            int eventid = eventab.getMaxEventID().getEventId();
+            System.out.println("# Creating event " + eventid + " tickets.");
+            EditTicketTable ticktab = new EditTicketTable();
             Ticket tick = new Ticket();
-            tick.setTicketType(Ticket.Type.REGULAR);
-            tick.setTicketPrice(10);
             tick.setTicketAvailability(1);
-            tick.setEventID(eventab.getMaxEventID().getEventId());
+            tick.setEventID(eventid);
             for (int i = 0; i < ev.getEventCapacity(); i++) {
+                if (i < 5) {
+                    tick.setTicketType(Ticket.Type.VIP);
+                    tick.setTicketPrice(50);
+                } else if (i < ev.getEventCapacity() / 2) {
+                    tick.setTicketType(Ticket.Type.BALCONY);
+                    tick.setTicketPrice(20);
+                } else {
+                    tick.setTicketType(Ticket.Type.REGULAR);
+                    tick.setTicketPrice(10);
+                }
                 ticktab.createNewTicket(tick);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
         }

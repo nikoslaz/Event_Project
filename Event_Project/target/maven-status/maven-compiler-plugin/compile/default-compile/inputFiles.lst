@@ -1,9 +1,9 @@
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\mainClasses\Ticket.java
-C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\servlets\SelectRegularEventTickets.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\mainClasses\Reservation.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\servlets\CreateTables.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\database\tables\EditClientTable.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\database\tables\EditTicketTable.java
+C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\servlets\CountEventTickets.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\servlets\LoadClientEvents.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\servlets\Login.java
 C:\Users\mikek\Desktop\Event_Project\Event_Project\src\main\java\mainClasses\JSON_Converter.java

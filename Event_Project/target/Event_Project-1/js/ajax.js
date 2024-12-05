@@ -452,7 +452,7 @@ function submitTickets(){
 function selectRegularEventTickets(id) {
     console.log(`Event ID: ${id}`);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'SelectRegularEventTickets', true); // URL of your servlet
+    xhr.open('POST', 'CountEventTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     const eventData = JSON.stringify({
         eventId: id
@@ -462,7 +462,7 @@ function selectRegularEventTickets(id) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Response from servlet:', response);
-                document.getElementById('showRegularTickets').innerHTML = '<h2>Regular Tickets: ' + response.regularCount + '</h2>';
+                document.getElementById('showTicketCount').innerHTML = '<h2>Available Tickets for Event '+id+'<br>Regular:'+response.regular+' Balcony:'+response.balcony+' VIP:'+response.vip+' </h2>';
             } else {
                 console.error('Error:', xhr.responseText);
             }
