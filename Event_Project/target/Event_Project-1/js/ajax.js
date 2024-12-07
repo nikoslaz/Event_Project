@@ -356,7 +356,7 @@ function createReservationTableJSON(data) {
                 <td>${reservations.reservation_tickets || 'N/A'}</td>
                 <td>${reservations.reservation_date || 'N/A'}</td>
                 <td>${reservations.reservation_payment_amount || 'N/A'}</td>
-                <td>${reservations.status || 'N/A'}</td>
+                <td>${reservations.reservation_status || 'N/A'}</td>
                 <td>${reservations.client_username || 'N/A'}</td>
                 <td>${reservations.event_id || 'N/A'}</td>
             </tr>

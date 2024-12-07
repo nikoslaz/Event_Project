@@ -8,8 +8,10 @@ import database.DB_Connection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import mainClasses.Reservation.ResStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 public class LoadReservations extends HttpServlet {
 
@@ -26,10 +28,10 @@ public class LoadReservations extends HttpServlet {
                 reservation.put("reservation_tickets", rs.getInt("reservation_tickets"));
                 reservation.put("reservation_date", rs.getDate("reservation_date").toString());
                 reservation.put("reservation_payment_amount", rs.getInt("reservation_payment_amount"));
-                reservation.put("reservation_status", rs.getString("reservation_status"));
+                reservation.put("reservation_status", ResStatus.valueOf(rs.getString("reservation_status")));
                 reservation.put("client_username", rs.getString("client_username"));
                 reservation.put("event_id", rs.getInt("event_id"));
-
+                
                 reservationArray.put(reservation);
             }
 
