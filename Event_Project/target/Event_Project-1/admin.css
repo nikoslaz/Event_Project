@@ -1,8 +1,7 @@
-
 /* General Styling for Body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f3f4f6, #ffffff);
     color: #333;
     margin: 0;
     padding: 0;
@@ -14,10 +13,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     max-width: 700px;
     width: 100%;
     text-align: center;
@@ -26,8 +25,8 @@ body {
 /* Dashboard Title */
 .dashboard-container h1 {
     font-size: 2em;
-    color: #444;
-    margin-bottom: 20px; /* Add space below title */
+    color: #2c3e50;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -35,18 +34,18 @@ body {
 .button-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
     justify-content: center;
     width: 100%;
 }
 
 /* Button Styling */
 button {
-    background-color: #007bff;
+    background-color: #3498db;
     color: #fff;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -54,48 +53,48 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #2980b9;
+    transform: scale(1.05);
 }
 
 button:active {
-    background-color: #003d80;
-    transform: scale(0.98); /* Slightly shrink when clicked */
+    background-color: #1c5980;
+    transform: scale(0.98);
 }
 
 /* General Styling for Content Container */
 .content-container {
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    gap: 20px; /* Space between child elements */
-    padding: 20px; /* Add padding around the container */
-    margin: 20px auto; /* Center horizontally with margin at the top */
-    max-width: 1200px; /* Set a maximum width for the container */
-    background-color: #f9f9f9; /* Light background for the container */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Styling for Each Content Div */
 .content-container > div {
-    background-color: #fff; /* White background for each content block */
-    padding: 15px; /* Add padding inside each block */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for each block */
-    border: 1px solid #ddd; /* Light border around each block */
-    min-height: 150px; /* Ensure minimum height for empty blocks */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dcdcdc;
+    min-height: 150px;
     display: flex;
-    flex-direction: column; /* Allow content to stack inside each block */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center-align text inside blocks */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 /* Adjust Text Inside Content Blocks */
 .content-container > div p {
-    margin: 0; /* Remove default margins */
-    font-size: 1em; /* Set a standard font size */
-    color: #555; /* Subtle text color */
+    margin: 0;
+    font-size: 1em;
+    color: #555;
 }
 
 /* General Hidden Class */
@@ -105,10 +104,10 @@ button:active {
 
 /* Add Event Form Container */
 #addEventForm {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     margin: 20px auto;
     text-align: center;
@@ -118,7 +117,7 @@ button:active {
 #addEventForm h2 {
     margin-bottom: 20px;
     font-size: 1.8em;
-    color: #333;
+    color: #2c3e50;
 }
 
 /* Form Styling */
@@ -143,22 +142,23 @@ button:active {
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
+    background-color: #f9f9f9;
 }
 
 /* Input Focus Effect */
 #eventForm input:focus,
 #eventForm select:focus {
-    border-color: #007bff;
+    border-color: #3498db;
     outline: none;
 }
 
 /* Select Dropdown Styling */
 #eventForm select {
-    appearance: none; /* For consistent styling across browsers */
-    background-color: #fff;
+    appearance: none;
+    background-color: #ffffff;
     cursor: pointer;
 }
 
@@ -167,18 +167,18 @@ button:active {
     padding: 10px 15px;
     font-size: 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #eventForm button:first-of-type {
-    background-color: #007bff;
+    background-color: #3498db;
     color: #fff;
 }
 
 #eventForm button:first-of-type:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
 }
 
 #eventForm button:first-of-type:active {
@@ -210,12 +210,12 @@ button:active {
     }
     
     .content-container {
-        padding: 15px; /* Reduce padding for smaller screens */
+        padding: 15px;
     }
 
     .content-container > div {
-        padding: 10px; /* Reduce padding inside blocks */
-        min-height: 100px; /* Lower minimum height for smaller screens */
+        padding: 10px;
+        min-height: 100px;
     }
     
     #addEventForm {
@@ -233,4 +233,5 @@ button:active {
         padding: 8px;
     }
 }
+
 

@@ -1,7 +1,7 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f3f4f6, #ffffff);
     color: #333;
     margin: 0;
     padding: 0;
@@ -13,8 +13,8 @@ body {
     margin: 20px auto;
     padding: 20px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -22,7 +22,7 @@ body {
 .dashboard-container h1 {
     font-size: 2.5em;
     margin: 0;
-    color: #444;
+    color: #2c3e50;
 }
 
 /* Button Container */
@@ -35,24 +35,24 @@ body {
 
 /* Button Styling */
 button {
-    background-color: #007bff;
+    background-color: #3498db;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
     transform: scale(1.05);
 }
 
 button:active {
-    background-color: #003d80;
+    background-color: #1c5980;
     transform: scale(0.98);
 }
 
@@ -61,22 +61,22 @@ button:active {
     display: none;
 }
 
-/* Add Event Form */
+/* Event Table */
 #eventTable {
     max-width: 600px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 25px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Add Event Form Title */
+/* Event Table Title */
 #eventTable h2 {
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin-bottom: 20px;
-    color: #333;
+    color: #2c3e50;
 }
 
 /* Form Styling */
@@ -95,37 +95,37 @@ button:active {
 
 #eventForm select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
     font-size: 1em;
-    background-color: #fff;
+    background-color: #f9f9f9;
     cursor: pointer;
     transition: border-color 0.3s ease;
 }
 
 #eventForm select:focus {
-    border-color: #007bff;
+    border-color: #3498db;
     outline: none;
 }
 
 /* Form Buttons */
 #eventForm button {
-    padding: 10px 15px;
+    padding: 12px 15px;
     font-size: 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 #eventForm button:first-of-type {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #3498db;
+    color: #ffffff;
 }
 
 #eventForm button:first-of-type:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
 }
 
 #eventForm button:first-of-type:active {
@@ -133,12 +133,12 @@ button:active {
 }
 
 #eventForm button:last-of-type {
-    background-color: #ccc;
+    background-color: #e0e0e0;
     color: #333;
 }
 
 #eventForm button:last-of-type:hover {
-    background-color: #aaa;
+    background-color: #d6d6d6;
 }
 
 /* Content Container */
@@ -149,17 +149,17 @@ button:active {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
-    background-color: #f4f4f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f3f3f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Content Boxes */
 .content-container > div {
     background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     min-height: 150px;
     display: flex;
@@ -173,6 +173,61 @@ button:active {
     color: #555;
 }
 
+#ticketForm {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 15px; /* Space between elements */
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto; /* Center form horizontally */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#ticketForm label {
+    font-size: 1em;
+    color: #333;
+    width: 100%;
+    text-align: center; /* Center text within the label */
+}
+
+#ticketForm input {
+    width: 60%; /* Adjust width of input fields */
+    padding: 10px;
+    font-size: 1em;
+    text-align: center; /* Center the text inside input fields */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#ticketForm input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.submit-box {
+    margin-top: 20px;
+}
+
+.submit-box button {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-box button:hover {
+    background-color: #2980b9;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-container {
@@ -181,7 +236,7 @@ button:active {
 
     button {
         font-size: 0.9em;
-        padding: 8px 15px;
+        padding: 10px 15px;
     }
 
     .content-container {
@@ -195,11 +250,12 @@ button:active {
 
     #eventForm select {
         font-size: 0.9em;
-        padding: 8px;
+        padding: 10px;
     }
 
     #eventForm button {
         font-size: 0.9em;
-        padding: 8px;
+        padding: 10px;
     }
 }
+
