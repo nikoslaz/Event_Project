@@ -42,6 +42,8 @@ public class UpdateTickets extends HttpServlet {
         allTickets = regularTickets + vipTickets + balconyTickets;
 
         EditTicketTable edit_tick = new EditTicketTable();
+        int reservationID = -1;
+        
         if (allTickets != 0) {
             try {
                 for (int i = 0; i < regularTickets; i++) {
@@ -74,7 +76,7 @@ public class UpdateTickets extends HttpServlet {
             System.out.println(clientUsername);
 
         try {
-            edit_res.createNewReservation(res);
+            reservationID = edit_res.createNewReservation(res);
         } catch (Exception e) {
             System.out.println(e);
             }
@@ -85,6 +87,11 @@ public class UpdateTickets extends HttpServlet {
 
         // Respond with JSON
         response.setContentType("application/json");
+        if (reservationID != -1) {
+            response.getWriter().write("{\"status\": \"success\", \"message\": \"Tickets processed successfully!\", \"reservation_id\": " + reservationID + "}");
+        } else {
+            response.getWriter().write("{\"status\": \"failure\", \"message\": \"Failed to process tickets.\"}");
+        }        
         response.getWriter().write("{\"status\": \"success\", \"message\": \"Tickets processed successfully!\"}");
     }
 }
