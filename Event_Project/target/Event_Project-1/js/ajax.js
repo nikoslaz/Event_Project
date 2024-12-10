@@ -524,8 +524,26 @@ function cancelEventForm(){
 //=================================================================================================
 // Cancel Reservation
 
-function cancelRes(){
-    console.log('hi');
+function cancelReserv(){
+    const id = document.getElementById('cancelRes').value;
+    console.log(`Reservation ID: ${id}`);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'CancelReservation', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    const data = JSON.stringify({
+        reservation_ID:id
+    });
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+    xhr.send(data);
 }
 
 //=================================================================================================
