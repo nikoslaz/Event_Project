@@ -44,6 +44,10 @@
         <servlet-name>CountEventTickets</servlet-name>
         <servlet-class>servlets.CountEventTickets</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelEvent</servlet-name>
+        <servlet-class>servlets.CancelEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>CountEventTickets</servlet-name>
         <url-pattern>/CountEventTickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelEvent</servlet-name>
+        <url-pattern>/CancelEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

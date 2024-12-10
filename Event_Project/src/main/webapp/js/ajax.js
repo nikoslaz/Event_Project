@@ -454,33 +454,13 @@ function submitTickets(){
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                try {
-                    // Parse the response JSON
-                    const response = JSON.parse(xhr.responseText);
-
-                    // Check if the request was successful
-                    if (response.status === "success") {
-                        const reservationID = response.reservation_id;
-                        console.log(`Reservation ID: ${reservationID}`);
-
-                        // Use the reservation ID as needed
-                        //alert(`Reservation successfully created! Your Reservation ID is: ${reservationID}`);
-                        sessionStorage.setItem('reservationID', reservationID); // Store the reservation ID if needed later
-                    } else {
-                        console.error(`Error: ${response.message}`);
-                        //alert(`Failed to create reservation: ${response.message}`);
-                    }
-                } catch (e) {
-                    console.error('Error parsing response:', e);
-                    //alert('An error occurred while processing the response.');
-                }
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
             } else {
-                console.error(`Error: ${xhr.responseText}`);
-                //alert('Failed to create reservation. Please try again.');
+                console.error('Error:', xhr.responseText);
             }
         }
     };
-    
     
     xhr.send(ticketData);
 }
@@ -505,5 +485,33 @@ function selectRegularEventTickets(id) {
             }
         }
     };
+    xhr.send(eventData);
+}
+
+//=================================================================================================
+// Cancel Event 
+
+function cancelEventForm(){
+    let eventID = document.getElementById('event_id');
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'CancelEvent', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    const ticketData = JSON.stringify({
+        eventID:eventID
+    });
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+    
     xhr.send(eventData);
 }
