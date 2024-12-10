@@ -113,14 +113,71 @@ public class EditEventTable {
         return null;
     }
 
-    public void updateEvent(int eventID, String status) throws SQLException, ClassNotFoundException {
+    public void updateEvent(int eventID) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String updateQuery = "UPDATE events SET status='" + status + "' WHERE event_id= '" + eventID + "'";
+        String updateQuery = "UPDATE events SET event_status = 'CANCELED' WHERE event_id= '" + eventID + "'";
         stmt.executeUpdate(updateQuery);
         stmt.close();
         con.close();
     }
+
+    public void returnPaymentAmount(int eventID) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        try {
+            // Query to fetch client username and payment amount for the given event ID
+            String selectQuery = "SELECT client_username, SUM(reservation_payment_amount) AS total_payment_amount "
+                    + "FROM reservations WHERE event_id = '" + eventID + "' GROUP BY client_username";
+
+            String username = "";
+            int paymentAmount = 0;
+            int totalPaymentAmount = 0;
+
+            // Execute the query and get the result
+            ResultSet rs = stmt.executeQuery(selectQuery);
+            while (rs.next()) {
+                username = rs.getString("client_username"); // Get the client username
+                paymentAmount = rs.getInt("total_payment_amount"); // Get the sum
+                totalPaymentAmount += paymentAmount;
+            }
+
+            // If no results were found, log and return
+            if (username.isEmpty()) {
+                System.out.println("No reservation found for event ID: " + eventID);
+                return;
+            }
+
+            // Update the client's balance
+            String updateClientQuery = "UPDATE clients "
+                    + "SET client_balance = client_balance + " + totalPaymentAmount
+                    + " WHERE client_username = '" + username + "'";
+            stmt.executeUpdate(updateClientQuery);
+            System.out.println("# Updated client balance for username: " + username);
+
+            // Update the reservation status
+            String updateResQuery = "UPDATE reservations "
+                    + "SET reservation_status = 'CANCELED', reservation_tickets = 0 "
+                    + "WHERE client_username = '" + username + "' AND event_id = '" + eventID + "'";
+            stmt.executeUpdate(updateResQuery);
+            System.out.println("# Updated reservation status for username: " + username);
+
+            // Update all tickets associated with the event ID
+            String updateTicketQuery = "DELETE FROM tickets "
+                    + "WHERE event_id = " + eventID;
+            stmt.executeUpdate(updateTicketQuery);
+            System.out.println("# Updated ticket availability for event ID: " + eventID);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
+
 
     public void createEventTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
@@ -189,6 +246,5 @@ public class EditEventTable {
             Logger.getLogger(EditEventTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
 }

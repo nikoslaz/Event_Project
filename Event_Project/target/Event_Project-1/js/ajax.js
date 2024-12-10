@@ -492,14 +492,19 @@ function selectRegularEventTickets(id) {
 // Cancel Event 
 
 function cancelEventForm(){
-    let eventID = document.getElementById('event_id');
+    const eventId = document.getElementById('event_id').value;
+    
+    if (!eventId) {
+        console.log("No event id");
+        return;
+    }
     
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'CancelEvent', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     
-    const ticketData = JSON.stringify({
-        eventID:eventID
+    const data = JSON.stringify({
+        eventID:eventId 
     });
     
     xhr.onreadystatechange = function () {
@@ -513,5 +518,5 @@ function cancelEventForm(){
         }
     };
     
-    xhr.send(eventData);
+    xhr.send(data);
 }

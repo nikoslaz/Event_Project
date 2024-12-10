@@ -131,13 +131,13 @@ public class EditTicketTable {
 
             // Query to select the first ticket with ticket_availability = 1
             if (type == 0) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' AND event_id = " + event_id + " LIMIT 1";;
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' AND event_id = " + event_id + " LIMIT 1";
                 rs = stmt.executeQuery(selectQuery);
             } else if (type == 1) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'VIP' AND event_id = " + event_id + " LIMIT 1";;
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'VIP' AND event_id = " + event_id + " LIMIT 1";
                 rs = stmt.executeQuery(selectQuery);
             } else if (type == 2) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'BALCONY' AND event_id = " + event_id + " LIMIT 1";;
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'BALCONY' AND event_id = " + event_id + " LIMIT 1";
                 rs = stmt.executeQuery(selectQuery);
             }
 

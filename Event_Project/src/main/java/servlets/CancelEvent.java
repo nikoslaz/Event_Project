@@ -33,7 +33,8 @@ public class CancelEvent extends HttpServlet {
 
         EditEventTable ev = new EditEventTable();
         try {
-            ev.updateEvent(eventID, "CANCELLED");
+            ev.updateEvent(eventID);
+            ev.returnPaymentAmount(eventID);
         } catch (Exception e) {
             System.out.println(e);
         }
