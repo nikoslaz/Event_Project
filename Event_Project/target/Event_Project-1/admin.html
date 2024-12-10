@@ -14,21 +14,10 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <h1>Admin Dashboard</h1>
+    <h1>Admin Dashboard</h1>
         <div class="button-container">
             <button onclick="createTables()">Create Tables</button>
             <button onclick="refreshTables()">Refresh Tables</button>
-            
-            <!--sto cancel tha prepei kapws na dinoume to id pou theloume na akurwthei sthn sunarthsh -->
-            <button onclick="cancelEvent()">Cancel Event</button>
-            
-            <!-- SQL Questions -->
-            <button onclick="showAvailable_ReservedSeats()">Show Available and Reserved seats for every event</button>
-            <button onclick="showProfits()">Show profits for each event</button>
-            <button onclick="showMostPopularEvent()">Show most popular event based on reservations</button>
-            <button onclick="showReservationsbyTimePeriod()">Show reservations in a particular time period</button>
-            <button onclick="showtotalProfitVIP()">Show total profit from VIP</button>
-            <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
         </div>
     </div>
     
@@ -65,6 +54,28 @@
         <button type="button" onclick="submitEventForm()">Submit Event</button>
         <button type="button" onclick="hideEventForm()">Cancel</button>
     </form>
+    </div>
+    
+    <div id="addEventForm">
+    <h2>Cancel Event</h2>
+    <form id="cancelForm">
+
+        <label for="event_id">Event ID:</label>
+        <input type="number" id="event_id" name="event_id" required>
+        <button type="button" onclick="cancelEventForm()">Submit</button>
+    </form>
+    </div>
+    
+    <div class="dashboard-container">
+    <h1>SQL Questions</h1>
+        <div class="button-container">
+            <button onclick="showAvailable_ReservedSeats()">Show Available and Reserved seats for every event</button>
+            <button onclick="showProfits()">Show profits for each event</button>
+            <button onclick="showMostPopularEvent()">Show most popular event based on reservations</button>
+            <button onclick="showReservationsbyTimePeriod()">Show reservations in a particular time period</button>
+            <button onclick="showtotalProfitVIP()">Show total profit from VIP</button>
+            <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
+        </div>
     </div>
 
 </body>
