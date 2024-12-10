@@ -82,7 +82,6 @@ public class UpdateTickets extends HttpServlet {
             }
         } else {
             System.out.println("NO TICKETS AVAILABLE");
-            // We can put other things here to show the user <3
         }
 
         // Respond with JSON

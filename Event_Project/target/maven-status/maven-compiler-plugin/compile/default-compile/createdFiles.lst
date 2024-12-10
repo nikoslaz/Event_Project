@@ -30,6 +30,7 @@ servlets\CancelEvent.class
 servlets\ProfitTickets.class
 mainClasses\Event$EventStatus.class
 servlets\LoadEvents.class
+servlets\ProfitTimePeriod.class
 servlets\ShowEventsProfit.class
 mainClasses\Client.class
 servlets\EventTimePeriod.class
