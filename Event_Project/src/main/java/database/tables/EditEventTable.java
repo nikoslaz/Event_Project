@@ -164,7 +164,7 @@ public class EditEventTable {
             System.out.println("# Updated reservation status for username: " + username);
 
             // Update all tickets associated with the event ID
-            String updateTicketQuery = "DELETE FROM tickets "
+                String updateTicketQuery = "DELETE FROM tickets "
                     + "WHERE event_id = " + eventID;
             stmt.executeUpdate(updateTicketQuery);
             System.out.println("# Updated ticket availability for event ID: " + eventID);

@@ -493,6 +493,7 @@ function selectRegularEventTickets(id) {
 
 function cancelEventForm(){
     const eventId = document.getElementById('event_id').value;
+
     
     if (!eventId) {
         console.log("No event id");
@@ -519,4 +520,11 @@ function cancelEventForm(){
     };
     
     xhr.send(data);
+}
+
+//=================================================================================================
+// Cancel Reservation
+
+function cancelRes(){
+    console.log('hi');
 }
