@@ -25,12 +25,11 @@ public class EventTimePeriod extends HttpServlet {
 
         // Validate the input
         if (startDate == null || endDate == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Start date and end date are required.");
             return;
         }
 
         // Construct SQL query
-        String selectQuery = "SELECT reservation_id, client_name, event_id, reservation_date, reservation_payment_amount "
+        String selectQuery = "SELECT reservation_id, client_username, event_id, reservation_date, reservation_payment_amount "
                 + "FROM reservations "
                 + "WHERE reservation_date BETWEEN '" + startDate + "' AND '" + endDate + "'";
 
@@ -40,7 +39,7 @@ public class EventTimePeriod extends HttpServlet {
             while (rs.next()) {
                 JSONObject reservationObject = new JSONObject(); // Create a JSON object for each reservation
                 reservationObject.put("reservation_id", rs.getInt("reservation_id"));
-                reservationObject.put("client_name", rs.getString("client_name"));
+                reservationObject.put("client_username", rs.getString("client_username"));
                 reservationObject.put("event_id", rs.getInt("event_id"));
                 reservationObject.put("reservation_date", rs.getString("reservation_date"));
                 reservationObject.put("reservation_payment_amount", rs.getDouble("reservation_payment_amount"));

@@ -86,25 +86,31 @@
     <div id="regular-profit-container"></div>
     <div id="balcony-profit-container"></div>
     
-    <h2>Show Reservations by Time Period</h2>
-    <form onsubmit="showReservationsbyTimePeriod();">
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" required>
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" required>
-        <button type="submit">Show Reservations</button>
-    </form>
+    <div id="revTime">
+        <h2>Show Reservations by Time Period</h2>
+        <form id="revTimeForm">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" required>
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" required>
+            <button type="button" onclick="showReservationsbyTimePeriod()">Show Reservations</button>
+        </form>
+    </div>
     
-    <h2>Show Profit by Time Period</h2>
-    <form onsubmit="showProfitbyTimePeriod();">
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" required>
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" required>
-        <button type="submit">Show Profit</button>
-    </form>
-
-    <div id="reservations-container"></div>
+    <div id="reservation-table-container"></div>
+    
+    <div id="profitTime">
+        <h2>Show Profit by Time Period</h2>
+        <form id="profitTimeForm">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date-profit" required>
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date-profit" required>
+            <button type="button" onclick="showProfitbyTimePeriod()">Show Profit</button>
+        </form>
+    </div>
+    
+    <div id="profit-container"></div>
     
 </body>
 </html>

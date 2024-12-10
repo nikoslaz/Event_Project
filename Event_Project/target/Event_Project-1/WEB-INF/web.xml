@@ -76,6 +76,10 @@
         <servlet-name>EventTimePeriod</servlet-name>
         <servlet-class>servlets.EventTimePeriod</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfitTimePeriod</servlet-name>
+        <servlet-class>servlets.ProfitTimePeriod</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>EventTimePeriod</servlet-name>
         <url-pattern>/EventTimePeriod</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitTimePeriod</servlet-name>
+        <url-pattern>/ProfitTimePeriod</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

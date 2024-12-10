@@ -833,7 +833,7 @@ function showReservationsbyTimePeriod() {
                 console.log('Reservations:', response);
 
                 // Display reservations on the webpage
-                displayReservations(response);
+                displayReservationTable(response);
             } else {
                 console.error('Error fetching reservations:', xhr.responseText);
             }
@@ -842,4 +842,100 @@ function showReservationsbyTimePeriod() {
 
     xhr.send();
 }
+
+function displayReservationTable(data) {
+    const container = document.getElementById('reservation-table-container'); // Ensure this container exists in your HTML
+    container.innerHTML = ''; // Clear previous content
+
+    if (!data || data.length === 0) {
+        container.innerHTML = '<p>No reservations found.</p>';
+        return;
+    }
+
+    let tableContent = `
+        <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 8px; border: 1px solid #ddd;">Reservation ID</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Reservation Date</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Reservation Payment Amount</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Client Username</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Event ID</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    data.forEach(reservation => {
+        tableContent += `
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">${reservation.reservation_id || 'N/A'}</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">${reservation.reservation_date || 'N/A'}</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">$${reservation.reservation_payment_amount ? reservation.reservation_payment_amount.toFixed(2) : 'N/A'}</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">${reservation.client_username || 'N/A'}</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">${reservation.event_id || 'N/A'}</td>
+            </tr>
+        `;
+    });
+    tableContent += `
+            </tbody>
+        </table>
+    `;
+
+    container.innerHTML = tableContent;
+}
+
+//=================================================================================================
+// Show profit in a time period 
+
+function showProfitbyTimePeriod() {
+    // Get the start and end dates from the input fields
+    const startDate = document.getElementById('start-date-profit').value;
+    const endDate = document.getElementById('end-date-profit').value;
+
+    if (!startDate || !endDate) {
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `ProfitTimePeriod?start=${startDate}&end=${endDate}`, true); // Adjust URL to your servlet
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Reservations:', response);
+
+                // Display reservations on the webpage
+                displayProfitTable(response);
+            } else {
+                console.error('Error fetching reservations:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function displayProfitTable(data) {
+    const container = document.getElementById('profit-container'); // Ensure this container exists in your HTML
+    container.innerHTML = '';
+
+    if (!data || data.total_payment_amount === undefined) {
+        container.innerHTML = '<p>Error fetching total profit. Please try again.</p>';
+        return;
+    }
+
+    const profitHeading = document.createElement('h2');
+    profitHeading.textContent = 'Total Profit for Selected Time Period';
+
+    const profitAmount = document.createElement('p');
+    profitAmount.textContent = `$${data.total_payment_amount.toFixed(2)}`; // Format as currency
+    profitAmount.style.fontSize = '1.5em';
+    profitAmount.style.color = '#4CAF50'; // Green color for emphasis
+
+    container.appendChild(profitHeading);
+    container.appendChild(profitAmount);
+}
+
 
