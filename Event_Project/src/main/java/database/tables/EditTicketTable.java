@@ -119,7 +119,7 @@ public class EditTicketTable {
         return -1;
     }
 
-    public void updateTicketStatus(int type) throws SQLException, ClassNotFoundException {
+    public void updateTicketStatus(int type, int res_id) throws SQLException, ClassNotFoundException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -146,7 +146,7 @@ public class EditTicketTable {
                 int ticketId = rs.getInt("ticket_id");
 
                 // Update ticket_availability to 0 for the selected ticket
-                String updateQuery = "UPDATE Tickets SET ticket_availability = 0 WHERE ticket_id = " + ticketId;
+                String updateQuery = "UPDATE Tickets " + "SET ticket_availability = 0, reservation_id = " + res_id + " WHERE ticket_id = " + ticketId;
                 int rowsAffected = stmt.executeUpdate(updateQuery);
 
                 if (rowsAffected > 0) {

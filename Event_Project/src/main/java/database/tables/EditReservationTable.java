@@ -114,7 +114,6 @@ public class EditReservationTable {
      *
      * @throws ClassNotFoundException
      */
-    // PREPEI NA ALLAXTEI DEN KSEROYUME POS NA KNAOYE TA FORGEINS <3
     public int createNewReservation(Reservation res) throws ClassNotFoundException {
         int reservationID = -1;
         try {
@@ -135,12 +134,12 @@ public class EditReservationTable {
             //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            // Retrieve the generated reservation_id
+            // Fetch the auto-incremented key from the result set
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 reservationID = rs.getInt(1); // Get the generated reservation_id
                 System.out.println("# Generated Reservation ID: " + reservationID);
-            }  
+            }
             
             System.out.println("# The reservation was successfully added in the database.");
 
@@ -153,10 +152,6 @@ public class EditReservationTable {
         }
         
         return reservationID;
-    }
-
-    public void getUsername() {
-
     }
 
     public static void main(String[] args) {

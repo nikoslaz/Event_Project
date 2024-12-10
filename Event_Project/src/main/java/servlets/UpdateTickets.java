@@ -45,19 +45,6 @@ public class UpdateTickets extends HttpServlet {
         int reservationID = -1;
         
         if (allTickets != 0) {
-            try {
-                for (int i = 0; i < regularTickets; i++) {
-                    edit_tick.updateTicketStatus(0);
-                }
-                for (int i = 0; i < vipTickets; i++) {
-                    edit_tick.updateTicketStatus(1);
-                }
-                for (int i = 0; i < balconyTickets; i++) {
-                    edit_tick.updateTicketStatus(2);
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
 
             Reservation res = new Reservation();
             EditReservationTable edit_res = new EditReservationTable();
@@ -67,8 +54,6 @@ public class UpdateTickets extends HttpServlet {
 
             res.setReservationTickets(allTickets);
             res.setReservationDate(dateString);
-            // Maybe do a function to return each price base on Event_ID from a QUERY !!!
-            // This is an example
             res.setReservationPaymentAmount(regularTickets * 10 + vipTickets * 50 + balconyTickets * 20);
             res.setClientUsername(clientUsername);
             res.setEventID(eventID);
@@ -77,6 +62,21 @@ public class UpdateTickets extends HttpServlet {
 
         try {
             reservationID = edit_res.createNewReservation(res);
+
+            try {
+                for (int i = 0; i < regularTickets; i++) {
+                    edit_tick.updateTicketStatus(0, reservationID);
+                }
+                for (int i = 0; i < vipTickets; i++) {
+                    edit_tick.updateTicketStatus(1, reservationID);
+                }
+                for (int i = 0; i < balconyTickets; i++) {
+                    edit_tick.updateTicketStatus(2, reservationID);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         } catch (Exception e) {
             System.out.println(e);
             }

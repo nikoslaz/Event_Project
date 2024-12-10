@@ -464,19 +464,19 @@ function submitTickets(){
                         console.log(`Reservation ID: ${reservationID}`);
 
                         // Use the reservation ID as needed
-                        alert(`Reservation successfully created! Your Reservation ID is: ${reservationID}`);
+                        //alert(`Reservation successfully created! Your Reservation ID is: ${reservationID}`);
                         sessionStorage.setItem('reservationID', reservationID); // Store the reservation ID if needed later
                     } else {
                         console.error(`Error: ${response.message}`);
-                        alert(`Failed to create reservation: ${response.message}`);
+                        //alert(`Failed to create reservation: ${response.message}`);
                     }
                 } catch (e) {
                     console.error('Error parsing response:', e);
-                    alert('An error occurred while processing the response.');
+                    //alert('An error occurred while processing the response.');
                 }
             } else {
                 console.error(`Error: ${xhr.responseText}`);
-                alert('Failed to create reservation. Please try again.');
+                //alert('Failed to create reservation. Please try again.');
             }
         }
     };
