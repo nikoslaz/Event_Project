@@ -65,13 +65,13 @@ public class UpdateTickets extends HttpServlet {
 
             try {
                 for (int i = 0; i < regularTickets; i++) {
-                    edit_tick.updateTicketStatus(0, reservationID);
+                    edit_tick.updateTicketStatus(0, reservationID, eventID);
                 }
                 for (int i = 0; i < vipTickets; i++) {
-                    edit_tick.updateTicketStatus(1, reservationID);
+                    edit_tick.updateTicketStatus(1, reservationID, eventID);
                 }
                 for (int i = 0; i < balconyTickets; i++) {
-                    edit_tick.updateTicketStatus(2, reservationID);
+                    edit_tick.updateTicketStatus(2, reservationID, eventID);
                 }
             } catch (Exception e) {
                 System.out.println(e);

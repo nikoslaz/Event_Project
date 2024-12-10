@@ -119,7 +119,7 @@ public class EditTicketTable {
         return -1;
     }
 
-    public void updateTicketStatus(int type, int res_id) throws SQLException, ClassNotFoundException {
+    public void updateTicketStatus(int type, int res_id, int event_id) throws SQLException, ClassNotFoundException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -131,13 +131,13 @@ public class EditTicketTable {
 
             // Query to select the first ticket with ticket_availability = 1
             if (type == 0) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' LIMIT 1";
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' AND event_id = " + event_id + " LIMIT 1";;
                 rs = stmt.executeQuery(selectQuery);
             } else if (type == 1) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'VIP' LIMIT 1";
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'VIP' AND event_id = " + event_id + " LIMIT 1";;
                 rs = stmt.executeQuery(selectQuery);
             } else if (type == 2) {
-                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'BALCONY' LIMIT 1";
+                String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'BALCONY' AND event_id = " + event_id + " LIMIT 1";;
                 rs = stmt.executeQuery(selectQuery);
             }
 
@@ -171,7 +171,7 @@ public class EditTicketTable {
         }
     }
 
-    public void cancelTicketStatus(int type) throws SQLException, ClassNotFoundException {
+    public void cancelTicketStatus(int type, int event_id) throws SQLException, ClassNotFoundException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -183,13 +183,13 @@ public class EditTicketTable {
 
                 // Query to select the first ticket with ticket_availability = 0
                 if (type == 0) {
-                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'REGULAR' LIMIT 1";
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'REGULAR' AND event_id = " + event_id + " LIMIT 1";
                     rs = stmt.executeQuery(selectQuery);
                 } else if (type == 1) {
-                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'VIP' LIMIT 1";
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'VIP' AND event_id = " + event_id + " LIMIT 1";
                     rs = stmt.executeQuery(selectQuery);
                 } else if (type == 2) {
-                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'BALCONY' LIMIT 1";
+                    String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 0 AND ticket_type = 'BALCONY' AND event_id = " + event_id + " LIMIT 1";
                     rs = stmt.executeQuery(selectQuery);
                 }
 
@@ -222,9 +222,6 @@ public class EditTicketTable {
             }
         }
     }
-
-
-
 
     public void createTicketTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
