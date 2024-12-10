@@ -494,7 +494,6 @@ function selectRegularEventTickets(id) {
 function cancelEventForm(){
     const eventId = document.getElementById('event_id').value;
 
-    
     if (!eventId) {
         console.log("No event id");
         return;
@@ -528,3 +527,319 @@ function cancelEventForm(){
 function cancelRes(){
     console.log('hi');
 }
+
+//=================================================================================================
+// Cancel Reservation
+
+function showProfits() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ShowEventsProfit', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
+
+                displayProfits(response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function displayProfits(profits) {
+    // Create a container element
+    const container = document.getElementById('profits-container');
+    container.innerHTML = ''; // Clear previous content
+
+    // Create a table for the profits
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    // Add table header
+    const header = table.createTHead();
+    const headerRow = header.insertRow(0);
+    const headerCell1 = headerRow.insertCell(0);
+    const headerCell2 = headerRow.insertCell(1);
+
+    headerCell1.textContent = 'Event ID';
+    headerCell2.textContent = 'Total Payment Amount';
+
+    headerCell1.style.border = '1px solid #ddd';
+    headerCell1.style.padding = '8px';
+    headerCell2.style.border = '1px solid #ddd';
+    headerCell2.style.padding = '8px';
+
+    // Add table body
+    const tbody = table.createTBody();
+
+    // Populate table rows with profits
+    profits.forEach(profit => {
+        const row = tbody.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+
+        cell1.textContent = profit.event_id;
+        cell2.textContent = profit.total_payment_amount;
+
+        cell1.style.border = '1px solid #ddd';
+        cell1.style.padding = '8px';
+        cell2.style.border = '1px solid #ddd';
+        cell2.style.padding = '8px';
+    });
+
+    // Append table to the container
+    container.appendChild(table);
+}
+
+//=================================================================================================
+// Most popular event
+
+function showMostPopularEvent() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'PopularEvent', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
+
+                displayMostPopularEvent(response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+// Function to display the most popular event
+function displayMostPopularEvent(eventData) {
+    const container = document.getElementById('most-popular-event-container');
+    container.innerHTML = ''; // Clear previous content
+
+    if (eventData.event_id) {
+        // If a popular event is found
+        const heading = document.createElement('h2');
+        heading.textContent = 'Most Popular Event';
+
+        const eventDetails = document.createElement('p');
+        eventDetails.textContent = `Event ID: ${eventData.event_id}, Reservations: ${eventData.reservation_count}`;
+
+        container.appendChild(heading);
+        container.appendChild(eventDetails);
+    } else if (eventData.message) {
+        // If no active reservations found
+        const noEventMessage = document.createElement('p');
+        noEventMessage.textContent = eventData.message;
+        container.appendChild(noEventMessage);
+    } else {
+        // Handle unexpected response
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = 'An error occurred while fetching the most popular event.';
+        container.appendChild(errorMessage);
+    }
+}
+
+//=================================================================================================
+// Show VIP profit
+
+function showtotalProfitVIP() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ProfitVIP', true); // URL to the servlet
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Total VIP Profit:', response.total_payment_amount);
+
+                // Display the total profit in the webpage
+                displayVIPProfit(response.total_payment_amount);
+            } else {
+                console.error('Error fetching VIP profit:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+// Function to display the total profit on the webpage
+function displayVIPProfit(totalProfit) {
+    const container = document.getElementById('vip-profit-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Total Profit from VIP Tickets';
+
+    const profitText = document.createElement('p');
+    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
+
+    container.appendChild(heading);
+    container.appendChild(profitText);
+}
+
+//=================================================================================================
+// Show General profit
+
+function showtotalProfitRegular() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ProfitRegular', true); // URL to the servlet for Regular tickets
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Total Regular Profit:', response.total_payment_amount);
+
+                // Display the total profit in the webpage
+                displayRegularProfit(response.total_payment_amount);
+            } else {
+                console.error('Error fetching Regular profit:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+// Function to display the total profit from Regular tickets on the webpage
+function displayRegularProfit(totalProfit) {
+    const container = document.getElementById('regular-profit-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Total Profit from Regular Tickets';
+
+    const profitText = document.createElement('p');
+    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
+
+    container.appendChild(heading);
+    container.appendChild(profitText);
+}
+
+//=================================================================================================
+// Show Tickets profit
+
+function showtotalProfitTickets() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ProfitTickets', true); // URL to the servlet for ticket profits
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Total Ticket Profits:', response);
+
+                // Display the profits in the webpage
+                displayTicketProfits(response);
+            } else {
+                console.error('Error fetching ticket profits:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function displayTicketProfits(ticketProfits) {
+    const container = document.getElementById('ticket-profit-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Total Ticket Profits';
+
+    container.appendChild(heading);
+
+    const totalPayment = document.createElement('p');
+    totalPayment.textContent = `Total Profit: $${ticketProfits.total_payment_amount.toFixed(2)}`;
+
+    container.appendChild(totalPayment);
+}
+
+//=================================================================================================
+// Show Tickets profit
+
+function showtotalProfitBalcony() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ProfitBalcony', true); // URL to the servlet for Balcony tickets
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Total Balcony Profit:', response.total_payment_amount);
+
+                // Display the total profit in the webpage
+                displayBalconyProfit(response.total_payment_amount);
+            } else {
+                console.error('Error fetching Balcony profit:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+// Function to display the total profit from Balcony tickets on the webpage
+function displayBalconyProfit(totalProfit) {
+    const container = document.getElementById('balcony-profit-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Total Profit from Balcony Tickets';
+
+    const profitText = document.createElement('p');
+    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
+
+    container.appendChild(heading);
+    container.appendChild(profitText);
+}
+
+//=================================================================================================
+// Show reservations in a time period 
+
+function showReservationsbyTimePeriod() {
+    // Get the start and end dates from the input fields
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    if (!startDate || !endDate) {
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `EventTimePeriod?start=${startDate}&end=${endDate}`, true); // Adjust URL to your servlet
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Reservations:', response);
+
+                // Display reservations on the webpage
+                displayReservations(response);
+            } else {
+                console.error('Error fetching reservations:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+

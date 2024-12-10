@@ -69,14 +69,42 @@
     <div class="dashboard-container">
     <h1>SQL Questions</h1>
         <div class="button-container">
-            <button onclick="showAvailable_ReservedSeats()">Show Available and Reserved seats for every event</button>
             <button onclick="showProfits()">Show profits for each event</button>
             <button onclick="showMostPopularEvent()">Show most popular event based on reservations</button>
             <button onclick="showReservationsbyTimePeriod()">Show reservations in a particular time period</button>
+            <button onclick="showtotalProfitTickets()">Show total profit for all Tickets</button>
             <button onclick="showtotalProfitVIP()">Show total profit from VIP</button>
             <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
+            <button onclick="showtotalProfitBalcony()">Show total profit from balcony tickets</button>
         </div>
     </div>
+    
+    <div id="profits-container"></div>
+    <div id="most-popular-event-container"></div>
+    <div id="ticket-profit-container"></div>
+    <div id="vip-profit-container"></div>
+    <div id="regular-profit-container"></div>
+    <div id="balcony-profit-container"></div>
+    
+    <h2>Show Reservations by Time Period</h2>
+    <form onsubmit="showReservationsbyTimePeriod();">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" required>
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" required>
+        <button type="submit">Show Reservations</button>
+    </form>
+    
+    <h2>Show Profit by Time Period</h2>
+    <form onsubmit="showProfitbyTimePeriod();">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" required>
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" required>
+        <button type="submit">Show Profit</button>
+    </form>
 
+    <div id="reservations-container"></div>
+    
 </body>
 </html>

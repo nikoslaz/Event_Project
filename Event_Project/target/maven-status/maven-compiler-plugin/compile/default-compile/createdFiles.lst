@@ -1,6 +1,8 @@
+servlets\ProfitRegular.class
 mainClasses\Reservation.class
 mainClasses\Event.class
 servlets\LoadReservations.class
+servlets\ProfitBalcony.class
 database\DB_Connection.class
 mainClasses\JSON_Converter.class
 servlets\LoadClientEvents.class
@@ -9,12 +11,14 @@ servlets\AddEvent.class
 servlets\RegistrationClient.class
 mainClasses\Event$EventType.class
 mainClasses\Ticket.class
+servlets\PopularEvent.class
 database\tables\EditTicketTable$Regulars.class
 servlets\LoadClients.class
 servlets\UpdateTickets.class
 mainClasses\Ticket$Type.class
 servlets\CreateTables.class
 mainClasses\Reservation$ResStatus.class
+servlets\ProfitVIP.class
 database\tables\EditTicketTable.class
 servlets\LoadTickets.class
 servlets\Login.class
@@ -22,6 +26,9 @@ database\tables\EditEventTable.class
 database\tables\EditReservationTable.class
 servlets\CountEventTickets.class
 servlets\CancelEvent.class
+servlets\ProfitTickets.class
 mainClasses\Event$EventStatus.class
 servlets\LoadEvents.class
+servlets\ShowEventsProfit.class
 mainClasses\Client.class
+servlets\EventTimePeriod.class

@@ -48,6 +48,34 @@
         <servlet-name>CancelEvent</servlet-name>
         <servlet-class>servlets.CancelEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowEventsProfit</servlet-name>
+        <servlet-class>servlets.ShowEventsProfit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PopularEvent</servlet-name>
+        <servlet-class>servlets.PopularEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfitVIP</servlet-name>
+        <servlet-class>servlets.ProfitVIP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfitRegular</servlet-name>
+        <servlet-class>servlets.ProfitRegular</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfitTickets</servlet-name>
+        <servlet-class>servlets.ProfitTickets</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfitBalcony</servlet-name>
+        <servlet-class>servlets.ProfitBalcony</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventTimePeriod</servlet-name>
+        <servlet-class>servlets.EventTimePeriod</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -95,6 +123,34 @@
     <servlet-mapping>
         <servlet-name>CancelEvent</servlet-name>
         <url-pattern>/CancelEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowEventsProfit</servlet-name>
+        <url-pattern>/ShowEventsProfit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PopularEvent</servlet-name>
+        <url-pattern>/PopularEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitVIP</servlet-name>
+        <url-pattern>/ProfitVIP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitRegular</servlet-name>
+        <url-pattern>/ProfitRegular</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitTickets</servlet-name>
+        <url-pattern>/ProfitTickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitBalcony</servlet-name>
+        <url-pattern>/ProfitBalcony</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventTimePeriod</servlet-name>
+        <url-pattern>/EventTimePeriod</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
