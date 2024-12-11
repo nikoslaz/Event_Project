@@ -8,6 +8,7 @@ mainClasses\JSON_Converter.class
 servlets\LoadClientEvents.class
 database\tables\EditClientTable.class
 servlets\AddEvent.class
+servlets\ExecuteSQL.class
 servlets\RegistrationClient.class
 mainClasses\Event$EventType.class
 mainClasses\Ticket.class

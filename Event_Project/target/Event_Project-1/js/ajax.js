@@ -948,4 +948,75 @@ function displayClientReservations(data) {
     reservationsContainer.innerHTML = tableContent;
 }
 
+//=================================================================================================
+// Input for SQL questions
+
+function executeQuery() {
+    const query = document.getElementById('sqlQuery').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'ExecuteSQL', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.error) {
+                        displayError(response.error);
+                    } else {
+                        displayResults(response.data);
+                    }
+                } catch (e) {
+                    displayError(`Error parsing response: ${e.message}`);
+                }
+            } else {
+                displayError(`Error: ${xhr.status} ${xhr.statusText}`);
+            }
+        }
+    };
+
+    // Define what happens in case of error
+    xhr.onerror = function () {
+        displayError('An error occurred during the request.');
+    };
+
+    // Send the request
+    xhr.send(JSON.stringify({ query }));
+}
+
+function displayResults(data) {
+    const resultDiv = document.getElementById('results');
+    const table = document.createElement('table');
+    table.border = "1";
+
+    // Add table headers
+    const keys = Object.keys(data[0]);
+    const headerRow = table.insertRow();
+    keys.forEach(key => {
+        const th = document.createElement('th');
+        th.innerText = key;
+        headerRow.appendChild(th);
+    });
+
+    // Add table rows
+    data.forEach(row => {
+        const dataRow = table.insertRow();
+        keys.forEach(key => {
+            const cell = dataRow.insertCell();
+            cell.innerText = row[key];
+        });
+    });
+
+    // Display the table
+    resultDiv.innerHTML = '';
+    resultDiv.appendChild(table);
+}
+
+function displayError(errorMessage) {
+    const resultDiv = document.getElementById('results');
+    resultDiv.innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+}
+
 // end of ajax.js

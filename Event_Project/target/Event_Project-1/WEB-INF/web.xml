@@ -88,6 +88,10 @@
         <servlet-name>ProfitTimePeriod</servlet-name>
         <servlet-class>servlets.ProfitTimePeriod</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExecuteSQL</servlet-name>
+        <servlet-class>servlets.ExecuteSQL</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>ProfitTimePeriod</servlet-name>
         <url-pattern>/ProfitTimePeriod</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExecuteSQL</servlet-name>
+        <url-pattern>/ExecuteSQL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
