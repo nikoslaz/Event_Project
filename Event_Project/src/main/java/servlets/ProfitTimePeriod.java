@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.DB_Connection;
+import org.json.JSONArray;
 
 /**
  *
@@ -20,37 +21,42 @@ public class ProfitTimePeriod extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        JSONArray reservationsArray = new JSONArray(); // JSON array to store reservations
+
         // Get the time period from the request parameters
         String startDate = request.getParameter("start");
         String endDate = request.getParameter("end");
 
         // Validate the input
         if (startDate == null || endDate == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Start date and end date are required.");
             return;
         }
 
         // Construct SQL query
-        String selectQuery = "SELECT SUM(reservation_payment_amount) AS total_payment_amount "
+        String highestProfitEventQuery = "SELECT event_id, SUM(reservation_payment_amount) AS total_profit "
                 + "FROM reservations "
                 + "WHERE reservation_date BETWEEN '" + startDate + "' AND '" + endDate + "' "
-                + "AND reservation_status = 'ACTIVE'";
+                + "AND reservation_status = 'ACTIVE' "
+                + "GROUP BY event_id "
+                + "ORDER BY total_profit DESC "
+                + "LIMIT 1";
 
-        try (Connection conn = DB_Connection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
+        try (Connection conn = DB_Connection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(highestProfitEventQuery)) {
 
-            JSONObject resultObject = new JSONObject();
+            // Loop through the results and add them to the JSON array
+            while (rs.next()) {
+                JSONObject reservationObject = new JSONObject(); // Create a JSON object for each reservation
+                reservationObject.put("event_id", rs.getInt("event_id"));
+                reservationObject.put("total_profit", rs.getString("total_profit"));
 
-            if (rs.next()) {
-                int totalPaymentAmount = rs.getInt("total_payment_amount");
-                resultObject.put("total_payment_amount", totalPaymentAmount);
-            } else {
-                resultObject.put("total_payment_amount", 0.0); // Default to 0 if no data
+                reservationsArray.put(reservationObject);
             }
 
+            // Set the response type to JSON and write the JSON array to the response
             response.setContentType("application/json");
-            response.getWriter().write(resultObject.toString());
-
+            response.getWriter().write(reservationsArray.toString());
         } catch (SQLException | ClassNotFoundException ex) {
+            // Handle any database or connection errors
             System.err.println("Database error: " + ex.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred");
         }

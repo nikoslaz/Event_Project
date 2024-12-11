@@ -704,8 +704,7 @@ function displayVIPProfit(totalProfit) {
 
     container.appendChild(heading);
     container.appendChild(profitText);
-}
-
+}   
 //=================================================================================================
 // Show General profit
 
@@ -932,24 +931,38 @@ function showProfitbyTimePeriod() {
 }
 
 function displayProfitTable(data) {
-    const container = document.getElementById('profit-container'); // Ensure this container exists in your HTML
-    container.innerHTML = '';
+    const container = document.getElementById('profit-time-container'); // Ensure this container exists in your HTML
+    container.innerHTML = ''; // Clear previous content
 
-    if (!data || data.total_payment_amount === undefined) {
-        container.innerHTML = '<p>Error fetching total profit. Please try again.</p>';
+    if (!data || data.length === 0) {
+        container.innerHTML = '<p>No reservations found.</p>';
         return;
     }
 
-    const profitHeading = document.createElement('h2');
-    profitHeading.textContent = 'Total Profit for Selected Time Period';
+    let tableContent = `
+        <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 8px; border: 1px solid #ddd;">Event ID</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Profit Date</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    data.forEach(event => {
+        tableContent += `
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">${event.event_id || 'N/A'}</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">${event.total_profit || 'N/A'}</td>
+            </tr>
+        `;
+    });
+    tableContent += `
+            </tbody>
+        </table>
+    `;
 
-    const profitAmount = document.createElement('p');
-    profitAmount.textContent = `$${data.total_payment_amount.toFixed(2)}`; // Format as currency
-    profitAmount.style.fontSize = '1.5em';
-    profitAmount.style.color = '#4CAF50'; // Green color for emphasis
-
-    container.appendChild(profitHeading);
-    container.appendChild(profitAmount);
+    container.innerHTML = tableContent;
 }
 
 //=================================================================================================

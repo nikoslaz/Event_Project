@@ -84,6 +84,10 @@
         <servlet-name>LoadClientReservations</servlet-name>
         <servlet-class>servlets.LoadClientReservations</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfitTimePeriod</servlet-name>
+        <servlet-class>servlets.ProfitTimePeriod</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>LoadClientReservations</servlet-name>
         <url-pattern>/LoadClientReservations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfitTimePeriod</servlet-name>
+        <url-pattern>/ProfitTimePeriod</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
