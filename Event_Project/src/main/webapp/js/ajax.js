@@ -1,3 +1,7 @@
+// ajax.js
+// By csd5087 - csd4844 - csd4922
+
+// Globals
 let globalUsername;
 let globalID;
 
@@ -40,7 +44,6 @@ function RegisterPOST() {
 function loginPOST() {
     let username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
-    
     if (username === 'admin' && password === 'admin123') {
         window.location.href = 'admin.html';
         return;
@@ -68,6 +71,9 @@ function loginPOST() {
     console.log("Sending request with data:", data);
     xhr.send(data);
 }
+
+//=================================================================================================
+// Create Event
 
 function submitEventForm() {
     let myForm = document.getElementById('eventForm');
@@ -103,7 +109,35 @@ function submitEventForm() {
 }
 
 //=================================================================================================
-// Create Tables for Admin
+// Cancel Event 
+
+function cancelEventForm(){
+    const eventId = document.getElementById('event_id').value;
+    if (!eventId) {
+        console.log("No event id");
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'CancelEvent', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    const data = JSON.stringify({
+        eventID:eventId 
+    });
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Response from servlet:', response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+    xhr.send(data);
+}
+
+//=================================================================================================
+// Create Database Tables
 
 function createTables() {
     const xhr = new XMLHttpRequest();
@@ -112,6 +146,9 @@ function createTables() {
     console.log("Creating Tables...");
     xhr.send();
 }
+
+//=================================================================================================
+// Load Tables for Admin
 
 function refreshTables() {
     loadClients();
@@ -262,20 +299,20 @@ function createClientTableJSON(data) {
 }
 
 function createEventTableJSON(data) {
-        let tableContent = `
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Event ID</th>
-                    <th>Event Name</th>
-                    <th>Event Date</th>
-                    <th>Event Time</th>
-                    <th>Event Type</th>
-                    <th>Event Capacity</th>
-                    <th>Event Status</th>
-                </tr>
-            </thead>
-            <tbody>
+    let tableContent = `
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Event Date</th>
+                <th>Event Time</th>
+                <th>Event Type</th>
+                <th>Event Capacity</th>
+                <th>Event Status</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
     data.forEach(event => {
         tableContent += `
@@ -291,26 +328,26 @@ function createEventTableJSON(data) {
         `;
     });
     tableContent += `
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     `;
     return tableContent;
 }
 
 function createTicketTableJSON(data) {
-        let tableContent = `
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Ticket ID</th>
-                    <th>Ticket Type</th>
-                    <th>Ticket Price</th>
-                    <th>Ticket Availabilty</th>
-                    <th>Event ID</th>
-                    <th>Reservation ID</th>
-                </tr>
-            </thead>
-            <tbody>
+    let tableContent = `
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Ticket Type</th>
+                <th>Ticket Price</th>
+                <th>Ticket Availabilty</th>
+                <th>Event ID</th>
+                <th>Reservation ID</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
     data.forEach(ticket => {
         tableContent += `
@@ -325,27 +362,27 @@ function createTicketTableJSON(data) {
         `;
     });
     tableContent += `
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     `;
     return tableContent;
 }
 
 function createReservationTableJSON(data) {
-        let tableContent = `
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Reservation ID</th>
-                    <th>Reservation Tickets</th>
-                    <th>Reservation Date</th>
-                    <th>Reservation Payment Amount</th>
-                    <th>Reservation Status</th>
-                    <th>Client Username</th>
-                    <th>Event ID</th>
-                </tr>
-            </thead>
-            <tbody>
+    let tableContent = `
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Reservation Tickets</th>
+                <th>Reservation Date</th>
+                <th>Reservation Payment Amount</th>
+                <th>Reservation Status</th>
+                <th>Client Username</th>
+                <th>Event ID</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
     data.forEach(reservations => {
         tableContent += `
@@ -361,8 +398,8 @@ function createReservationTableJSON(data) {
         `;
     });
     tableContent += `
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     `;
     return tableContent;
 }
@@ -396,18 +433,18 @@ function refreshClientEvents() {
 
 function loadClientEventTableJSON(data) {
     let tableContent = `
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Event ID</th>
-                    <th>Event Name</th>
-                    <th>Event Date</th>
-                    <th>Event Time</th>
-                    <th>Event Type</th>
-                </tr>
-            </thead>
-            <tbody>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Event Date</th>
+                <th>Event Time</th>
+                <th>Event Type</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
     data.forEach(event => {
         tableContent += `
@@ -422,45 +459,10 @@ function loadClientEventTableJSON(data) {
         `;
     });
     tableContent +=     `
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     `;
     return tableContent;
-}
-
-function submitTickets(){
-    const regular = parseInt(document.getElementById('regularTickets').value) || 0;
-    const vip = parseInt(document.getElementById('vipTickets').value) || 0;
-    const balcony = parseInt(document.getElementById('balconyTickets').value) || 0;
-    const globalUsername = sessionStorage.getItem('globalUsername'); 
-    const globalEventID = sessionStorage.getItem('globalID');
-    
-    console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}, Username: ${globalUsername}, Event ID: ${globalEventID} `);
-    
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'UpdateTickets', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    
-    const ticketData = JSON.stringify({
-        regularTickets: regular,
-        vipTickets: vip,
-        balconyTickets: balcony,
-        clientUsername: globalUsername,
-        eventID:globalEventID
-    });
-    
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                console.log('Response from servlet:', response);
-            } else {
-                console.error('Error:', xhr.responseText);
-            }
-        }
-    };
-    
-    xhr.send(ticketData);
 }
 
 function selectRegularEventTickets(id) {
@@ -487,24 +489,25 @@ function selectRegularEventTickets(id) {
 }
 
 //=================================================================================================
-// Cancel Event 
+// Create Reservation
 
-function cancelEventForm(){
-    const eventId = document.getElementById('event_id').value;
-
-    if (!eventId) {
-        console.log("No event id");
-        return;
-    }
-    
+function submitTickets(){
+    const regular = parseInt(document.getElementById('regularTickets').value) || 0;
+    const vip = parseInt(document.getElementById('vipTickets').value) || 0;
+    const balcony = parseInt(document.getElementById('balconyTickets').value) || 0;
+    const globalUsername = sessionStorage.getItem('globalUsername'); 
+    const globalEventID = sessionStorage.getItem('globalID');
+    console.log(`Regular Tickets: ${regular}, VIP Tickets: ${vip}, Balcony Tickets: ${balcony}, Username: ${globalUsername}, Event ID: ${globalEventID} `);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'CancelEvent', true);
+    xhr.open('POST', 'UpdateTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    
-    const data = JSON.stringify({
-        eventID:eventId 
+    const ticketData = JSON.stringify({
+        regularTickets: regular,
+        vipTickets: vip,
+        balconyTickets: balcony,
+        clientUsername: globalUsername,
+        eventID:globalEventID
     });
-    
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -515,8 +518,7 @@ function cancelEventForm(){
             }
         }
     };
-    
-    xhr.send(data);
+    xhr.send(ticketData);
 }
 
 //=================================================================================================
@@ -544,73 +546,59 @@ function cancelReserv(){
     xhr.send(data);
 }
 
+// 0===============0
+// | SQL QUESTIONS |
+// 0===============0
+
 //=================================================================================================
-// Cancel Reservation
+// Profits per Event
 
 function showProfits() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'ShowEventsProfit', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Response from servlet:', response);
-
                 displayProfits(response);
             } else {
                 console.error('Error:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayProfits(profits) {
-    // Create a container element
     const container = document.getElementById('profits-container');
-    container.innerHTML = ''; // Clear previous content
-
-    // Create a table for the profits
+    container.innerHTML = '';
     const table = document.createElement('table');
     table.style.width = '100%';
     table.style.borderCollapse = 'collapse';
-
-    // Add table header
     const header = table.createTHead();
     const headerRow = header.insertRow(0);
     const headerCell1 = headerRow.insertCell(0);
     const headerCell2 = headerRow.insertCell(1);
-
     headerCell1.textContent = 'Event ID';
     headerCell2.textContent = 'Total Payment Amount';
-
     headerCell1.style.border = '1px solid #ddd';
     headerCell1.style.padding = '8px';
     headerCell2.style.border = '1px solid #ddd';
     headerCell2.style.padding = '8px';
-
-    // Add table body
     const tbody = table.createTBody();
-
-    // Populate table rows with profits
     profits.forEach(profit => {
         const row = tbody.insertRow();
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
-
         cell1.textContent = profit.event_id;
         cell2.textContent = profit.total_payment_amount;
-
         cell1.style.border = '1px solid #ddd';
         cell1.style.padding = '8px';
         cell2.style.border = '1px solid #ddd';
         cell2.style.padding = '8px';
     });
-
-    // Append table to the container
     container.appendChild(table);
 }
 
@@ -621,45 +609,35 @@ function showMostPopularEvent() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'PopularEvent', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Response from servlet:', response);
-
                 displayMostPopularEvent(response);
             } else {
                 console.error('Error:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
-// Function to display the most popular event
 function displayMostPopularEvent(eventData) {
     const container = document.getElementById('most-popular-event-container');
-    container.innerHTML = ''; // Clear previous content
-
+    container.innerHTML = '';
     if (eventData.event_id) {
-        // If a popular event is found
         const heading = document.createElement('h2');
         heading.textContent = 'Most Popular Event';
-
         const eventDetails = document.createElement('p');
         eventDetails.textContent = `Event ID: ${eventData.event_id}, Reservations: ${eventData.reservation_count}`;
-
         container.appendChild(heading);
         container.appendChild(eventDetails);
     } else if (eventData.message) {
-        // If no active reservations found
         const noEventMessage = document.createElement('p');
         noEventMessage.textContent = eventData.message;
         container.appendChild(noEventMessage);
     } else {
-        // Handle unexpected response
         const errorMessage = document.createElement('p');
         errorMessage.textContent = 'An error occurred while fetching the most popular event.';
         container.appendChild(errorMessage);
@@ -671,75 +649,92 @@ function displayMostPopularEvent(eventData) {
 
 function showtotalProfitVIP() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'ProfitVIP', true); // URL to the servlet
+    xhr.open('GET', 'ProfitVIP', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Total VIP Profit:', response.total_payment_amount);
-
-                // Display the total profit in the webpage
                 displayVIPProfit(response.total_payment_amount);
             } else {
                 console.error('Error fetching VIP profit:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
-// Function to display the total profit on the webpage
 function displayVIPProfit(totalProfit) {
     const container = document.getElementById('vip-profit-container');
-    container.innerHTML = ''; // Clear previous content
-
+    container.innerHTML = '';
     const heading = document.createElement('h2');
     heading.textContent = 'Total Profit from VIP Tickets';
-
     const profitText = document.createElement('p');
-    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
-
+    profitText.textContent = `$${totalProfit.toFixed(2)}`;
     container.appendChild(heading);
     container.appendChild(profitText);
 }   
 //=================================================================================================
-// Show General profit
+// Show Regular profit
 
 function showtotalProfitRegular() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'ProfitRegular', true); // URL to the servlet for Regular tickets
+    xhr.open('GET', 'ProfitRegular', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Total Regular Profit:', response.total_payment_amount);
-
-                // Display the total profit in the webpage
                 displayRegularProfit(response.total_payment_amount);
             } else {
                 console.error('Error fetching Regular profit:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayRegularProfit(totalProfit) {
     const container = document.getElementById('regular-profit-container');
-    container.innerHTML = ''; // Clear previous content
-
+    container.innerHTML = '';
     const heading = document.createElement('h2');
     heading.textContent = 'Total Profit from Regular Tickets';
-
     const profitText = document.createElement('p');
-    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
+    profitText.textContent = `$${totalProfit.toFixed(2)}`;
+    container.appendChild(heading);
+    container.appendChild(profitText);
+}
 
+//=================================================================================================
+// Show Balcony profit
+
+function showtotalProfitBalcony() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'ProfitBalcony', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Total Balcony Profit:', response.total_payment_amount);
+                displayBalconyProfit(response.total_payment_amount);
+            } else {
+                console.error('Error fetching Balcony profit:', xhr.responseText);
+            }
+        }
+    };
+    xhr.send();
+}
+
+function displayBalconyProfit(totalProfit) {
+    const container = document.getElementById('balcony-profit-container');
+    container.innerHTML = '';
+    const heading = document.createElement('h2');
+    heading.textContent = 'Total Profit from Balcony Tickets';
+    const profitText = document.createElement('p');
+    profitText.textContent = `$${totalProfit.toFixed(2)}`;
     container.appendChild(heading);
     container.appendChild(profitText);
 }
@@ -749,122 +744,66 @@ function displayRegularProfit(totalProfit) {
 
 function showtotalProfitTickets() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'ProfitTickets', true); // URL to the servlet for ticket profits
+    xhr.open('GET', 'ProfitTickets', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Total Ticket Profits:', response);
-
-                // Display the profits in the webpage
                 displayTicketProfits(response);
             } else {
                 console.error('Error fetching ticket profits:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayTicketProfits(ticketProfits) {
     const container = document.getElementById('ticket-profit-container');
-    container.innerHTML = ''; // Clear previous content
-
+    container.innerHTML = '';
     const heading = document.createElement('h2');
     heading.textContent = 'Total Ticket Profits';
-
     container.appendChild(heading);
-
     const totalPayment = document.createElement('p');
     totalPayment.textContent = `Total Profit: $${ticketProfits.total_payment_amount.toFixed(2)}`;
-
     container.appendChild(totalPayment);
-}
-
-//=================================================================================================
-// Show Tickets profit
-
-function showtotalProfitBalcony() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'ProfitBalcony', true); // URL to the servlet for Balcony tickets
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                console.log('Total Balcony Profit:', response.total_payment_amount);
-
-                // Display the total profit in the webpage
-                displayBalconyProfit(response.total_payment_amount);
-            } else {
-                console.error('Error fetching Balcony profit:', xhr.responseText);
-            }
-        }
-    };
-
-    xhr.send();
-}
-
-function displayBalconyProfit(totalProfit) {
-    const container = document.getElementById('balcony-profit-container');
-    container.innerHTML = ''; // Clear previous content
-
-    const heading = document.createElement('h2');
-    heading.textContent = 'Total Profit from Balcony Tickets';
-
-    const profitText = document.createElement('p');
-    profitText.textContent = `$${totalProfit.toFixed(2)}`; // Format as currency
-
-    container.appendChild(heading);
-    container.appendChild(profitText);
 }
 
 //=================================================================================================
 // Show reservations in a time period 
 
 function showReservationsbyTimePeriod() {
-    // Get the start and end dates from the input fields
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
-
     if (!startDate || !endDate) {
         return;
     }
-
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `EventTimePeriod?start=${startDate}&end=${endDate}`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Reservations:', response);
-
-                // Display reservations on the webpage
                 displayReservationTable(response);
             } else {
                 console.error('Error fetching reservations:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayReservationTable(data) {
-    const container = document.getElementById('reservation-table-container'); // Ensure this container exists in your HTML
-    container.innerHTML = ''; // Clear previous content
-
+    const container = document.getElementById('reservation-table-container');
+    container.innerHTML = '';
     if (!data || data.length === 0) {
         container.innerHTML = '<p>No reservations found.</p>';
         return;
     }
-
     let tableContent = `
         <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
@@ -893,52 +832,42 @@ function displayReservationTable(data) {
             </tbody>
         </table>
     `;
-
     container.innerHTML = tableContent;
 }
 
 //=================================================================================================
-// Show profit in a time period 
+// Show profits in a time period 
 
 function showProfitbyTimePeriod() {
-    // Get the start and end dates from the input fields
     const startDate = document.getElementById('start-date-profit').value;
     const endDate = document.getElementById('end-date-profit').value;
-
     if (!startDate || !endDate) {
         return;
     }
-
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `ProfitTimePeriod?start=${startDate}&end=${endDate}`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Reservations:', response);
-
-                // Display reservations on the webpage
                 displayProfitTable(response);
             } else {
                 console.error('Error fetching reservations:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayProfitTable(data) {
-    const container = document.getElementById('profit-time-container'); // Ensure this container exists in your HTML
-    container.innerHTML = ''; // Clear previous content
-
+    const container = document.getElementById('profit-time-container');
+    container.innerHTML = '';
     if (!data || data.length === 0) {
         container.innerHTML = '<p>No reservations found.</p>';
         return;
     }
-
     let tableContent = `
         <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
@@ -961,7 +890,6 @@ function displayProfitTable(data) {
             </tbody>
         </table>
     `;
-
     container.innerHTML = tableContent;
 }
 
@@ -970,30 +898,25 @@ function displayProfitTable(data) {
 
 function loadClientReservations(){
     const globalUsername = sessionStorage.getItem('globalUsername');
-    
     const url = `LoadClientReservations?username=${encodeURIComponent(globalUsername)}`;
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Reservations:', response);
-
                 displayClientReservations(response);
             } else {
                 console.error('Error:', xhr.responseText);
             }
         }
     };
-
     xhr.send();
 }
 
 function displayClientReservations(data) {
     const reservationsContainer = document.getElementById('reservationsClientContainer');
-    
     let tableContent = `
         <table border="1">
             <thead>
@@ -1022,7 +945,7 @@ function displayClientReservations(data) {
             </tbody>
         </table>
     `;
-
-    // Set the generated HTML table to the container
     reservationsContainer.innerHTML = tableContent;
 }
+
+// end of ajax.js
