@@ -14,6 +14,7 @@ mainClasses\Ticket.class
 servlets\PopularEvent.class
 database\tables\EditTicketTable$Regulars.class
 servlets\LoadClients.class
+servlets\LoadClientReservations.class
 servlets\CancelReservation.class
 servlets\UpdateTickets.class
 mainClasses\Ticket$Type.class

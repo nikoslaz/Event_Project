@@ -80,6 +80,10 @@
         <servlet-name>CancelReservation</servlet-name>
         <servlet-class>servlets.CancelReservation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadClientReservations</servlet-name>
+        <servlet-class>servlets.LoadClientReservations</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationClient</servlet-name>
         <url-pattern>/RegistrationClient</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>CancelReservation</servlet-name>
         <url-pattern>/CancelReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadClientReservations</servlet-name>
+        <url-pattern>/LoadClientReservations</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

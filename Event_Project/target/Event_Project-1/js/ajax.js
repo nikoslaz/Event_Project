@@ -837,7 +837,7 @@ function showReservationsbyTimePeriod() {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `EventTimePeriod?start=${startDate}&end=${endDate}`, true); // Adjust URL to your servlet
+    xhr.open('GET', `EventTimePeriod?start=${startDate}&end=${endDate}`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onreadystatechange = function () {
@@ -911,7 +911,7 @@ function showProfitbyTimePeriod() {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `ProfitTimePeriod?start=${startDate}&end=${endDate}`, true); // Adjust URL to your servlet
+    xhr.open('GET', `ProfitTimePeriod?start=${startDate}&end=${endDate}`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onreadystatechange = function () {
@@ -950,4 +950,64 @@ function displayProfitTable(data) {
 
     container.appendChild(profitHeading);
     container.appendChild(profitAmount);
+}
+
+//=================================================================================================
+// Show clients reservations
+
+function loadClientReservations(){
+    const globalUsername = sessionStorage.getItem('globalUsername');
+    
+    const url = `LoadClientReservations?username=${encodeURIComponent(globalUsername)}`;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Reservations:', response);
+
+                displayClientReservations(response);
+            } else {
+                console.error('Error:', xhr.responseText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function displayClientReservations(data) {
+    const reservationsContainer = document.getElementById('reservationsClientContainer');
+    
+    let tableContent = `
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Client Username</th>
+                    <th>Reservation Tickets</th>
+                    <th>Reservation Date</th>
+                    <th>Reservation Payment Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    data.forEach(reservation => {
+        tableContent += `
+            <tr>
+                <td>${reservation.client_username || 'N/A'}</td>
+                <td>${reservation.reservation_tickets || 'N/A'}</td>
+                <td>${reservation.reservation_date || 'N/A'}</td>
+                <td>${reservation.reservation_payment_amount || 'N/A'}</td>
+            </tr>
+        `;
+    });
+    tableContent += `
+            </tbody>
+        </table>
+    `;
+
+    // Set the generated HTML table to the container
+    reservationsContainer.innerHTML = tableContent;
 }
