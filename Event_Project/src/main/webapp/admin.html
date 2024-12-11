@@ -62,13 +62,13 @@
     </div>
     
     <div id="cancelEventForm">
-    <h2>Cancel Event</h2>
-    <form id="cancelForm">
+        <h2>Cancel Event</h2>
+        <form id="cancelForm">
 
-        <label for="event_id">Event ID:</label>
-        <input type="number" id="event_id" name="event_id" required>
-        <button type="button" onclick="cancelEventForm()">Submit</button>
-    </form>
+            <label for="event_id">Event ID:</label>
+            <input type="number" id="event_id" name="event_id" required>
+            <button type="button" onclick="cancelEventForm()">Submit</button>
+        </form>
     </div>
     
     <div class="dashboard-container">
@@ -83,12 +83,25 @@
         </div>
     </div>
     
-    <div id="profits-container"></div>
-    <div id="most-popular-event-container"></div>
-    <div id="ticket-profit-container"></div>
-    <div id="vip-profit-container"></div>
-    <div id="regular-profit-container"></div>
-    <div id="balcony-profit-container"></div>
+    
+    <div id="profits-container">
+    <div class="container-placeholder">Loading profits...</div>
+    </div>
+    <div id="most-popular-event-container">
+        <div class="container-placeholder">Loading the most popular event...</div>
+    </div>
+    <div id="ticket-profit-container">
+        <div class="container-placeholder">Loading ticket profits...</div>
+    </div>
+    <div id="vip-profit-container">
+        <div class="container-placeholder">Loading VIP profits...</div>
+    </div>
+    <div id="regular-profit-container">
+        <div class="container-placeholder">Loading regular ticket profits...</div>
+    </div>
+    <div id="balcony-profit-container">
+        <div class="container-placeholder">Loading balcony ticket profits...</div>
+    </div>
     
     <div id="revTime">
         <h2>Show Reservations by Time Period</h2>
@@ -116,14 +129,25 @@
     
     <div id="profit-time-container"></div>
     
-    <h1>SQL Query Executor</h1>
+<!--    <h1>SQL Query Executor</h1>
     <form id="queryForm">
         <label for="sqlQuery">Enter SQL Query:</label><br><br>
         <textarea id="sqlQuery" name="sqlQuery" rows="5" cols="50" placeholder="Enter your SQL query here..."></textarea><br><br>
         <button type="button" onclick="executeQuery()">Submit</button>
     </form>
     <h2>Query Results</h2>
-    <div id="results"></div>
+    <div id="results"></div>-->
+    
+    <div id="sqlExecutorContainer">
+        <h1>SQL Query Executor</h1>
+        <form id="queryForm">
+            <label for="sqlQuery">Enter SQL Query:</label><br><br>
+            <textarea id="sqlQuery" name="sqlQuery" rows="5" cols="50" placeholder="Enter your SQL query here..."></textarea><br><br>
+            <button type="button" onclick="executeQuery()">Submit</button>
+        </form>
+        <h2>Query Results</h2>
+        <div id="results"></div>
+    </div>
     
 </body>
 </html>

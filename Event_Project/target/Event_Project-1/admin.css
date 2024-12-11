@@ -17,7 +17,7 @@ body {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
+    max-width: 1000px;
     width: 100%;
     text-align: center;
 }
@@ -197,6 +197,342 @@ button:active {
 #eventForm button:last-of-type:active {
     transform: scale(0.98);
 }
+
+/* Styling for Cancel Event Form */
+#cancelEventForm {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Cancel Event Form Heading */
+#cancelEventForm h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #2c3e50;
+}
+
+/* Cancel Form Styling */
+#cancelForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Labels for Cancel Form */
+#cancelForm label {
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+}
+
+/* Input Fields for Cancel Form */
+#cancelForm input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+/* Input Focus Effect for Cancel Form */
+#cancelForm input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Buttons in Cancel Form */
+#cancelForm button {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#cancelForm button:first-of-type {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#cancelForm button:first-of-type:hover {
+    background-color: #2980b9;
+}
+
+#cancelForm button:first-of-type:active {
+    transform: scale(0.98);
+}
+
+#cancelForm button:last-of-type {
+    background-color: #ccc;
+    color: #333;
+}
+
+#cancelForm button:last-of-type:hover {
+    background-color: #aaa;
+}
+
+#cancelForm button:last-of-type:active {
+    transform: scale(0.98);
+}
+
+
+/* Center all sections below SQL Questions */
+#profits-container,
+#most-popular-event-container,
+#ticket-profit-container,
+#vip-profit-container,
+#regular-profit-container,
+#balcony-profit-container,
+#revTime,
+#reservation-table-container,
+#profitTime,
+#profit-time-container,
+#queryForm,
+#results, h1, h2 {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 80%; /* Adjust width if needed */
+}
+
+
+/* General Styling for Profit and Info Containers */
+#profits-container,
+#most-popular-event-container,
+#ticket-profit-container,
+#vip-profit-container,
+#regular-profit-container,
+#balcony-profit-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+    overflow-x: auto; /* Prevent overflow for wide tables */
+    border: 1px solid #dcdcdc;
+}
+
+/* Add Consistent Spacing Between Containers */
+#profits-container + div,
+#most-popular-event-container + div,
+#ticket-profit-container + div,
+#vip-profit-container + div,
+#regular-profit-container + div,
+#balcony-profit-container + div {
+    margin-top: 20px;
+}
+
+/* Add Loading Spinner Placeholder */
+.container-placeholder {
+    font-size: 1.2em;
+    color: #777;
+    text-align: center;
+    padding: 20px;
+}
+
+/* General Styling for Time Period Sections */
+#revTime,
+#profitTime {
+    background-color: #ffffff;
+    padding: 15px 20px; /* Reduced padding */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
+    max-width: 400px; /* Reduced max width */
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+}
+
+/* Section Heading */
+#revTime h2,
+#profitTime h2 {
+    font-size: 1.5em; /* Slightly smaller font size */
+    color: #2c3e50;
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+/* Styling for Forms */
+#revTimeForm,
+#profitTimeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap between elements */
+    align-items: center;
+}
+
+/* Labels */
+#revTimeForm label,
+#profitTimeForm label {
+    font-size: 0.9em; /* Slightly smaller font size */
+    font-weight: bold;
+    color: #555;
+    align-self: flex-start;
+}
+
+/* Input Fields */
+#revTimeForm input,
+#profitTimeForm input {
+    width: 100%;
+    max-width: 250px; /* Reduced max width */
+    padding: 8px; /* Reduced padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+/* Input Focus Effect */
+#revTimeForm input:focus,
+#profitTimeForm input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Buttons */
+#revTimeForm button,
+#profitTimeForm button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 15px; /* Reduced padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#revTimeForm button:hover,
+#profitTimeForm button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+#revTimeForm button:active,
+#profitTimeForm button:active {
+    background-color: #1c5980;
+    transform: scale(0.98);
+}
+
+/* Reservation and Profit Containers */
+#reservation-table-container,
+#profit-time-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+}
+
+/* SQL Query Executor Container */
+#sqlExecutorContainer {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* Adjust width to match other sections */
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+}
+
+/* Heading Styling */
+#sqlExecutorContainer h1 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+#queryForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Label Styling */
+#queryForm label {
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Textarea Styling */
+#queryForm textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+/* Textarea Focus Effect */
+#queryForm textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Button Styling */
+#queryForm button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#queryForm button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+#queryForm button:active {
+    background-color: #1c5980;
+    transform: scale(0.98);
+}
+
+/* Results Container */
+#results {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Match the form width */
+    max-height: 300px; /* Fixed height to prevent overflow */
+    overflow-y: auto; /* Add vertical scroll for overflow content */
+    margin: 20px auto;
+    text-align: left; /* Align results to the left */
+    white-space: pre-wrap; /* Preserve formatting for SQL output */
+    word-wrap: break-word; /* Break long words to prevent horizontal scroll */
+}
+
+
+
 
 /* Responsive Design for Smaller Screens */
 @media (max-width: 480px) {
