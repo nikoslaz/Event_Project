@@ -176,7 +176,7 @@ public class EditEventTable {
                 + "event_name VARCHAR(50) NOT NULL, "
                 + "event_date DATE NOT NULL, "
                 + "event_time TIME NOT NULL, "
-                + "event_type ENUM('CONCERT', 'PERFORMANCE', 'COMEDYNIGHT') NOT NULL, "
+                + "event_type ENUM('CONCERT', 'PERFORMANCE', 'COMEDYNIGHT', 'SPORTS', 'CONFERENCE', 'WORKSHOP') NOT NULL, "
                 + "event_capacity INTEGER NOT NULL, "
                 + "event_status ENUM('SCHEDULED', 'CANCELED', 'COMPLETED') NOT NULL, "
                 + "PRIMARY KEY (event_id))";
