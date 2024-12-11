@@ -38,6 +38,7 @@ public class CancelReservation extends HttpServlet {
 
         // Extract values from JSON
         int reservationID = jsonObject.get("reservation_ID").getAsInt();
+        String logUsername = jsonObject.get("username").getAsString();
         EditReservationTable edit_res = new EditReservationTable();
 
         try {
@@ -45,6 +46,12 @@ public class CancelReservation extends HttpServlet {
             Statement stmt = con.createStatement();
             Reservation res = edit_res.databaseToReservation(reservationID);
             String username = res.getClientUsername();
+
+            if (!logUsername.equals(username) || res.getReservationStatus() == Reservation.ResStatus.CANCELED) {
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\": \"failed\", \"message\": \"Reservation not cancelled!\"}");
+                return;
+            }
 
             String updateClientQuery = "UPDATE clients "
                     + "SET client_balance = client_balance + " + (int) (res.getReservationPaymentAmount() * 0.8)
