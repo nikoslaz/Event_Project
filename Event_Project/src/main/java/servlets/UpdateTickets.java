@@ -47,7 +47,20 @@ public class UpdateTickets extends HttpServlet {
 
         EditTicketTable edit_tick = new EditTicketTable();
         int reservationID = -1;
-        
+
+        try {
+            if (regularTickets > edit_tick.getRegularCount(eventID)
+                    || vipTickets > edit_tick.getVIPCount(eventID)
+                    || balconyTickets > edit_tick.getBalconyCount(eventID)) {
+
+                response.setContentType("application/json");
+                response.getWriter().write("{\"status\": \"failure\", \"message\": \"Failed to process tickets.\"}");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         if (allTickets != 0) {
 
             Reservation res = new Reservation();

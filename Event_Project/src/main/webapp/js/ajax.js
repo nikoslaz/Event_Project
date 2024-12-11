@@ -526,12 +526,15 @@ function submitTickets(){
 
 function cancelReserv(){
     const id = document.getElementById('cancelRes').value;
-    console.log(`Reservation ID: ${id}`);
+    const globalUsername = sessionStorage.getItem('globalUsername');
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'CancelReservation', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     const data = JSON.stringify({
-        reservation_ID:id
+        reservation_ID : id,
+        username : globalUsername
+        
     });
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
