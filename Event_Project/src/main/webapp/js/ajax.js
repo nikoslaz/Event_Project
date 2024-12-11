@@ -998,7 +998,8 @@ function displayClientReservations(data) {
         <table border="1">
             <thead>
                 <tr>
-                    <th>Client Username</th>
+                    <th>Reservation ID</th>
+                    <th>Event ID</th>
                     <th>Reservation Tickets</th>
                     <th>Reservation Date</th>
                     <th>Reservation Payment Amount</th>
@@ -1009,7 +1010,8 @@ function displayClientReservations(data) {
     data.forEach(reservation => {
         tableContent += `
             <tr>
-                <td>${reservation.client_username || 'N/A'}</td>
+                <td>${reservation.reservation_id || 'N/A'}</td>
+                <td>${reservation.event_id || 'N/A'}</td>
                 <td>${reservation.reservation_tickets || 'N/A'}</td>
                 <td>${reservation.reservation_date || 'N/A'}</td>
                 <td>${reservation.reservation_payment_amount || 'N/A'}</td>

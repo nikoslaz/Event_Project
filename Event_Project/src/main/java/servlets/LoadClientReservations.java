@@ -36,7 +36,8 @@ public class LoadClientReservations extends HttpServlet {
 
             while (rs.next()) {
                 JSONObject reserv = new JSONObject();
-                reserv.put("client_username", rs.getString("client_username"));
+                reserv.put("reservation_id", rs.getInt("reservation_id"));
+                reserv.put("event_id", rs.getInt("event_id"));
                 reserv.put("reservation_tickets", rs.getInt("reservation_tickets"));
                 reserv.put("reservation_date", rs.getString("reservation_date")); // Corrected field name
                 reserv.put("reservation_payment_amount", rs.getInt("reservation_payment_amount")); // Corrected field name
