@@ -21,7 +21,6 @@ public class LoadClientReservations extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve the username from query parameters
         String username = request.getParameter("username");
 
         if (username == null || username.trim().isEmpty()) {
@@ -39,8 +38,8 @@ public class LoadClientReservations extends HttpServlet {
                 reserv.put("reservation_id", rs.getInt("reservation_id"));
                 reserv.put("event_id", rs.getInt("event_id"));
                 reserv.put("reservation_tickets", rs.getInt("reservation_tickets"));
-                reserv.put("reservation_date", rs.getString("reservation_date")); // Corrected field name
-                reserv.put("reservation_payment_amount", rs.getInt("reservation_payment_amount")); // Corrected field name
+                reserv.put("reservation_date", rs.getString("reservation_date"));
+                reserv.put("reservation_payment_amount", rs.getInt("reservation_payment_amount"));
                 clientsArray.put(reserv);
             }
 

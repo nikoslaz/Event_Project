@@ -101,7 +101,6 @@ public class UpdateTickets extends HttpServlet {
             System.out.println("NO TICKETS AVAILABLE");
         }
 
-        // Respond with JSON
         response.setContentType("application/json");
         if (reservationID != -1) {
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Tickets processed successfully!\", \"reservation_id\": " + reservationID + "}");

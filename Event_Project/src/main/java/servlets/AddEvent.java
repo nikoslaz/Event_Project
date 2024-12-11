@@ -25,7 +25,6 @@ public class AddEvent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost registration");
-        // Parse JSON data from event
         StringBuilder sb = new StringBuilder();
         String line;
         try (BufferedReader reader = request.getReader()) {
@@ -55,18 +54,16 @@ public class AddEvent extends HttpServlet {
         JSONObject jsonResponse = new JSONObject();
 
         try {
-            // Check if user already exists in the database
-            if (editEventTable.databaseToEvent(event.getEventId() )!= null) {
-                // User already exists, send error response
+            if (editEventTable.databaseToEvent(event.getEventId()) != null) {
                 jsonResponse.put("status", "error");
-                jsonResponse.put("message", "User with provided username or password already exists.");
+                jsonResponse.put("message", "Event with provided evend_id already exists.");
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
             } else {
                 editEventTable.createNewEvent(event);
                 System.out.println("Event added");
                 response.setStatus(HttpServletResponse.SC_OK);
                 jsonResponse.put("status", "success");
-                jsonResponse.put("message", "Registration successful.");
+                jsonResponse.put("message", "Event successful.");
                 response.setStatus(HttpServletResponse.SC_OK);
             }
         } catch (SQLException ex) {
@@ -81,7 +78,6 @@ public class AddEvent extends HttpServlet {
             Logger.getLogger(AddEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Send JSON response
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         out.print(jsonResponse);

@@ -33,7 +33,6 @@ public class CreateTables extends HttpServlet {
             EditReservationTable editReservationTable = new EditReservationTable();
             EditTicketTable editTicketTable = new EditTicketTable();
 
-            // Attempt to create each table
             editEventTable.createEventTable();
             LOGGER.info("Event table created successfully.");
             editClientTable.createClientsTable();
@@ -43,19 +42,16 @@ public class CreateTables extends HttpServlet {
             editTicketTable.createTicketTable();
             LOGGER.info("Ticket table created successfully.");
 
-            // Success response
             jsonResponse.put("status", "success");
             jsonResponse.put("message", "All tables created successfully.");
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception ex) {
-            // Log the exception and send an error response
             LOGGER.log(Level.SEVERE, "Error creating tables", ex);
             jsonResponse.put("status", "error");
             jsonResponse.put("message", "An error occurred while creating tables: " + ex.getMessage());
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
 
-        // Send JSON response
         try (PrintWriter out = response.getWriter()) {
             out.print(jsonResponse);
             out.flush();

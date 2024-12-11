@@ -48,7 +48,7 @@ public class CountEventTickets extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("{\"error\": \"Failed to fetch regular ticket count\"}");
+            response.getWriter().write("{\"error\": \"Failed to fetch ticket count\"}");
         }
     }
 }

@@ -20,7 +20,7 @@ public class PopularEvent extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // SQL query to count reservations for each event and find the most popular event
+
         String selectQuery = "SELECT event_id, COUNT(*) AS reservation_count "
                 + "FROM reservations WHERE reservation_status = 'ACTIVE' "
                 + "GROUP BY event_id ORDER BY reservation_count DESC LIMIT 1";
@@ -29,7 +29,6 @@ public class PopularEvent extends HttpServlet {
 
             JSONObject mostPopularEvent = new JSONObject();
 
-            // Get the most popular event details from the query result
             if (rs.next()) {
                 int eventId = rs.getInt("event_id");
                 int reservationCount = rs.getInt("reservation_count");
@@ -37,7 +36,6 @@ public class PopularEvent extends HttpServlet {
                 mostPopularEvent.put("event_id", eventId);
                 mostPopularEvent.put("reservation_count", reservationCount);
             } else {
-                // No active reservations found
                 mostPopularEvent.put("message", "No active reservations found");
             }
 

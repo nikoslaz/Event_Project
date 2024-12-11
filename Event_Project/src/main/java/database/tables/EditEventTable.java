@@ -80,7 +80,6 @@ public class EditEventTable {
         ArrayList<Event> events = new ArrayList<Event>();
         ResultSet rs = null;
         try {
-            // Build the query to fetch all clients
             String query = "SELECT * FROM events";
             rs = stmt.executeQuery(query);
 
@@ -95,7 +94,6 @@ public class EditEventTable {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         } finally {
-            // Close the ResultSet, Statement, and Connection
             if (rs != null) {
                 rs.close();
             }
@@ -118,14 +116,13 @@ public class EditEventTable {
             String updateQuery = "UPDATE events SET event_status = 'CANCELED' WHERE event_id= '" + eventID + "'";
             stmt.executeUpdate(updateQuery);
 
-            // Query to fetch client username and payment amount for the given event ID
+            // Query to fetch client username and total payment amount for the given event ID
             String selectQuery = "SELECT client_username, SUM(reservation_payment_amount) AS total_payment_amount "
                     + "FROM reservations WHERE event_id = " + eventID + " AND reservation_status='ACTIVE' GROUP BY client_username";
 
             String username = "";
             int paymentAmount = 0;
 
-            // Execute the query and get the result
             try {
                 ResultSet rs = stmt.executeQuery(selectQuery);
                 while (rs.next()) {

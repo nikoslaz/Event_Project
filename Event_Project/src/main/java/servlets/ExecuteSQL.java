@@ -25,7 +25,6 @@ public class ExecuteSQL extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Parse the SQL query from the request
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = request.getReader().readLine()) != null) {
@@ -34,12 +33,10 @@ public class ExecuteSQL extends HttpServlet {
             String jsonInput = sb.toString();
             String query = new Gson().fromJson(jsonInput, HashMap.class).get("query").toString();
 
-            // Execute the SQL query
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            // Extract results
             List<HashMap<String, Object>> results = new ArrayList<>();
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();

@@ -122,7 +122,7 @@ public class EditTicketTable {
             con = DB_Connection.getConnection();
             stmt = con.createStatement();
 
-            // Query to select the first ticket with ticket_availability = 1
+            // Query to select the first tickets with ticket_availability = 1
             if (type == 0) {
                 String selectQuery = "SELECT ticket_id FROM Tickets WHERE ticket_availability = 1 AND ticket_type = 'REGULAR' AND event_id = " + event_id + " LIMIT 1";
                 rs = stmt.executeQuery(selectQuery);
@@ -135,10 +135,8 @@ public class EditTicketTable {
             }
 
             if (rs.next()) {
-                // Get the ticket_id of the first available ticket
                 int ticketId = rs.getInt("ticket_id");
 
-                // Update ticket_availability to 0 for the selected ticket
                 String updateQuery = "UPDATE Tickets " + "SET ticket_availability = 0, reservation_id = " + res_id + " WHERE ticket_id = " + ticketId;
                 int rowsAffected = stmt.executeUpdate(updateQuery);
 
@@ -151,7 +149,6 @@ public class EditTicketTable {
                 System.out.println("No available tickets found.");
             }
         } finally {
-            // Close resources
             if (rs != null) {
                 rs.close();
             }
@@ -201,7 +198,6 @@ public class EditTicketTable {
             stmt.executeUpdate(insertQuery);
             System.out.println("# The ticket was successfully added in the database.");
 
-            /* Get the member id from the database and set it to the member */
             stmt.close();
 
         } catch (SQLException ex) {

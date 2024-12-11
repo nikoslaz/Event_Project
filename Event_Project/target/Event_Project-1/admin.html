@@ -57,7 +57,6 @@
         <input type="number" id="event_capacity" name="event_capacity" required>
 
         <button type="button" onclick="submitEventForm()">Submit Event</button>
-        <button type="button" onclick="hideEventForm()">Cancel</button>
     </form>
     </div>
     
@@ -76,8 +75,8 @@
         <div class="button-container">
             <button onclick="showProfits()">Show profits for each event</button>
             <button onclick="showMostPopularEvent()">Show most popular event based on reservations</button>
-            <button onclick="showtotalProfitTickets()">Show total profit for all Tickets</button>
-            <button onclick="showtotalProfitVIP()">Show total profit from VIP</button>
+            <button onclick="showtotalProfitTickets()">Show total profit from all Tickets</button>
+            <button onclick="showtotalProfitVIP()">Show total profit from VIP tickets</button>
             <button onclick="showtotalProfitRegular()">Show total profit from regular tickets</button>
             <button onclick="showtotalProfitBalcony()">Show total profit from balcony tickets</button>
         </div>
@@ -85,7 +84,7 @@
     
     
     <div id="profits-container">
-    <div class="container-placeholder">Loading profits...</div>
+    <div class="container-placeholder">Loading event profits...</div>
     </div>
     <div id="most-popular-event-container">
         <div class="container-placeholder">Loading the most popular event...</div>
@@ -94,7 +93,7 @@
         <div class="container-placeholder">Loading ticket profits...</div>
     </div>
     <div id="vip-profit-container">
-        <div class="container-placeholder">Loading VIP profits...</div>
+        <div class="container-placeholder">Loading VIP ticket profits...</div>
     </div>
     <div id="regular-profit-container">
         <div class="container-placeholder">Loading regular ticket profits...</div>
@@ -117,7 +116,7 @@
     <div id="reservation-table-container"></div>
     
     <div id="profitTime">
-        <h2>Show Profit by Time Period</h2>
+        <h2>Show Highest Event Profit by Time Period</h2>
         <form id="profitTimeForm">
             <label for="start-date">Start Date:</label>
             <input type="date" id="start-date-profit" required>

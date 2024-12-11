@@ -23,7 +23,7 @@ public class RegistrationClient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost registration");
-        // Parse JSON data from client
+
         StringBuilder sb = new StringBuilder();
         String line;
         try (BufferedReader reader = request.getReader()) {
@@ -53,9 +53,9 @@ public class RegistrationClient extends HttpServlet {
         JSONObject jsonResponse = new JSONObject();
 
         try {
-            // Check if user already exists in the database
+
             if (editClientTable.databaseToClients(client.getClientUsername(), client.getClientPassword()) != null) {
-                // User already exists, send error response
+
                 jsonResponse.put("status", "error");
                 jsonResponse.put("message", "User with provided username or password already exists.");
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
@@ -79,7 +79,6 @@ public class RegistrationClient extends HttpServlet {
             Logger.getLogger(RegistrationClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Send JSON response
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         out.print(jsonResponse);

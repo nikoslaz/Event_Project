@@ -61,7 +61,6 @@ public class EditClientTable {
         ArrayList<Client> clients = new ArrayList<Client>();
         ResultSet rs = null;
         try {
-            // Build the query to fetch all clients
             String query = "SELECT * FROM clients";
             rs = stmt.executeQuery(query);
 
@@ -76,7 +75,6 @@ public class EditClientTable {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         } finally {
-            // Close the ResultSet, Statement, and Connection
             if (rs != null) {
                 rs.close();
             }
@@ -165,7 +163,6 @@ public class EditClientTable {
     public void addNewClient(Client user) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
-
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO clients (client_username, client_password, client_firstname, client_lastname, client_email, client_phone, client_balance, card_number, card_expdate, card_cvv) "
@@ -183,14 +180,11 @@ public class EditClientTable {
 
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
+
             System.out.println("# The client was successfully added in the database.");
-
-            /* Get the member id from the database and set it to the member */
             stmt.close();
-
         } catch (SQLException ex) {
             Logger.getLogger(EditClientTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

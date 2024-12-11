@@ -124,7 +124,6 @@ public class EditReservationTable {
                     + ")";
 
             stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            // Fetch the auto-incremented key from the result set
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 reservationID = rs.getInt(1); // Get the generated reservation_id
@@ -133,7 +132,6 @@ public class EditReservationTable {
             
             System.out.println("# The reservation was successfully added in the database.");
 
-            /* Get the member id from the database and set it to the member */
             rs.close();
             stmt.close();
 

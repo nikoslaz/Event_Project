@@ -27,12 +27,10 @@ public class CancelEvent extends HttpServlet {
             }
         }
 
-        // Parse JSON using GSON
         String jsonData = sb.toString();
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(jsonData, JsonObject.class);
 
-        // Extract values from JSON
         int eventID = jsonObject.get("eventID").getAsInt();
 
         EditEventTable ev = new EditEventTable();
@@ -42,8 +40,6 @@ public class CancelEvent extends HttpServlet {
             System.out.println(e);
         }
 
-
-        // Respond with JSON
         response.setContentType("application/json");
         response.getWriter().write("{\"status\": \"success\", \"message\": \"Event cancelled successfully!\"}");
     }

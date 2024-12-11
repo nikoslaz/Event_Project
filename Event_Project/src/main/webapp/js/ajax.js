@@ -876,7 +876,7 @@ function displayProfitTable(data) {
             <thead>
                 <tr style="background-color: #f2f2f2;">
                     <th style="padding: 8px; border: 1px solid #ddd;">Event ID</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Profit Date</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Profit</th>
                 </tr>
             </thead>
             <tbody>

@@ -20,7 +20,6 @@ public class ProfitRegular extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // SQL query to calculate the total payment amount for Regular tickets
         String selectQuery = "SELECT SUM(ticket_price) AS total_payment_amount "
                 + "FROM tickets WHERE ticket_type = 'REGULAR' AND ticket_availability = 0";
 
@@ -28,12 +27,10 @@ public class ProfitRegular extends HttpServlet {
 
             JSONObject result = new JSONObject();
 
-            // Extract the total payment amount from the result set
             if (rs.next()) {
                 double totalPayment = rs.getDouble("total_payment_amount");
                 result.put("total_payment_amount", totalPayment);
             } else {
-                // If no data is found, set total payment amount to 0
                 result.put("total_payment_amount", 0.0);
             }
 

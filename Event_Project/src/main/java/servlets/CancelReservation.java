@@ -31,12 +31,10 @@ public class CancelReservation extends HttpServlet {
             }
         }
 
-        // Parse JSON using GSON
         String jsonData = sb.toString();
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(jsonData, JsonObject.class);
 
-        // Extract values from JSON
         int reservationID = jsonObject.get("reservation_ID").getAsInt();
         String logUsername = jsonObject.get("username").getAsString();
         EditReservationTable edit_res = new EditReservationTable();
@@ -73,7 +71,6 @@ public class CancelReservation extends HttpServlet {
             System.out.println(e);
         }
 
-        // Respond with JSON
         response.setContentType("application/json");
         response.getWriter().write("{\"status\": \"success\", \"message\": \"Event cancelled successfully!\"}");
     }
