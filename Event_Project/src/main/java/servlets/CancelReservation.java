@@ -10,11 +10,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.tables.EditReservationTable;
-import database.tables.EditTicketTable;
 import java.sql.Connection;
 import java.sql.Statement;
 import mainClasses.Reservation;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class CancelReservation extends HttpServlet {
 
     @Override
@@ -36,7 +39,6 @@ public class CancelReservation extends HttpServlet {
         // Extract values from JSON
         int reservationID = jsonObject.get("reservation_ID").getAsInt();
         EditReservationTable edit_res = new EditReservationTable();
-        EditTicketTable edit_tick = new EditTicketTable();
 
         try {
             Connection con = DB_Connection.getConnection();

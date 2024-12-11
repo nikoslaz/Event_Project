@@ -12,7 +12,10 @@ import mainClasses.Reservation.ResStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class LoadReservations extends HttpServlet {
 
     @Override

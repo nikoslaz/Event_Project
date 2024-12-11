@@ -13,6 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.DB_Connection;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class EventTimePeriod extends HttpServlet {
 
     @Override

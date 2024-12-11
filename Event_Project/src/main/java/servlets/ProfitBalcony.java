@@ -12,11 +12,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.DB_Connection;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class ProfitBalcony extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // SQL query to calculate the total payment amount for VIP tickets
+        // SQL query to calculate the total payment amount for Balocny tickets
         String selectQuery = "SELECT SUM(ticket_price) AS total_payment_amount "
                 + "FROM tickets WHERE ticket_type = 'BALCONY' AND ticket_availability = 0";
 
@@ -33,11 +37,9 @@ public class ProfitBalcony extends HttpServlet {
                 result.put("total_payment_amount", 0.0);
             }
 
-            // Set the response type to JSON and write the result
             response.setContentType("application/json");
             response.getWriter().write(result.toString());
         } catch (SQLException | ClassNotFoundException ex) {
-            // Handle any database or connection errors
             System.err.println("Database error: " + ex.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred");
         }

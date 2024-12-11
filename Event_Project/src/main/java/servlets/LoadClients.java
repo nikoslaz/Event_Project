@@ -11,6 +11,10 @@ import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class LoadClients extends HttpServlet {
 
     @Override

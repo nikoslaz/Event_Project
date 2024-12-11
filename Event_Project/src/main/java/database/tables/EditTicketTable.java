@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package database.tables;
 
 import com.google.gson.Gson;
@@ -17,13 +13,12 @@ import mainClasses.Ticket;
 
 /**
  *
- * @author nikos
+ * @author nikos, nikoletta, michalis
  */
 
 public class EditTicketTable {
 
     public static class Regulars {
-
         public String title;
         public int REGULARCOUNT;
     };
@@ -60,7 +55,6 @@ public class EditTicketTable {
         }
         return null;
     }
-
 
     public int getRegularCount(int event_id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
@@ -125,7 +119,6 @@ public class EditTicketTable {
         ResultSet rs = null;
 
         try {
-            // Establish the connection
             con = DB_Connection.getConnection();
             stmt = con.createStatement();
 
@@ -190,11 +183,6 @@ public class EditTicketTable {
         con.close();
     }
 
-    /**
-     * Establish a database connection and add in the database.
-     *
-     * @throws ClassNotFoundException
-     */
     public void createNewTicket(Ticket tick) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
@@ -208,7 +196,7 @@ public class EditTicketTable {
                     + "'" + tick.getTicketAvailability() + "', "
                     + "'" + tick.getEventID() + "'"
                     + ")";
-            //stmt.execute(table);
+
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
             System.out.println("# The ticket was successfully added in the database.");

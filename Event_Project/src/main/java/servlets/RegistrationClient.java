@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package servlets;
 
 import database.tables.EditClientTable;
@@ -20,7 +16,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author nikos
+ * @author nikos, nikoletta, michalis
  */
 public class RegistrationClient extends HttpServlet {
 

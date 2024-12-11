@@ -10,6 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.tables.EditEventTable;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class CancelEvent extends HttpServlet {
 
     @Override

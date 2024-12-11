@@ -12,6 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import database.DB_Connection;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class ProfitVIP extends HttpServlet {
 
     @Override
@@ -33,11 +37,9 @@ public class ProfitVIP extends HttpServlet {
                 result.put("total_payment_amount", 0.0);
             }
 
-            // Set the response type to JSON and write the result
             response.setContentType("application/json");
             response.getWriter().write(result.toString());
         } catch (SQLException | ClassNotFoundException ex) {
-            // Handle any database or connection errors
             System.err.println("Database error: " + ex.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred");
         }

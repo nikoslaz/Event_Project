@@ -2,7 +2,7 @@ package mainClasses;
 
 /**
  *
- * @author nikos
+ * @author nikos, nikoletta, michalis
  */
 public class Client {
 
@@ -17,7 +17,6 @@ public class Client {
     private String card_expdate;
     private int card_cvv;
 
-    // Getters and Setters for Client fields
     public String getClientUsername() {
         return client_username;
     }
@@ -74,7 +73,6 @@ public class Client {
         this.client_balance = client_balance;
     }
 
-    // Getters and Setters for CardDetails
     public int getCardNumber() {
         return card_number;
     }

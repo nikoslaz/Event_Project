@@ -1,10 +1,8 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
 let globalUsername;
 let globalID;
+
+//=================================================================================================
+// Register and Login
 
 function RegisterPOST() {
     let myForm = document.getElementById('form');
@@ -42,7 +40,7 @@ function RegisterPOST() {
 function loginPOST() {
     let username = document.getElementById('username_log').value;
     var password = document.getElementById('password_log').value;
-    console.log("Username:", username, "Password:", password);  
+    
     if (username === 'admin' && password === 'admin123') {
         window.location.href = 'admin.html';
         return;
@@ -733,7 +731,6 @@ function showtotalProfitRegular() {
     xhr.send();
 }
 
-// Function to display the total profit from Regular tickets on the webpage
 function displayRegularProfit(totalProfit) {
     const container = document.getElementById('regular-profit-container');
     container.innerHTML = ''; // Clear previous content
@@ -813,7 +810,6 @@ function showtotalProfitBalcony() {
     xhr.send();
 }
 
-// Function to display the total profit from Balcony tickets on the webpage
 function displayBalconyProfit(totalProfit) {
     const container = document.getElementById('balcony-profit-container');
     container.innerHTML = ''; // Clear previous content
@@ -955,5 +951,3 @@ function displayProfitTable(data) {
     container.appendChild(profitHeading);
     container.appendChild(profitAmount);
 }
-
-

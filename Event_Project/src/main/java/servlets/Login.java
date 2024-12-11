@@ -13,6 +13,10 @@ import java.util.logging.Logger;
 import mainClasses.Client;
 import org.json.JSONObject;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class Login extends HttpServlet {
 
     @Override

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package database.tables;
 
 import com.google.gson.Gson;
@@ -18,7 +14,7 @@ import mainClasses.Ticket;
 
 /**
  *
- * @author nikos
+ * @author nikos, nikoletta, michalis
  */
 public class EditEventTable {
 
@@ -172,7 +168,6 @@ public class EditEventTable {
         }
     }
 
-
     public void createEventTable() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -191,11 +186,6 @@ public class EditEventTable {
 
     }
 
-    /**
-     * Establish a database connection and add in the database.
-     *
-     * @throws ClassNotFoundException
-     */
     public void createNewEvent(Event ev) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();

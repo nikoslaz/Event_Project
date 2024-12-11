@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package servlets;
 
 import database.tables.EditEventTable;
@@ -18,6 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class CreateTables extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(CreateTables.class.getName());

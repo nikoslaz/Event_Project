@@ -14,6 +14,10 @@ import mainClasses.Reservation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *
+ * @author nikos, nikoletta, michalis
+ */
 public class UpdateTickets extends HttpServlet {
 
     @Override

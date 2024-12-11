@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package database.tables;
 
 import com.google.gson.Gson;
@@ -17,7 +13,7 @@ import mainClasses.Client;
 
 /**
  *
- * @author nikos
+ * @author nikos , nikoletta , michalis
  */
 public class EditClientTable {
 
@@ -166,12 +162,6 @@ public class EditClientTable {
         }
     }
 
-    /**
-     * Establish a database connection and add in the database.
-     *
-     * @param user
-     * @throws ClassNotFoundException
-     */
     public void addNewClient(Client user) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
@@ -191,7 +181,6 @@ public class EditClientTable {
                     + "'" + user.getCardExpDate() + "', "
                     + "'" + user.getCardCvv() + "')";
 
-            //stmt.execute(table);
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
             System.out.println("# The client was successfully added in the database.");

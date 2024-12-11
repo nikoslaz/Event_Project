@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package database.tables;
 
 import com.google.gson.Gson;
@@ -17,7 +13,7 @@ import mainClasses.Reservation;
 
 /**
  *
- * @author nikos
+ * @author nikos, nikoletta, michalis
  */
 public class EditReservationTable {
 
@@ -109,11 +105,6 @@ public class EditReservationTable {
         con.close();
     }
 
-    /**
-     * Establish a database connection and add in the database.
-     *
-     * @throws ClassNotFoundException
-     */
     public int createNewReservation(Reservation res) throws ClassNotFoundException {
         int reservationID = -1;
         try {
@@ -131,7 +122,6 @@ public class EditReservationTable {
                     + "'" + res.getClientUsername() + "',"
                     + "'" + res.getEventID() + "'"
                     + ")";
-            //stmt.execute(table);
 
             stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
             // Fetch the auto-incremented key from the result set
@@ -152,21 +142,6 @@ public class EditReservationTable {
         }
         
         return reservationID;
-    }
-
-    public static void main(String[] args) {
-        EditReservationTable tab = new EditReservationTable();
-        Reservation res = new Reservation();
-        res.setReservationTickets(2);
-        res.setReservationDate("11-11-11");
-        res.setReservationPaymentAmount(12);
-        res.setClientUsername("123456");
-        res.setEventID(1);
-        try {
-            tab.createNewReservation(res);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
 }
