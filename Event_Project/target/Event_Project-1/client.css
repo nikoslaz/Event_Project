@@ -74,7 +74,12 @@ button:active {
 
 /* Event Table Title */
 #eventTable h2 {
-    font-size: 1.5em;
+    font-size: 1.9em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+#eventTable h3 {
+    font-size: 1em;
     margin-bottom: 20px;
     color: #2c3e50;
 }
@@ -99,7 +104,7 @@ button:active {
     border: 1px solid #dcdcdc;
     border-radius: 8px;
     font-size: 1em;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     cursor: pointer;
     transition: border-color 0.3s ease;
 }
@@ -180,7 +185,7 @@ button:active {
     gap: 15px; /* Space between elements */
     padding: 20px;
     max-width: 400px;
-    margin: 0 auto; /* Center form horizontally */
+    margin: 20px auto;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -227,6 +232,114 @@ button:active {
 .submit-box button:hover {
     background-color: #2980b9;
 }
+
+/* General styling for the container elements */
+#clientRes, #reservationsClientContainer, #cancelReservation {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    background-color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Label styling */
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Input and button styling */
+input[type="number"], button[type="button"] {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px 0;
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for #reservationsClientContainer to prevent overflow */
+#reservationsClientContainer {
+    max-height: 200px; /* Adjust as needed */
+    overflow-y: auto;
+    border: 1px dashed #aaa;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0.9em;
+    /*color*/
+    background-color: #fff;
+}
+
+/* Center the event table container */
+#eventTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally centers content */
+    justify-content: center; /* Vertically centers content if needed */
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 60%; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* Style for the dynamic content inside #eventsContent */
+#eventsContent {
+    display: table; /* Ensures content behaves like a table */
+    margin: 20px auto; /* Centers the table horizontally */
+    border-collapse: collapse; /* Optional: for cleaner table design */
+    width: 100%; /* Adjust as needed */
+    max-width: 800px; /* Prevents the table from getting too wide */
+}
+
+/* Optional styling for tables loaded dynamically */
+#eventsContent table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#eventsContent table th,
+#eventsContent table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+#showTicketCount {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -479,7 +479,7 @@ function selectRegularEventTickets(id) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 console.log('Response from servlet:', response);
-                document.getElementById('showTicketCount').innerHTML = '<h2>Available Tickets for Event '+id+'<br>Regular:'+response.regular+' Balcony:'+response.balcony+' VIP:'+response.vip+' </h2>';
+                document.getElementById('showTicketCount').innerHTML = '<h3>Available Tickets for Event '+id+'<br>Regular:'+response.regular+' Balcony:'+response.balcony+' VIP:'+response.vip+' </h3>';
             } else {
                 console.error('Error:', xhr.responseText);
             }
