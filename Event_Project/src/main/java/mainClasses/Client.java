@@ -11,9 +11,9 @@ public class Client {
     private String client_firstname;
     private String client_lastname;
     private String client_email;
-    private int client_phone;
+    private String client_phone;
     private int client_balance;
-    private int card_number;
+    private String card_number;
     private String card_expdate;
     private int card_cvv;
 
@@ -57,11 +57,11 @@ public class Client {
         this.client_email = client_email;
     }
 
-    public int getClientPhone() {
+    public String getClientPhone() {
         return client_phone;
     }
 
-    public void setClientPhone(int client_phone) {
+    public void setClientPhone(String client_phone) {
         this.client_phone = client_phone;
     }
 
@@ -73,11 +73,11 @@ public class Client {
         this.client_balance = client_balance;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return card_number;
     }
 
-    public void setCardNumber(int card_number) {
+    public void setCardNumber(String card_number) {
         this.card_number = card_number;
     }
 

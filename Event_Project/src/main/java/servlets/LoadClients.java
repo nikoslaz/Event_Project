@@ -31,9 +31,9 @@ public class LoadClients extends HttpServlet {
                 client.put("client_firstname", rs.getString("client_firstname"));
                 client.put("client_lastname", rs.getString("client_lastname"));
                 client.put("client_email", rs.getString("client_email"));
-                client.put("client_phone", rs.getInt("client_phone"));
+                client.put("client_phone", rs.getString("client_phone"));
                 client.put("client_balance", rs.getInt("client_balance"));
-                client.put("card_number", rs.getInt("card_number"));
+                client.put("card_number", rs.getString("card_number"));
                 client.put("card_expdate", rs.getDate("card_expdate").toString());
                 client.put("card_cvv", rs.getInt("card_cvv"));
 
