@@ -180,9 +180,9 @@ button:active {
 
 #ticketForm {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    gap: 15px; /* Space between elements */
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
     padding: 20px;
     max-width: 400px;
     margin: 20px auto;
@@ -195,14 +195,14 @@ button:active {
     font-size: 1em;
     color: #333;
     width: 100%;
-    text-align: center; /* Center text within the label */
+    text-align: center; 
 }
 
 #ticketForm input {
-    width: 60%; /* Adjust width of input fields */
+    width: 60%; 
     padding: 10px;
     font-size: 1em;
-    text-align: center; /* Center the text inside input fields */
+    text-align: center; 
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -283,7 +283,7 @@ button[type="button"]:hover {
 
 /* Styling for #reservationsClientContainer to prevent overflow */
 #reservationsClientContainer {
-    max-height: 200px; /* Adjust as needed */
+    max-height: 200px; 
     overflow-y: auto;
     border: 1px dashed #aaa;
     margin-top: 10px;
@@ -297,12 +297,12 @@ button[type="button"]:hover {
 #eventTable {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Horizontally centers content */
-    justify-content: center; /* Vertically centers content if needed */
+    align-items: center; 
+    justify-content: center; 
     text-align: center;
     margin: 0 auto;
     padding: 20px;
-    max-width: 60%; /* Adjust width as needed */
+    max-width: 60%; 
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -311,11 +311,11 @@ button[type="button"]:hover {
 
 /* Style for the dynamic content inside #eventsContent */
 #eventsContent {
-    display: table; /* Ensures content behaves like a table */
-    margin: 20px auto; /* Centers the table horizontally */
-    border-collapse: collapse; /* Optional: for cleaner table design */
-    width: 100%; /* Adjust as needed */
-    max-width: 800px; /* Prevents the table from getting too wide */
+    display: table; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+    width: 100%; 
+    max-width: 800px; 
 }
 
 /* Optional styling for tables loaded dynamically */

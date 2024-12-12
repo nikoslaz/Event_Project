@@ -98,8 +98,8 @@ button:hover {
 /* Footer Styling */
 footer {
     text-align: center;
-    margin-top: 20px; /* Add spacing at the top */
-    font-size: 0.85em; /* Slightly smaller footer text */
+    margin-top: 20px; 
+    font-size: 0.85em; 
     color: #666;
 }
 
@@ -107,18 +107,18 @@ footer {
     margin: 10px 0;
     display: flex;
     justify-content: center;
-    gap: 10px; /* Space between links */
+    gap: 10px; 
 }
 
 .social-media a {
     text-decoration: none;
-    color: #555; /* Default color */
+    color: #555; 
     font-size: 16px;
     transition: color 0.3s ease;
 }
 
 .social-media a:hover {
-    color: #007bff; /* Highlight color when hovered */
+    color: #007bff; 
 }
 
 
@@ -137,6 +137,6 @@ footer {
     }
         
     footer {
-        font-size: 0.75em; /* Smaller footer text */
+        font-size: 0.75em; 
     }
 }
